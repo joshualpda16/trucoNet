@@ -1,5 +1,6 @@
 package clases;
 
+import formularios.frmPrincipal;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -53,6 +54,6 @@ public class SimpleClient {
     }
 
 	private void log (String s) {
-		System.out.println(s);
+		frmPrincipal.log(s);
 	}
 }

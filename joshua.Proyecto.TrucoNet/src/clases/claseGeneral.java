@@ -65,7 +65,7 @@ public class claseGeneral {
     }
     
     public void log(String msj){
-        frmPrincipal.txtLog.append(msj+"\n");
+        frmPrincipal.log(msj);
     }
     
     public static claseGeneral getInstance(){

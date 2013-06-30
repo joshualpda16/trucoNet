@@ -60,7 +60,7 @@ public class SimpleServer {
 	}
 
 	private void log(String s) {
-		frmPrincipal.txtLog.append(s+"\n");
+		frmPrincipal.log(s);
 	}
 
 	/**

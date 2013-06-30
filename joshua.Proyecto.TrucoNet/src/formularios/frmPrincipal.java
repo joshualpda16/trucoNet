@@ -45,6 +45,18 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         txtLog.setColumns(20);
         txtLog.setRows(5);
+        txtLog.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                txtLogInputMethodTextChanged(evt);
+            }
+        });
+        txtLog.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtLogPropertyChange(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtLog);
 
         cmdCrearSala.setText("Crear Sala");
@@ -119,6 +131,19 @@ public class frmPrincipal extends javax.swing.JFrame {
         cmdCrearSala.setEnabled(false);
     }//GEN-LAST:event_cmdCrearSalaActionPerformed
 
+    private void txtLogPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtLogPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLogPropertyChange
+
+    private void txtLogInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtLogInputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLogInputMethodTextChanged
+
+    static public void log(String txt){
+        txtLog.append(txt+"\n");
+        txtLog.setCaretPosition(txtLog.getText().length());
+    }
+    
     /**
      * @param args the command line arguments
      */
