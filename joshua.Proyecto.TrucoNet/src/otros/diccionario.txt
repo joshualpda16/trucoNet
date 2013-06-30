@@ -1,0 +1,17 @@
+Diccionario de mensajes:
+
+Los tres primeros d�gitos est�n reservados para el tipo de mensaje. Puede ser CFG, JGO, CNX
+
+	-CFG son mensajes de configuraci�n
+	-JGO son mensajes del juego (como nombre de la sala, puntos, turnos, etc)
+	-CNX son mensajes de informaci�n (conexi�n satisfactoria, conexi�n cerrada, etc)
+        -CHP son mensajes del chat previo al juego.
+
+Mensajes del tipo configuración (CFG)
+        "CFGNSLA" -El servidor envía el nombre de la sala
+
+Mensajes del tipo conexión (CNX):
+	"CNXCNCL" -De cliente al servidor. El cliente se conectó satisfactoriamente.
+
+Mensajes del tipo chat previo (CHP):
+        "CHPhola" -El cliente o el servidor enviaron un mensaje

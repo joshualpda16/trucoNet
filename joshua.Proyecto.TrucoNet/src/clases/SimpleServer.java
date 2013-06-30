@@ -1,14 +1,9 @@
 package clases;
 
 import formularios.frmPrincipal;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -19,6 +14,8 @@ public class SimpleServer {
 	private int portNumber;
 	private AcceptingThread acceptingThread;
 	private static final String ENCODING = "ISO-8859-1";
+        static ObjectOutputStream salida;
+        static ObjectInputStream entrada;
 
 	public SimpleServer(int portNumber) {
 		this.portNumber = portNumber;
@@ -40,12 +37,40 @@ public class SimpleServer {
 			this.acceptingThread.abort();
 		}
 	}
+        
+        //Envia el mensaje al cliente
+        public static void enviarDatos(String mensaje){
+            try{ //Envía objeto al cliente
+                salida.writeObject(mensaje);
+                salida.flush(); //envía toda la salida al cliente
+            } catch(IOException exepcionES){
+                frmPrincipal.log("\nError al enviar datos");
+            }
+        }
 
 	private void processConnection(Socket socket) throws IOException {
-		InputStream in = socket.getInputStream();
-		OutputStream out = socket.getOutputStream();
-		BufferedReader br = new BufferedReader(new InputStreamReader(in, ENCODING)); // toda estas cosas son para abrir "optimamente" un canal de entrada (recepcion) de datos
-		out = new BufferedOutputStream(out);
+                salida = new ObjectOutputStream(socket.getOutputStream()); //Flujo de salida hacia el cliente
+                salida.flush();
+                
+                entrada = new ObjectInputStream(socket.getInputStream()); //Flujo de entrada del cliente
+                frmPrincipal.log("[Server] Se obtuvieron los flujos de E/S");
+		//InputStream in = socket.getInputStream();
+		//OutputStream out = socket.getOutputStream();
+                String mensaje="";
+                
+                do{ //procesa los mensajes enviados desde el cliente
+                    try{ //Lee el mensaje y lo muestra en pantalla
+                        mensaje = (String) entrada.readObject(); //Lee el nuevo mensaje
+                        claseGeneral.procesarMensaje(mensaje);
+                    } catch (ClassNotFoundException exceptionClaseNoEncontrada){
+                        frmPrincipal.log("\nSe recibió un tipo de objeto desconocido:\n\tmensaje: "+mensaje);
+                    }
+                } while(!mensaje.equals("CNXOUT0"));
+                
+                
+                
+		/*BufferedReader br = new BufferedReader(new InputStreamReader(in, ENCODING)); // toda estas cosas son para abrir "optimamente" un canal de entrada (recepcion) de datos
+		salida = new BufferedOutputStream(salida);
 		PrintWriter pw = new PrintWriter(new OutputStreamWriter(out, ENCODING)); // operaciones par abrir "optimamente" un canal para salida (envio) de datos
 
 		String line = br.readLine();
@@ -56,7 +81,7 @@ public class SimpleServer {
 
 		pw.write("[Server] - Gracias por conectarse " + socket.toString());
 		pw.flush();
-		pw.close();
+		pw.close();*/
 	}
 
 	private void log(String s) {
@@ -67,52 +92,52 @@ public class SimpleServer {
 	 * Clase interna (inner class) que implementa la funcionalidad necesaria para abrir un thread nuevo en donde quedarse escuchando los coneciones entrantes.
 	 */
 	private class AcceptingThread extends Thread {
-		private boolean shutdownRequested = false;
-		private ServerSocket ss = null;
+            private boolean shutdownRequested = false;
+            private ServerSocket ss = null;
 
-		// Dentro de este run (que es invocado internamente en el start*) tiene el codigo para levantar el servidor
-		public void run() {
-			try {
-				log("[AcceptingThread] Starting... ");
-				this.ss = new ServerSocket(portNumber); // Reservo el puerto deseado y se permite el ingresar a conexiones, es decir.. se levanta un servidor de sockets :)
-				try {
-					while (!shutdownRequested) {
-						Socket s = null;
-						try {
-							log("[AcceptingThread] Aceptando conexiones en el puerto: " + this.ss.getLocalPort());
-							s = this.ss.accept(); // se levanta una conexion de la cola, en la variable "s" tengo la conexion o "enchufe" (traduccion de socket por google)
-							log("[AcceptingThread] Conexión recibida desde " + s.getInetAddress().toString());
-							processConnection(s); // se la procesa invocando el m�todo de la clase exterior (SimpleServer) que se llama processConnection
-						} catch (SocketException se) {
-							log("[AcceptingThread] Terminada - "
-							        + se.getMessage()); // por aca pasa cuando se TERMINA "manualmente" (es decir, libero el puerto y dejo de escuchar conexiones entrantes)
-						} finally {
-							if (s != null) {
-								s.close(); // por las dudas cierro la conexion.. nunca viene mal
-							}
-						}
-					}
-				} catch (Exception e) {
-					log("[AcceptingThread] Exception - " + e.getMessage());
-				} finally {
-					if (this.ss != null) {
-						this.ss.close(); // lo mismo aca, pero aca cierro el server (el que escucha y levanta conexiones)
-					}
-				}
-			} catch (IOException e) {
-				log("[AcceptingThread] IOException at start - " + e.getMessage()); // como que no deberia pasar
-			} finally {
-				log("[AcceptingThread] Stoped. "); // solamente logeo que si estoy aca entonces no estoy escuchando
-			}
-		}
+            // Dentro de este run (que es invocado internamente en el start*) tiene el codigo para levantar el servidor
+            public void run() {
+                try {
+                    log("[AcceptingThread] Iniciando... ");
+                    this.ss = new ServerSocket(portNumber); // Reservo el puerto deseado y se permite el ingresar a conexiones, es decir.. se levanta un servidor de sockets :)
+                    try {
+                        while (!shutdownRequested) {
+                            Socket s = null;
+                            try {
+                                log("[AcceptingThread] Aceptando conexiones en el puerto: " + this.ss.getLocalPort());
+                                s = this.ss.accept(); // se levanta una conexion de la cola, en la variable "s" tengo la conexion o "enchufe" (traduccion de socket por google)
+                                log("[AcceptingThread] Conexión recibida desde " + s.getInetAddress().toString());
+                                processConnection(s); // se la procesa invocando el método de la clase exterior (SimpleServer) que se llama processConnection
+                            } catch (SocketException se) {
+                                log("[AcceptingThread] Terminada - "
+                                        + se.getMessage()); // por aca pasa cuando se TERMINA "manualmente" (es decir, libero el puerto y dejo de escuchar conexiones entrantes)
+                            } finally {
+                                if (s != null) {
+                                    s.close(); // por las dudas cierro la conexion.. nunca viene mal
+                                }
+                            }
+                        }
+                    } catch (Exception e) {
+                        log("[AcceptingThread] Exception - " + e.getMessage());
+                    } finally {
+                        if (this.ss != null) {
+                            this.ss.close(); // lo mismo aca, pero aca cierro el server (el que escucha y levanta conexiones)
+                        }
+                    }
+                } catch (IOException e) {
+                    log("[AcceptingThread] IOException at start - " + e.getMessage()); // como que no deberia pasar
+                } finally {
+                    log("[AcceptingThread] Stoped. "); // solamente logeo que si estoy aca entonces no estoy escuchando
+                }
+            }
 
-		// dentro de este m�tedo que se ejecuta DIRECTAMENTE (es decir, como programadores estamos escribiendo su invocacion en algun momento del programa) se baja al servidor
-		public void abort() throws IOException {
-			this.shutdownRequested = true;
-			if (this.ss != null) {
-				this.ss.close();
-			}
-		}
-	}
+        // dentro de este m�tedo que se ejecuta DIRECTAMENTE (es decir, como programadores estamos escribiendo su invocacion en algun momento del programa) se baja al servidor
+        public void abort() throws IOException {
+            this.shutdownRequested = true;
+            if (this.ss != null) {
+                this.ss.close();
+            }
+        }
+    }
 
 }

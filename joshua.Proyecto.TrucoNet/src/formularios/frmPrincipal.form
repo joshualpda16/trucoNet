@@ -141,6 +141,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Unirse a una Sala"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdUnirseActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

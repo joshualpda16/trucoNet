@@ -67,6 +67,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
 
         cmdUnirse.setText("Unirse a una Sala");
+        cmdUnirse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdUnirseActionPerformed(evt);
+            }
+        });
 
         mnuArchivo.setText("Archivo");
 
@@ -139,6 +144,13 @@ public class frmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLogInputMethodTextChanged
 
+    private void cmdUnirseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdUnirseActionPerformed
+        if(!general.isSvActivo()){
+            general.mostrarUnirse();
+            cmdUnirse.setEnabled(false);
+        }
+    }//GEN-LAST:event_cmdUnirseActionPerformed
+
     static public void log(String txt){
         txtLog.append(txt+"\n");
         txtLog.setCaretPosition(txtLog.getText().length());
@@ -174,7 +186,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmPrincipal().setVisible(true);
+                frmPrincipal princ = new frmPrincipal();
+                princ.setExtendedState(frmPrincipal.MAXIMIZED_BOTH);
+                princ.setVisible(true);
             }
         });
     }

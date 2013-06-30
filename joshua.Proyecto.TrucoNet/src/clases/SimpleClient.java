@@ -1,59 +1,95 @@
 package clases;
 
 import formularios.frmPrincipal;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class SimpleClient {
 
     private String hostname;
+    private String mensaje;
     private int port;
     private Socket socket;
+    private AcceptingThread acceptingThread;
+    static ObjectOutputStream salida;
+    static ObjectInputStream entrada;
+    
 
     public SimpleClient(String hostname, int port){
         this.hostname = hostname;
         this.port = port;
-    }
-
-    public void connect() throws UnknownHostException, IOException{
-        log("[Client] - Attempting to connect to "+hostname+":"+port);
-        socket = new Socket(hostname,port);
-        log("[Client] - Connection Established");
-    }
-
-    public void send(String message) throws IOException{
-    	OutputStream os = socket.getOutputStream();
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os)); // operaciones par abrir "optimamente" un canal para salida (envio) de datos
-        bw.write(message);
-        bw.flush();
-        socket.shutdownOutput(); // esta mierda de linea sirve para avisar que YA no va a enviar mas datos, asi los puede levantar desde el metodo processConnection de la instancia de la clase SimpleServer
+        this.acceptingThread=null;
     }
     
-    public void recieve() throws IOException{ 
-        InputStream is = socket.getInputStream();
-        BufferedReader br = new BufferedReader(new InputStreamReader(is)); // operaciones par abrir un canal de entrada (recepcion) de datos
-        log("[Client] - Response from server:");
-		String line = br.readLine();
-		while (line != null) {
-			log("[Client] recieved : " + line);
-			line = br.readLine();
-		}
+    public void run(){
+        log("[Cliente] Conexión a sala...");
+        if(this.acceptingThread==null){
+            this.acceptingThread = new AcceptingThread();
+            this.acceptingThread.start();
+        }
+    }
+
+    public void enviarDatos(String mensaje){
+        try{
+            salida.writeObject(mensaje);
+            salida.flush();
+        } catch(IOException excepcionES){
+            log("Excepcion E/S");
+        }
+    }
+    
+    
+    private class AcceptingThread extends Thread {
+        private boolean shutdownRequested = false;
+        private Socket sock = null;
+
+        // Dentro de este run (que es invocado internamente en el start*) tiene el codigo para levantar el servidor
+        public void run() {
+            try {
+                //Conectar
+                log("[Cliente] Conectando... ");
+                this.sock = new Socket(hostname,port);
+                log("[Cliente] Conexión exitosa");
+                
+                //Obtener flujos
+                salida = new ObjectOutputStream(sock.getOutputStream());
+                salida.flush();
+                entrada = new ObjectInputStream(sock.getInputStream());
+                log("Se obtuvieron los flujos de E/S");
+                
+                //Notificar al servidor
+                enviarDatos("CNXCNCL");
+                
+                //Dejo procesando la conexión
+                procesarConexion();
+            } catch (IOException e) {
+                log("[AcceptingThread] IOException at start - " + e.getMessage()); // como que no deberia pasar
+            } finally {
+                log("[AcceptingThread] Stoped. "); // solamente logeo que si estoy aca entonces no estoy escuchando
+            }
+        }
+    }
+    
+    private void procesarConexion() throws IOException{
+        do{
+            try{
+                mensaje = (String) entrada.readObject();
+                claseGeneral.procesarMensaje(mensaje);
+            } catch(ClassNotFoundException excepcionClaseNoEncontrada){
+                log("Se recibió un tipo de objeto desconocido");
+            }
+        } while(!mensaje.equals("Fin"));
     }
     
     public void close () throws IOException {
     	if (this.socket != null) {
-    		this.socket.close();
+            this.socket.close();
     	}
     }
 
-	private void log (String s) {
-		frmPrincipal.log(s);
-	}
+    private void log (String s) {
+        frmPrincipal.log(s);
+    }
 }
