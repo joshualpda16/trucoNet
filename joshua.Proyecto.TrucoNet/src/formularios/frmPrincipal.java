@@ -12,12 +12,14 @@ import clases.claseGeneral;
  */
 public class frmPrincipal extends javax.swing.JFrame {
     
-    private claseGeneral general= claseGeneral.getInstance();
+    private claseGeneral general;
     /**
      * Creates new form frmPrincipal
      */
     public frmPrincipal() {
         initComponents();
+        general = claseGeneral.getInstance();
+        general.verificarConfig();
     }
 
     /**
@@ -36,6 +38,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         cmdUnirse = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuArchivo = new javax.swing.JMenu();
+        mnuOpciones = new javax.swing.JMenuItem();
         mnuSalir = new javax.swing.JMenuItem();
         mnuJuego = new javax.swing.JMenu();
 
@@ -74,6 +77,14 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
 
         mnuArchivo.setText("Archivo");
+
+        mnuOpciones.setText("Opciones");
+        mnuOpciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuOpcionesActionPerformed(evt);
+            }
+        });
+        mnuArchivo.add(mnuOpciones);
 
         mnuSalir.setText("Salir");
         mnuSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +162,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmdUnirseActionPerformed
 
+    private void mnuOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuOpcionesActionPerformed
+        general.mostrarOpciones();
+    }//GEN-LAST:event_mnuOpcionesActionPerformed
+
     static public void log(String txt){
         txtLog.append(txt+"\n");
         txtLog.setCaretPosition(txtLog.getText().length());
@@ -189,17 +204,19 @@ public class frmPrincipal extends javax.swing.JFrame {
                 frmPrincipal princ = new frmPrincipal();
                 princ.setExtendedState(frmPrincipal.MAXIMIZED_BOTH);
                 princ.setVisible(true);
+                
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton cmdCrearSala;
-    private javax.swing.JButton cmdUnirse;
+    public static javax.swing.JButton cmdUnirse;
     public static javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenu mnuArchivo;
     private javax.swing.JMenu mnuJuego;
+    private javax.swing.JMenuItem mnuOpciones;
     private javax.swing.JMenuItem mnuSalir;
     public static javax.swing.JTextArea txtLog;
     // End of variables declaration//GEN-END:variables

@@ -5,23 +5,42 @@
 package clases;
 
 import formularios.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Joshua
  */
 public class claseGeneral {
+    //Mis datos
+    static String miNombre;
+    static int miId;
+    static String salaActual;
+    
+    //Jugadores
+    static List<Jugador> lstJugadores=new ArrayList();
+    
     //Formularios
     private frmCrearSala formCrearSala;
     private frmUnirse formUnirse;
+    private frmOpciones formOpciones;
     
-    //Declaración de variables
-    private static final claseGeneral INSTANCE = new claseGeneral();
+    //Variables de conexión
     static SimpleServer simpleServer;
     static SimpleClient simpleClient;
-    static String nombreSala;
     private int puertoSala;
+    static String nombreSala;
+    
+    private static final claseGeneral INSTANCE = new claseGeneral();
     private boolean svActivo;
     
     public static void procesarMensaje(String mensaje){
@@ -30,19 +49,145 @@ public class claseGeneral {
         
         switch(tipo){
             case "CFG":
-                if(msj.equals("NSLA")){
-                    frmPrincipal.log("Nombre de la sala: "+mensaje.substring(7));
+                switch (msj) {
+                    case "NSLA":
+                        //Recibo nombre de la sala
+                        salaActual=mensaje.substring(7);
+                        break;
+                    case "NVID":
+                        //Recibo mi nuevo id como jugador
+                        miId=Integer.parseInt(mensaje.substring(7));
+                        SimpleClient.enviarDatos("CFGNCLI"+miNombre);
+                        break;
+                    case "NCLI":
+                        //Recibo el nombre del jugador cliente
+                        lstJugadores.add(new Jugador(miNombre,0));
+                        lstJugadores.add(new Jugador(mensaje.substring(7),1));
+                        miId=0;
+                        SimpleServer.enviarDatos("CFGNSVR"+miNombre);
+                        break;
+                    case "NSVR":
+                        //Recibo el nombre del jugador servidor
+                        lstJugadores.add(new Jugador(mensaje.substring(7),0));
+                        lstJugadores.add(new Jugador(miNombre,miId));
+                        break;
                 }
                 break;
             case "CNX":
                 if(msj.equals("CNCL")){
                     frmPrincipal.log("Cliente conectado correctamente");
-                    SimpleServer.enviarDatos("CFGNSLA"+claseGeneral.nombreSala);
+                    SimpleServer.enviarDatos("CFGNSLA"+nombreSala);
+                    SimpleServer.enviarDatos("CFGNVID"+1);
                 }
                 break;
             case "JGO":
                 break;
         }
+    }
+    
+    
+    public void guardarNombre(String nombre){
+        //Escritura
+        File f;
+        String ruta="src/otros/config.cfg";
+        f = new File(ruta);
+        try{
+            FileWriter w = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(w);
+            PrintWriter wr = new PrintWriter(bw);	
+            wr.write(nombre);
+            wr.close();
+            bw.close();
+        }catch(IOException e){};
+        verificarConfig();
+    }
+    
+    public void verificarConfig(){
+        String ruta = "src/otros/config.cfg";
+        String estado = estadoConfig(ruta);
+        if(estado.equals("existe")){
+            //<editor-fold defaultstate="collapsed" desc="Si existe">
+            File fich = null;
+            FileReader fichr = null;
+            BufferedReader bf = null;
+            
+            try
+            {
+                // Apertura del fichero y creacion de BufferedReader
+                // para hacer lectura con readLine()
+                fich = new File (ruta);
+                fichr = new FileReader (fich);
+                bf = new BufferedReader(fichr);
+                
+                // Lectura del fichero y escritura en pantalla
+                String line;
+                while((line=bf.readLine())!=null){
+                    miNombre=line;
+                    log("Su nombre es: "+line);
+                }
+            } catch(Exception e){
+                e.printStackTrace();
+            } finally{
+                // En el finally cerramos el fichero con
+                // control de excepcions
+                try
+                {
+                    if( bf != null )
+                    {
+                        bf.close();
+                    }
+                }
+                catch (Exception e2)
+                {
+                    e2.printStackTrace();
+                }
+            }
+            //</editor-fold>
+        } else if(estado.equals("noexiste")){
+            //<editor-fold defaultstate="collapsed" desc="Si no existe">
+            int seleccion = JOptionPane.showOptionDialog(null, "El archivo de configuración no existe, se creará uno nuevo.\nDesea configurar su información personal ahora?",
+                    "No existe",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,new Object[]{"Si","No"},
+                    null);
+            //Escritura
+            try{
+                File f;
+                f = new File("src/otros/config.cfg");
+                FileWriter w = new FileWriter(f);
+                BufferedWriter bw = new BufferedWriter(w);
+                PrintWriter wr = new PrintWriter(bw);
+                wr.write("Anonimo");
+                wr.close();
+                bw.close();
+                miNombre="Anonimo";
+            }catch(IOException e){
+            };
+            if(seleccion<0){
+                mostrarOpciones();
+            } else{
+                
+            }
+            //</editor-fold>
+        } else{
+            JOptionPane.showMessageDialog(null, estado);
+        }
+    }
+    
+    static String estadoConfig(String ruta){
+        String msj="";
+        File archivoConfig = new File(ruta);
+        if(!archivoConfig.exists()){
+            msj="noexiste";
+        } else if(!archivoConfig.canRead()){
+            msj="El archivo de configuración no se puede leer!";
+        } else if(!archivoConfig.canWrite()){
+            msj="El archivo de configuración es de solo lectura!\nNo podrá guardar información nueva";
+        } else{
+            msj="existe";
+        }
+        return msj;
     }
     
     //<editor-fold defaultstate="collapsed" desc="Abrir y cerrar JFrames">
@@ -57,17 +202,24 @@ public class claseGeneral {
         formUnirse.setLocation(10,10);
         formUnirse.show();
     }
+    
+    public void mostrarOpciones(){
+        frmPrincipal.jDesktopPane1.add(formOpciones);
+        formOpciones.setLocation(10,10);
+        formOpciones.show();
+    }
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Metodos de conexión">
     public void crearSala(String nombre, int puerto){
-        this.nombreSala=nombre;
-        this.puertoSala=puerto;
+        nombreSala=nombre;
+        puertoSala=puerto;
         
         simpleServer = new SimpleServer(puerto);
         simpleServer.run();
         
         this.svActivo=true;
+        lstJugadores.add(new Jugador(miNombre,0));
     }
     
     public void cerrarSala(){
@@ -88,6 +240,7 @@ public class claseGeneral {
     private claseGeneral(){
         formCrearSala = new frmCrearSala();
         formUnirse = new frmUnirse();
+        formOpciones = new frmOpciones();
     }
     
     public void log(String msj){
@@ -99,7 +252,16 @@ public class claseGeneral {
     }
     //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc="Gets">
+    //<editor-fold defaultstate="collapsed" desc="GetsSets">
+
+    public static String getMiNombre() {
+        return miNombre;
+    }
+
+    public static void setMiNombre(String miNombre) {
+        claseGeneral.miNombre = miNombre;
+    }
+    
     public boolean isSvActivo() {
         return svActivo;
     }

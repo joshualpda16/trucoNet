@@ -31,12 +31,12 @@ public class SimpleClient {
         }
     }
 
-    public void enviarDatos(String mensaje){
+    public static void enviarDatos(String mensaje){
         try{
             salida.writeObject(mensaje);
             salida.flush();
         } catch(IOException excepcionES){
-            log("Excepcion E/S");
+            frmPrincipal.log("Excepcion E/S");
         }
     }
     

@@ -37,6 +37,23 @@ public class frmUnirse extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("Unirse a una sala");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         cmdUnirse.setText("Unirse");
         cmdUnirse.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +104,7 @@ public class frmUnirse extends javax.swing.JInternalFrame {
                     .addComponent(txtPuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(cmdUnirse)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -101,6 +118,10 @@ public class frmUnirse extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, "Debe ingresar Host y Puerto para unirse", "Error", WIDTH);
         }
     }//GEN-LAST:event_cmdUnirseActionPerformed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        frmPrincipal.cmdUnirse.setEnabled(true);
+    }//GEN-LAST:event_formInternalFrameClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdUnirse;

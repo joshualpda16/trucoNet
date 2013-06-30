@@ -9,6 +9,8 @@ Los tres primeros d�gitos est�n reservados para el tipo de mensaje. Puede se
 
 Mensajes del tipo configuración (CFG)
         "CFGNSLA" -El servidor envía el nombre de la sala
+        "CFGNVID" -El servidor envía al cliente su nuevo id de jugador
+        "CFGNCLI" -El cliente envía al servidor, su nombre.
 
 Mensajes del tipo conexión (CNX):
 	"CNXCNCL" -De cliente al servidor. El cliente se conectó satisfactoriamente.
