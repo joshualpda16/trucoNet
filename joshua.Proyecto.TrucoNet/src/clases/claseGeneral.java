@@ -14,7 +14,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 
 /**
  *
@@ -25,18 +30,20 @@ public class claseGeneral {
     static String miNombre;
     static int miId;
     static String salaActual;
+    static boolean soyServer;
     
     //Jugadores
-    static List<Jugador> lstJugadores=new ArrayList();
+    static public List<Jugador> lstJugadores=new ArrayList();
     
     //Formularios
     private frmCrearSala formCrearSala;
     private frmUnirse formUnirse;
     private frmOpciones formOpciones;
+    static frmChatPrevio formChatPrevio;
     
     //Variables de conexión
-    static SimpleServer simpleServer;
-    static SimpleClient simpleClient;
+    static public SimpleServer simpleServer;
+    static public SimpleClient simpleClient;
     private int puertoSala;
     static String nombreSala;
     
@@ -49,6 +56,7 @@ public class claseGeneral {
         
         switch(tipo){
             case "CFG":
+                //<editor-fold defaultstate="collapsed" desc="Mensajes de CFG">
                 switch (msj) {
                     case "NSLA":
                         //Recibo nombre de la sala
@@ -65,26 +73,43 @@ public class claseGeneral {
                         lstJugadores.add(new Jugador(mensaje.substring(7),1));
                         miId=0;
                         SimpleServer.enviarDatos("CFGNSVR"+miNombre);
+                        mostrarChatPrevio();
                         break;
                     case "NSVR":
                         //Recibo el nombre del jugador servidor
                         lstJugadores.add(new Jugador(mensaje.substring(7),0));
                         lstJugadores.add(new Jugador(miNombre,miId));
+                        mostrarChatPrevio();
                         break;
                 }
+                //</editor-fold>
                 break;
             case "CNX":
+                //<editor-fold defaultstate="collapsed" desc="Mensajes de CNX">
                 if(msj.equals("CNCL")){
                     frmPrincipal.log("Cliente conectado correctamente");
                     SimpleServer.enviarDatos("CFGNSLA"+nombreSala);
+                    salaActual=nombreSala;
                     SimpleServer.enviarDatos("CFGNVID"+1);
                 }
+                //</editor-fold>
                 break;
-            case "JGO":
+            case "CHP": //CHP<ID><Mensaje> - CHP1Hola
+                //El nombre primero en negrita
+                SimpleAttributeSet attrs = new SimpleAttributeSet();
+                try {
+                    //El nombre primero en negrita
+                    StyleConstants.setBold(attrs, true);
+                    int indice = Integer.parseInt(mensaje.substring(3,4));
+                    frmChatPrevio.txtChatPrevio.getStyledDocument().insertString(frmChatPrevio.txtChatPrevio.getStyledDocument().getLength(),claseGeneral.lstJugadores.get(indice).getNombre() +" > ",attrs);
+                    StyleConstants.setBold(attrs, false);
+                    frmChatPrevio.txtChatPrevio.getStyledDocument().insertString(frmChatPrevio.txtChatPrevio.getStyledDocument().getLength(),mensaje.substring(4)+"\n",attrs);
+                } catch (BadLocationException ex) {
+                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
         }
     }
-    
     
     public void guardarNombre(String nombre){
         //Escritura
@@ -208,6 +233,11 @@ public class claseGeneral {
         formOpciones.setLocation(10,10);
         formOpciones.show();
     }
+    
+    static void mostrarChatPrevio(){
+        frmPrincipal.jDesktopPane1.add(formChatPrevio);
+        formChatPrevio.show();
+    }
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Metodos de conexión">
@@ -218,8 +248,8 @@ public class claseGeneral {
         simpleServer = new SimpleServer(puerto);
         simpleServer.run();
         
+        soyServer=true;
         this.svActivo=true;
-        lstJugadores.add(new Jugador(miNombre,0));
     }
     
     public void cerrarSala(){
@@ -233,6 +263,7 @@ public class claseGeneral {
     public void conectarAlServidor(String host, int port){
         simpleClient = new SimpleClient(host, port);
         simpleClient.run();
+        soyServer=false;
     }
     //</editor-fold>
     
@@ -241,6 +272,7 @@ public class claseGeneral {
         formCrearSala = new frmCrearSala();
         formUnirse = new frmUnirse();
         formOpciones = new frmOpciones();
+        formChatPrevio = new frmChatPrevio();
     }
     
     public void log(String msj){
@@ -254,8 +286,20 @@ public class claseGeneral {
     
     //<editor-fold defaultstate="collapsed" desc="GetsSets">
 
+    public static boolean isSoyServer() {
+        return soyServer;
+    }
+
+    public static void setSoyServer(boolean soyServer) {
+        claseGeneral.soyServer = soyServer;
+    }
+    
     public static String getMiNombre() {
         return miNombre;
+    }
+    
+    public static String getNombreSala(){
+        return salaActual;
     }
 
     public static void setMiNombre(String miNombre) {

@@ -54,8 +54,6 @@ public class SimpleServer {
                 
                 entrada = new ObjectInputStream(socket.getInputStream()); //Flujo de entrada del cliente
                 frmPrincipal.log("[Server] Se obtuvieron los flujos de E/S");
-		//InputStream in = socket.getInputStream();
-		//OutputStream out = socket.getOutputStream();
                 String mensaje="";
                 
                 do{ //procesa los mensajes enviados desde el cliente
@@ -66,22 +64,6 @@ public class SimpleServer {
                         frmPrincipal.log("\nSe recibió un tipo de objeto desconocido:\n\tmensaje: "+mensaje);
                     }
                 } while(!mensaje.equals("CNXOUT0"));
-                
-                
-                
-		/*BufferedReader br = new BufferedReader(new InputStreamReader(in, ENCODING)); // toda estas cosas son para abrir "optimamente" un canal de entrada (recepcion) de datos
-		salida = new BufferedOutputStream(salida);
-		PrintWriter pw = new PrintWriter(new OutputStreamWriter(out, ENCODING)); // operaciones par abrir "optimamente" un canal para salida (envio) de datos
-
-		String line = br.readLine();
-		while (line != null) {
-			log("[Server] recieved : " + line);
-			line = br.readLine();
-		}
-
-		pw.write("[Server] - Gracias por conectarse " + socket.toString());
-		pw.flush();
-		pw.close();*/
 	}
 
 	private void log(String s) {
