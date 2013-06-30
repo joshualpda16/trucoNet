@@ -61,15 +61,14 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="cmdCrearSala" min="-2" pref="123" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="cmdCrearSala" max="32767" attributes="0"/>
+                          <Component id="cmdUnirse" pref="133" max="32767" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jDesktopPane1" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="cmdUnirse" min="-2" pref="123" max="-2" attributes="0"/>
-                      <EmptySpace min="600" pref="600" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane1" pref="723" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>

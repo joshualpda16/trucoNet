@@ -5,6 +5,11 @@
 package formularios;
 
 import clases.claseGeneral;
+import java.awt.Image;
+import java.net.URL;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -28,6 +33,15 @@ public class frmJuego extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        suCarta3 = new javax.swing.JLabel();
+        suCarta2 = new javax.swing.JLabel();
+        suCarta1 = new javax.swing.JLabel();
+        miCarta3 = new javax.swing.JLabel();
+        miCarta2 = new javax.swing.JLabel();
+        miCarta1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
@@ -47,15 +61,37 @@ public class frmJuego extends javax.swing.JInternalFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(suCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 90, 140));
+        jPanel1.add(suCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 90, 140));
+        jPanel1.add(suCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 90, 140));
+        jPanel1.add(miCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 390, 90, 140));
+        jPanel1.add(miCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, 90, 140));
+        jPanel1.add(miCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 90, 140));
+
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 780, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(188, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -65,6 +101,57 @@ public class frmJuego extends javax.swing.JInternalFrame {
         this.setTitle("Jugando en sala -"+claseGeneral.getNombreSala()+"-");
     }//GEN-LAST:event_formInternalFrameOpened
 
+    public void quitarCarta(int num,int jugador){
+        if(jugador==2){
+            switch(num){
+                case 1:
+                    pintar(suCarta1,"Blanco");
+                    break;
+                case 2:
+                    pintar(suCarta2,"Blanco");
+                    break;
+                case 3:
+                    pintar(suCarta3,"Blanco");
+                    break;
+            }
+        }
+        if(jugador==1) {
+            switch(num){
+                case 1:
+                    pintar(miCarta1,"Blanco");
+                    break;
+                case 2:
+                    pintar(miCarta2,"Blanco");
+                    break;
+                case 3:
+                    pintar(miCarta3,"Blanco");
+                    break;
+            }
+        }
+    }
+    
+    public void pintarCartasOponente(){
+        pintar(suCarta1,"CartaAzul1");
+        pintar(suCarta2,"CartaAzul2");
+        pintar(suCarta3,"CartaAzul1");
+    }
+    
+    public void pintar(JLabel lbl, String valor){
+        String path = "/Cartas/"+valor+".jpg";
+        URL url = this.getClass().getResource(path);
+        ImageIcon icon = new ImageIcon(url);
+        Icon icono = new ImageIcon(icon.getImage().getScaledInstance(suCarta1.getWidth(), suCarta1.getHeight(), Image.SCALE_DEFAULT));
+        lbl.setIcon(icono);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel miCarta1;
+    private javax.swing.JLabel miCarta2;
+    private javax.swing.JLabel miCarta3;
+    private javax.swing.JLabel suCarta1;
+    private javax.swing.JLabel suCarta2;
+    private javax.swing.JLabel suCarta3;
     // End of variables declaration//GEN-END:variables
 }

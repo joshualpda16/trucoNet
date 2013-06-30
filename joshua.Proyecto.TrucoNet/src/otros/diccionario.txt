@@ -18,3 +18,23 @@ Mensajes del tipo conexión (CNX):
 Mensajes del tipo chat previo (CHP):
         "CHP0Hola" -El servidor envió el mensaje "Hola" al chat previo
         "CHP1ready" -El cliente está listo.
+
+
+
+
+Valor de las cartas:
+
+    4 cualquier palo:   1
+    5 cualquier palo:   2
+    6 cualquier palo:   3
+    7 basto/copa:       4
+    10:                 5
+    11:                 6
+    12:                 7
+    1 copa/oro:         8
+    2 cualquier palo:   9
+    3 cualquier palo:   10
+    7 oro:              11
+    7 espada:           12
+    1 basto:            13
+    1 espada:           14

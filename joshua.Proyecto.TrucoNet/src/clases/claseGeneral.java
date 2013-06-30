@@ -26,29 +26,33 @@ import javax.swing.text.StyleConstants;
  * @author Joshua
  */
 public class claseGeneral {
+    private static final claseGeneral INSTANCE = new claseGeneral();
+    
     //Mis datos
     static String miNombre;
     static int miId;
     static String salaActual;
     static boolean soyServer;
     
-    //Jugadores
+    //Juego
     static public List<Jugador> lstJugadores=new ArrayList();
     
-    //Formularios
+    //<editor-fold defaultstate="collapsed" desc="Variables de Formulario">
     private frmCrearSala formCrearSala;
     private frmUnirse formUnirse;
     private frmOpciones formOpciones;
     static frmChatPrevio formChatPrevio;
     static frmJuego formJuego;
+    //</editor-fold>
     
-    //Variables de conexión
+    //<editor-fold defaultstate="collapsed" desc="Variables de conexión">
     static public SimpleServer simpleServer;
     static public SimpleClient simpleClient;
     private int puertoSala;
     static String nombreSala;
+    //</editor-fold>
     
-    private static final claseGeneral INSTANCE = new claseGeneral();
+    
     private boolean svActivo;
     
     public static void procesarMensaje(String mensaje){
@@ -124,6 +128,9 @@ public class claseGeneral {
                 }
                 break;
                 //</editor-fold>
+            case "JGO":
+                
+                break;
         }
     }
     

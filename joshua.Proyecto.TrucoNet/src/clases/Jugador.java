@@ -4,6 +4,9 @@
  */
 package clases;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Joshua
@@ -11,6 +14,7 @@ package clases;
 public class Jugador {
     private String nombre;
     private int id;
+    private List<Carta> cartas = new ArrayList();
 
     Jugador(){
         
@@ -22,6 +26,15 @@ public class Jugador {
     }
     
     //<editor-fold defaultstate="collapsed" desc="GetSet">
+
+    public void setCartas(List<Carta> Cartas) {
+        this.cartas = Cartas;
+    }
+
+    public List<Carta> getCartas() {
+        return cartas;
+    }
+    
     public String getNombre() {
         return nombre;
     }
