@@ -16,4 +16,5 @@ Mensajes del tipo conexión (CNX):
 	"CNXCNCL" -De cliente al servidor. El cliente se conectó satisfactoriamente.
 
 Mensajes del tipo chat previo (CHP):
-        "CHPhola" -El cliente o el servidor enviaron un mensaje
+        "CHP0Hola" -El servidor envió el mensaje "Hola" al chat previo
+        "CHP1ready" -El cliente está listo.

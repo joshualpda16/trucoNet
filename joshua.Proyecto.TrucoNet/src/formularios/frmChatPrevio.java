@@ -74,6 +74,11 @@ public class frmChatPrevio extends javax.swing.JInternalFrame {
         lblNombreSala.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         cmdListo.setText("Listo");
+        cmdListo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdListoActionPerformed(evt);
+            }
+        });
 
         lblOponente.setText("Nombre del Servidor:");
 
@@ -92,18 +97,17 @@ public class frmChatPrevio extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblNombreSala, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(cmdListo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblNombreOponente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(lblOponente))
-                        .addGap(0, 31, Short.MAX_VALUE)))
+                        .addGap(0, 31, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombreSala, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblNombreOponente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -119,7 +123,7 @@ public class frmChatPrevio extends javax.swing.JInternalFrame {
                         .addComponent(lblOponente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblNombreOponente, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 239, Short.MAX_VALUE))
+                        .addGap(0, 247, Short.MAX_VALUE))
                     .addComponent(jScrollPane2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -136,9 +140,11 @@ public class frmChatPrevio extends javax.swing.JInternalFrame {
         if(claseGeneral.isSoyServer()){
             lblOponente.setText("Nombre del cliente:");
             lblNombreOponente.setText(claseGeneral.lstJugadores.get(1).getNombre());
+            cmdListo.setEnabled(false);
         } else{
             lblOponente.setText("Nombre del servidor:");
             lblNombreOponente.setText(claseGeneral.lstJugadores.get(0).getNombre());
+            cmdListo.setEnabled(true);
         }
     }//GEN-LAST:event_formInternalFrameOpened
 
@@ -162,8 +168,25 @@ public class frmChatPrevio extends javax.swing.JInternalFrame {
         txtEnviar.setText("");
     }//GEN-LAST:event_txtEnviarActionPerformed
 
+    private void cmdListoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListoActionPerformed
+        if(claseGeneral.isSoyServer()){
+            SimpleServer.enviarDatos("CHP0ready");
+            claseGeneral.abrirJuego();
+        } else{
+            try {
+                SimpleClient.enviarDatos("CHP1ready");
+                cmdListo.setEnabled(false);
+                SimpleAttributeSet attrs = new SimpleAttributeSet();
+                StyleConstants.setBold(attrs, true);
+                txtChatPrevio.getStyledDocument().insertString(txtChatPrevio.getStyledDocument().getLength(),"Estas listo. Esperá al servidor.\n",attrs);
+            } catch (BadLocationException ex) {
+                Logger.getLogger(frmChatPrevio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_cmdListoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cmdListo;
+    public static javax.swing.JButton cmdListo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblNombreOponente;

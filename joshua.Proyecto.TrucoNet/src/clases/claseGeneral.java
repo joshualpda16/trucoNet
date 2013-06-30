@@ -40,6 +40,7 @@ public class claseGeneral {
     private frmUnirse formUnirse;
     private frmOpciones formOpciones;
     static frmChatPrevio formChatPrevio;
+    static frmJuego formJuego;
     
     //Variables de conexión
     static public SimpleServer simpleServer;
@@ -95,19 +96,34 @@ public class claseGeneral {
                 //</editor-fold>
                 break;
             case "CHP": //CHP<ID><Mensaje> - CHP1Hola
-                //El nombre primero en negrita
-                SimpleAttributeSet attrs = new SimpleAttributeSet();
-                try {
-                    //El nombre primero en negrita
+                //<editor-fold defaultstate="collapsed" desc="Mensajes de CHP">
+                if(mensaje.equals("CHP1ready")){ //CHP0ready significa que el cliente está listo
+                    frmChatPrevio.cmdListo.setEnabled(true);
+                    SimpleAttributeSet attrs = new SimpleAttributeSet();
                     StyleConstants.setBold(attrs, true);
-                    int indice = Integer.parseInt(mensaje.substring(3,4));
-                    frmChatPrevio.txtChatPrevio.getStyledDocument().insertString(frmChatPrevio.txtChatPrevio.getStyledDocument().getLength(),claseGeneral.lstJugadores.get(indice).getNombre() +" > ",attrs);
-                    StyleConstants.setBold(attrs, false);
-                    frmChatPrevio.txtChatPrevio.getStyledDocument().insertString(frmChatPrevio.txtChatPrevio.getStyledDocument().getLength(),mensaje.substring(4)+"\n",attrs);
-                } catch (BadLocationException ex) {
-                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+                    try {
+                        frmChatPrevio.txtChatPrevio.getStyledDocument().insertString(frmChatPrevio.txtChatPrevio.getStyledDocument().getLength(),"El cliente "+lstJugadores.get(1).getNombre()+" está listo.\n",attrs);
+                    } catch (BadLocationException ex) {
+                        Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else if(mensaje.equals("CHP0ready")){ //CHP0ready es el servidor listo
+                    abrirJuego();
+                } else{
+                    //El nombre primero en negrita
+                    SimpleAttributeSet attrs = new SimpleAttributeSet();
+                    try {
+                        //El nombre primero en negrita
+                        StyleConstants.setBold(attrs, true);
+                        int indice = Integer.parseInt(mensaje.substring(3,4));
+                        frmChatPrevio.txtChatPrevio.getStyledDocument().insertString(frmChatPrevio.txtChatPrevio.getStyledDocument().getLength(),claseGeneral.lstJugadores.get(indice).getNombre() +" > ",attrs);
+                        StyleConstants.setBold(attrs, false);
+                        frmChatPrevio.txtChatPrevio.getStyledDocument().insertString(frmChatPrevio.txtChatPrevio.getStyledDocument().getLength(),mensaje.substring(4)+"\n",attrs);
+                    } catch (BadLocationException ex) {
+                        Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 break;
+                //</editor-fold>
         }
     }
     
@@ -216,6 +232,13 @@ public class claseGeneral {
     }
     
     //<editor-fold defaultstate="collapsed" desc="Abrir y cerrar JFrames">
+    static public void abrirJuego(){
+        formChatPrevio.dispose();
+        frmPrincipal.jDesktopPane1.add(formJuego);
+        formJuego.setLocation(10,10);
+        formJuego.show();
+    }
+    
     public void mostrarCrearSala(){
         frmPrincipal.jDesktopPane1.add(formCrearSala);
         formCrearSala.setLocation(10, 10);
@@ -273,6 +296,7 @@ public class claseGeneral {
         formUnirse = new frmUnirse();
         formOpciones = new frmOpciones();
         formChatPrevio = new frmChatPrevio();
+        formJuego = new frmJuego();
     }
     
     public void log(String msj){

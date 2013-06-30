@@ -149,6 +149,7 @@ public class frmCrearSala extends javax.swing.JInternalFrame {
         general.crearSala(txtNombreSala.getText(), Integer.parseInt(txtPuerto.getText()));
         cmdCrear.setEnabled(false);
         cmdCancelar.setEnabled(true);
+        this.dispose();
     }//GEN-LAST:event_cmdCrearActionPerformed
 
     private void cmdCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelarActionPerformed

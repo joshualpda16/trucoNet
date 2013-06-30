@@ -114,6 +114,7 @@ public class frmUnirse extends javax.swing.JInternalFrame {
         if((!txtHost.getText().equals(""))&&(!txtPuerto.getText().equals(""))){
             claseGeneral general = claseGeneral.getInstance();
             general.conectarAlServidor(txtHost.getText(),Integer.parseInt(txtPuerto.getText()));
+            this.dispose();
         } else{
             JOptionPane.showMessageDialog(rootPane, "Debe ingresar Host y Puerto para unirse", "Error", WIDTH);
         }
