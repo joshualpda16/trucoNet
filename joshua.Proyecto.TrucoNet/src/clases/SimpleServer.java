@@ -57,7 +57,7 @@ public class SimpleServer {
                 String mensaje="";
                 
                 do{ //procesa los mensajes enviados desde el cliente
-                    try{ //Lee el mensaje y lo muestra en pantalla
+                    try{ //Lee el mensaje
                         mensaje = (String) entrada.readObject(); //Lee el nuevo mensaje
                         claseGeneral.procesarMensaje(mensaje);
                     } catch (ClassNotFoundException exceptionClaseNoEncontrada){

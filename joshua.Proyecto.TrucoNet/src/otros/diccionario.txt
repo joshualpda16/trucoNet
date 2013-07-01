@@ -21,8 +21,12 @@ Mensajes del tipo chat previo (CHP):
         "CHP0ready" -El servidor empezó el juego.
 
 Mensajes del tipo Juego (JGO):
+        "JGOREPA" -Repartir las cartas (Solo las pinta)
+        "JGONVMN" -El servidor envia Nueva mano
         "JGOCCTS" -Las nuevas cartas del cliente
-        "JGOSCTS" -Las nuevas cartas del servidor
+        "JGOSVCT" -Las nuevas cartas del servidor
+        "JGOSCTS" -Las nuevas cartas del servidor (Y abrir juego. Se usa solo la primera vez)
+        "JGOCRTA<ID><NroCarta>" -Juega una carta
 
 
 Valor de las cartas:
@@ -41,3 +45,12 @@ Valor de las cartas:
     7 espada:           12
     1 basto:            13
     1 espada:           14
+
+Tantos:
+
+    No Cantados                 0
+    Envido:                     1
+    Envido+Envido:              2
+    Envido+RealEnvido:          3
+    Envido+Envido+RealEnvido    4
+    FaltaEnvido                 5

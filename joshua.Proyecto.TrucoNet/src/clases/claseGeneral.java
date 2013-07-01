@@ -39,7 +39,7 @@ public class claseGeneral {
     static public List<Jugador> lstJugadores=new ArrayList();
     
     //<editor-fold defaultstate="collapsed" desc="Variables de Formulario">
-    private frmCrearSala formCrearSala;
+    static frmCrearSala formCrearSala;
     private frmUnirse formUnirse;
     private frmOpciones formOpciones;
     static frmChatPrevio formChatPrevio;
@@ -97,6 +97,7 @@ public class claseGeneral {
                     SimpleServer.enviarDatos("CFGNSLA"+nombreSala);
                     salaActual=nombreSala;
                     SimpleServer.enviarDatos("CFGNVID"+1);
+                    formCrearSala.dispose();
                 }
                 //</editor-fold>
                 break;
@@ -136,11 +137,72 @@ public class claseGeneral {
                 break;
                 //</editor-fold>
             case "JGO":
+                //<editor-fold defaultstate="collapsed" desc="Juego">
                 switch(msj){
+                    case "CHAT":
+                        int suId=Integer.parseInt(mensaje.substring(7,8));
+                        
+                        SimpleAttributeSet attrs = new SimpleAttributeSet();
+                        StyleConstants.setBold(attrs, true);
+                        try {
+                            //El nombre primero en negrita
+                            frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(suId).getNombre()+" > ",attrs);
+                            StyleConstants.setBold(attrs, false);
+                            frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),mensaje.substring(8) +"\n",attrs);
+                        } catch (BadLocationException ex) {
+                            Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        break;
+                    case "SISI":
+                        frmPrincipal.log("Recibí el Quiero");
+                        formJuego.pintar(frmJuego.lblElCanta, "Quiero");
+                        switch(miJuego.getEsperando()){
+                            case "truco":
+                                miJuego.setInstanciaTruco(2);
+                                miJuego.setRonda(true);
+                                miJuego.setEnvido(true);
+                                break;
+                            case "retruco":
+                                miJuego.setInstanciaTruco(3);
+                                miJuego.setRonda(true);
+                                miJuego.setEnvido(true);
+                                break;
+                            case "valecuatro":
+                                miJuego.setInstanciaTruco(4);
+                                miJuego.setRonda(true);
+                                miJuego.setEnvido(true);
+                                break;
+                        }
+                        break;
+                    case "NONO":
+                        frmPrincipal.log("No quiso");
+                        break;
                     case "CCTS":
                         //Recibo mis cartas
                         String ctas1 = mensaje.substring(7);
-                        lstJugadores.get(1).guardarStringCartas(ctas1);
+                        lstJugadores.get(miId).guardarStringCartas(ctas1);
+                        break;
+                    case "SVCT":
+                        //Recibo cartas del servidor
+                        String ctas3 = mensaje.substring(7);
+                        lstJugadores.get(0).guardarStringCartas(ctas3);
+                        break;
+                    case "NVMN":
+                        //Nueva mano
+                        miJuego.inicializar();
+                        if(miJuego.getMano()!=miId){
+                            formJuego.apagarTodosBotones();
+                            frmJuego.cmdAlMazo.setText("Repartir");
+                            formJuego.suTurno();
+                        } else{
+                            frmJuego.cmdAlMazo.setText("Al Mazo");
+                            formJuego.apagarTodosBotones();
+                            claseGeneral.formJuego.miTurno();
+                        }
+                        break;
+                    case "REPA":
+                        //Repartir. Pinto las cartas solamente.
+                        miJuego.pintarCartas();
                         break;
                     case "SCTS":
                         //Recibo cartas del servidor
@@ -149,8 +211,123 @@ public class claseGeneral {
                         abrirJuego();
                         miJuego = new Juego();
                         break;
+                    case "CRTA": //El contrincante tiró una carta.
+                        //<editor-fold defaultstate="collapsed" desc="Llegó una carta">
+                        //Traigo la carta y el jugador
+                        frmPrincipal.log("Llegó la carta");
+                        int suID=Integer.parseInt(mensaje.substring(7, 8));
+                        int idCarta=Integer.parseInt(mensaje.substring(8,9));
+                        String carta = lstJugadores.get(suID).getCartas().get(idCarta).traerCarta();
+                        int susCartasTiradas = lstJugadores.get(suID).getCartasTiradas();
+                        boolean yoGano=false,yoPierdo=false;
+                        
+                        switch(susCartasTiradas){
+                            case 0:
+                                formJuego.pintar(frmJuego.suCartaTirada1, carta);
+                                formJuego.pintar(frmJuego.suCarta1, "Blanco");
+                                break;
+                            case 1:
+                                formJuego.pintar(frmJuego.suCartaTirada2, carta);
+                                formJuego.pintar(frmJuego.suCarta2, "Blanco");
+                                break;
+                            case 2:
+                                formJuego.pintar(frmJuego.suCartaTirada3, carta);
+                                formJuego.pintar(frmJuego.suCarta3, "Blanco");
+                                break;
+                        }
+                        if(miJuego.isPrimeraCarta()){
+                            frmPrincipal.log("Es la primera carta");
+                            miJuego.setCartaInstancia(lstJugadores.get(suID).getCartas().get(idCarta));
+                            miJuego.setPrimeraCarta(false);
+                            formJuego.miTurno();
+                            frmPrincipal.log("Me toca a mi");
+                        } else{
+                            frmPrincipal.log("No es la primera carta");
+                            if(Juego.compararCartas(miJuego.getCartaInstancia(),lstJugadores.get(suID).getCartas().get(idCarta))){
+                                frmPrincipal.log("Mi carta es más grande");
+                                formJuego.miTurno();
+                                miJuego.setPrimeraCarta(true);
+                                frmPrincipal.log("Mi turno");
+                                formJuego.apagarTodosBotones();
+                                lstJugadores.get(miId).setInstanciasGanadas(lstJugadores.get(miId).getInstanciasGanadas()+1);
+                                
+                                if(lstJugadores.get(miId).getInstanciasGanadas()==2){
+                                    yoGano=true;
+                                }
+                            } else{
+                                frmPrincipal.log("Mi carta es más chica");
+                                formJuego.suTurno();
+                                lstJugadores.get(suID).setInstanciasGanadas(lstJugadores.get(suID).getInstanciasGanadas()+1);
+                                formJuego.apagarTodosBotones();
+                                miJuego.setPrimeraCarta(true);
+                                frmPrincipal.log("Su turno");
+                                if(lstJugadores.get(suID).getInstanciasGanadas()==2){
+                                    yoPierdo=true;
+                                }
+                            }
+                            miJuego.setInstanciaJuego(miJuego.getInstanciaJuego()+1);
+                            frmPrincipal.log("Suma una instancia al juego. Estamos en la "+(miJuego.getInstanciaJuego()));
+                        }
+                        formJuego.prenderBotones();
+                        frmPrincipal.log("Sus cartas tiradas son "+susCartasTiradas+1);
+                        lstJugadores.get(suID).setCartasTiradas(susCartasTiradas+1);
+                        if(yoGano){
+                            frmPrincipal.log("Gané dos instancias");
+                            Juego.ganarMano(miId);
+                        }
+                        if(yoPierdo){
+                            frmPrincipal.log("Ganó dos instancias");
+                            Juego.ganarMano(suID);
+                        }
+                        //</editor-fold>
+                        break;
+                    case "TRC1": //El contrincante cantó truco
+                        formJuego.pintar(frmJuego.lblElCanta, "Truco");
+                        frmJuego.cmdQuiero.setEnabled(true);
+                        frmJuego.cmdNoQuiero.setEnabled(true);
+                        frmJuego.cmdTruco.setText("Quiero Re Truco");
+                        frmJuego.cmdTruco.setEnabled(true);
+                        miJuego.setEsperando("truco");
+                        break;
+                    case "TRC2": //El contrincante cantó Re Truco
+                        formJuego.pintar(frmJuego.lblElCanta,"ReTruco");
+                        formJuego.pintar(frmJuego.lblYoCanto,"Blanco");
+                        frmJuego.cmdQuiero.setEnabled(true);
+                        frmJuego.cmdNoQuiero.setEnabled(true);
+                        frmJuego.cmdTruco.setText("Quiero vale 4");
+                        frmJuego.cmdTruco.setEnabled(true);
+                        miJuego.setEsperando("retruco");
+                        miJuego.setRonda(false);
+                        break;
+                    case "TRC3":
+                        formJuego.pintar(frmJuego.lblElCanta,"ValeCuatro");
+                        formJuego.pintar(frmJuego.lblYoCanto,"Blanco");
+                        frmJuego.cmdQuiero.setEnabled(true);
+                        frmJuego.cmdNoQuiero.setEnabled(true);
+                        frmJuego.cmdTruco.setEnabled(false);
+                        miJuego.setEsperando("valecuatro");
+                        miJuego.setRonda(false);
+                        //</editor-fold>
                 }
                 break;
+        }
+    }
+    
+    public static void enviarQuiero(){
+        if(claseGeneral.isSoyServer()){
+            SimpleServer.enviarDatos("JGOSISI");
+        } else{
+            SimpleClient.enviarDatos("JGOSISI");
+        }
+        miJuego.setRonda(true);
+        formJuego.pintar(frmJuego.lblYoCanto, "Quiero");
+    }
+    
+     public static void enviarNoQuiero(){
+        if(claseGeneral.isSoyServer()){
+            SimpleServer.enviarDatos("JGONONO");
+        } else{
+            SimpleClient.enviarDatos("JGONONO");
         }
     }
     

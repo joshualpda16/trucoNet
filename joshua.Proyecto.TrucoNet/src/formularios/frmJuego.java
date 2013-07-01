@@ -4,12 +4,21 @@
  */
 package formularios;
 
+import clases.Juego;
+import clases.SimpleClient;
+import clases.SimpleServer;
 import clases.claseGeneral;
+import java.awt.Color;
 import java.awt.Image;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 
 /**
  *
@@ -46,65 +55,141 @@ public class frmJuego extends javax.swing.JInternalFrame {
         miCartaTirada3 = new javax.swing.JLabel();
         miCartaTirada2 = new javax.swing.JLabel();
         miCartaTirada1 = new javax.swing.JLabel();
+        lblYo = new javax.swing.JLabel();
+        lblEl = new javax.swing.JLabel();
+        lblYoCanto = new javax.swing.JLabel();
+        lblElCanta = new javax.swing.JLabel();
+        cmdAlMazo = new javax.swing.JButton();
+        cmdEnvido = new javax.swing.JButton();
+        cmdRealEnvido = new javax.swing.JButton();
+        cmdFaltaEnvido = new javax.swing.JButton();
+        cmdNoQuiero = new javax.swing.JButton();
+        cmdTruco = new javax.swing.JButton();
+        txtEnviarChat = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtChat = new javax.swing.JTextPane();
+        txtYo = new javax.swing.JTextField();
+        txtEl = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        cmdQuiero = new javax.swing.JButton();
 
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameOpened(evt);
             }
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
         });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        suCarta3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.add(suCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 70, 110));
-
-        suCarta2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.add(suCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 70, 110));
+        jPanel1.add(suCartaTirada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 80, 120));
 
-        suCartaTirada3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(suCartaTirada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, 80, 120));
+        miCarta3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                miCarta3MouseClicked(evt);
+            }
+        });
+        jPanel1.add(miCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 410, 100, 140));
 
-        miCarta3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(miCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 480, 100, 140));
+        miCarta2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                miCarta2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(miCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, 100, 140));
 
-        miCarta2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(miCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 100, 140));
-
-        miCarta1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(miCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 480, 100, 140));
-
-        suCarta1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        miCarta1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                miCarta1MouseClicked(evt);
+            }
+        });
+        jPanel1.add(miCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 100, 140));
         jPanel1.add(suCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 70, 110));
+        jPanel1.add(suCartaTirada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 80, 120));
+        jPanel1.add(suCartaTirada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 80, 120));
+        jPanel1.add(miCartaTirada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 80, 120));
+        jPanel1.add(miCartaTirada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 280, 80, 120));
+        jPanel1.add(miCartaTirada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 80, 120));
 
-        suCartaTirada1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(suCartaTirada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 80, 120));
+        lblYo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblYo.setText("Yo");
+        jPanel1.add(lblYo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 510, 30, -1));
 
-        suCartaTirada2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(suCartaTirada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 80, 120));
+        lblEl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblEl.setText("Él");
+        jPanel1.add(lblEl, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 20, -1));
+        jPanel1.add(lblYoCanto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 120, 70));
+        jPanel1.add(lblElCanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 120, 70));
 
-        miCartaTirada3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(miCartaTirada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, 80, 120));
+        cmdAlMazo.setText("Al Mazo");
+        cmdAlMazo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAlMazoActionPerformed(evt);
+            }
+        });
 
-        miCartaTirada2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(miCartaTirada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 80, 120));
+        cmdEnvido.setText("Envido");
 
-        miCartaTirada1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(miCartaTirada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 80, 120));
+        cmdRealEnvido.setText("Real Envido");
+
+        cmdFaltaEnvido.setText("Falta Envido");
+
+        cmdNoQuiero.setText("No Quiero");
+        cmdNoQuiero.setEnabled(false);
+        cmdNoQuiero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdNoQuieroActionPerformed(evt);
+            }
+        });
+
+        cmdTruco.setText("Truco");
+        cmdTruco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdTrucoActionPerformed(evt);
+            }
+        });
+
+        txtEnviarChat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEnviarChatActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setViewportView(txtChat);
+
+        txtYo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtYoActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Yo");
+
+        jLabel2.setText("Él");
+
+        cmdQuiero.setText("Quiero");
+        cmdQuiero.setEnabled(false);
+        cmdQuiero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdQuieroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,14 +198,66 @@ public class frmJuego extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEnviarChat)
+                            .addComponent(jScrollPane2)
+                            .addComponent(cmdAlMazo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmdFaltaEnvido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmdEnvido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(cmdQuiero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmdNoQuiero))
+                            .addComponent(cmdTruco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmdRealEnvido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEl, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtYo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(63, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEnviarChat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtYo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtEl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmdAlMazo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmdNoQuiero, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                            .addComponent(cmdQuiero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmdTruco, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmdFaltaEnvido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmdRealEnvido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmdEnvido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -128,8 +265,342 @@ public class frmJuego extends javax.swing.JInternalFrame {
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         this.setTitle("Jugando en sala -"+claseGeneral.getNombreSala()+"-");
+        lblYo.setForeground(Color.BLUE);
+        lblEl.setForeground(Color.BLACK);
+        if(!claseGeneral.isSoyServer()){
+            apagarTodosBotones();
+            lblYo.setForeground(Color.BLACK);
+            lblEl.setForeground(Color.BLUE);
+        }
     }//GEN-LAST:event_formInternalFrameOpened
 
+    public void apagarTodosBotones(){
+        cmdEnvido.setEnabled(false);
+        cmdRealEnvido.setEnabled(false);
+        cmdFaltaEnvido.setEnabled(false);
+        cmdTruco.setEnabled(false);
+        cmdQuiero.setEnabled(false);
+        cmdNoQuiero.setEnabled(false);
+    }
+    
+    public void prenderBotones(){
+        if(claseGeneral.miJuego.getInstanciaJuego()==0){
+            if(claseGeneral.miJuego.isEnvido()){
+                switch(claseGeneral.miJuego.getInstanciaEnvido()){
+                    case 1:
+                        cmdQuiero.setEnabled(true);
+                        cmdNoQuiero.setEnabled(true);
+                    case 0:
+                        cmdEnvido.setEnabled(true);
+                        cmdRealEnvido.setEnabled(true);
+                        cmdFaltaEnvido.setEnabled(true);
+                        break;
+                    case 2:
+                        cmdQuiero.setEnabled(true);
+                        cmdNoQuiero.setEnabled(true);
+                        cmdRealEnvido.setEnabled(true);
+                    case 3:
+                    case 4:
+                        cmdQuiero.setEnabled(true);
+                        cmdNoQuiero.setEnabled(true);
+                        cmdFaltaEnvido.setEnabled(true);
+                        break;
+                }
+            }
+        }
+        if((claseGeneral.miJuego.isTruco())&&(claseGeneral.miJuego.getTurno()==claseGeneral.getMiId())){
+            switch(claseGeneral.miJuego.getInstanciaTruco()){
+                case 0:
+                    cmdTruco.setText("Truco");
+                    cmdTruco.setEnabled(true);
+                    break;
+                case 2:
+                    cmdTruco.setText("Quiero re truco!");
+                    cmdTruco.setEnabled(true);
+                    break;
+                case 3:
+                    cmdTruco.setText("Quiero vale cuatro!");
+                    cmdTruco.setEnabled(true);
+                    break;
+            }
+        }
+    }
+    
+    private void miCarta1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_miCarta1MouseClicked
+        if(claseGeneral.miJuego.isRonda()){
+            if(claseGeneral.miJuego.getTurno()==claseGeneral.getMiId()){
+                if(!claseGeneral.lstJugadores.get(claseGeneral.getMiId()).isCarta1tirada()){
+                    claseGeneral.lstJugadores.get(claseGeneral.getMiId()).setCarta1tirada(true);
+                    tirarCarta(0);
+                    pintar(lblYoCanto,"Blanco");
+                    pintar(lblElCanta,"Blanco");
+                }
+            }
+        }  
+    }//GEN-LAST:event_miCarta1MouseClicked
+
+    private void miCarta2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_miCarta2MouseClicked
+        if(claseGeneral.miJuego.isRonda()){
+            if(claseGeneral.miJuego.getTurno()==claseGeneral.getMiId()){
+                if(!claseGeneral.lstJugadores.get(claseGeneral.getMiId()).isCarta2tirada()){
+                    claseGeneral.lstJugadores.get(claseGeneral.getMiId()).setCarta2tirada(true);
+                    tirarCarta(1);
+                    pintar(lblYoCanto,"Blanco");
+                    pintar(lblElCanta,"Blanco");
+                }
+            }
+        } 
+    }//GEN-LAST:event_miCarta2MouseClicked
+
+    private void miCarta3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_miCarta3MouseClicked
+        if(claseGeneral.miJuego.isRonda()){
+            if(claseGeneral.miJuego.getTurno()==claseGeneral.getMiId()){
+                if(!claseGeneral.lstJugadores.get(claseGeneral.getMiId()).isCarta3tirada()){
+                    claseGeneral.lstJugadores.get(claseGeneral.getMiId()).setCarta3tirada(true);
+                    tirarCarta(2);
+                    pintar(lblYoCanto,"Blanco");
+                    pintar(lblElCanta,"Blanco");
+                }
+            }
+        } 
+    }//GEN-LAST:event_miCarta3MouseClicked
+
+    private void txtYoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtYoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtYoActionPerformed
+
+    private void cantarTruco(){
+        int miId=claseGeneral.getMiId();
+        if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOTRC1"+miId);}
+        else{SimpleClient.enviarDatos("JGOTRC1"+miId);}
+        frmPrincipal.log("Envié el Truco!");
+        pintar(lblYoCanto,"Truco");
+        pintar(lblElCanta,"Blanco");
+        claseGeneral.miJuego.setRonda(false);
+        apagarTodosBotones();
+        claseGeneral.miJuego.setEsperando("truco");
+    }
+    
+    private void cantarReTruco(){
+        int miId=claseGeneral.getMiId();
+        if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOTRC2"+miId);}
+        else{SimpleClient.enviarDatos("JGOTRC2"+miId);}
+        pintar(lblYoCanto,"ReTruco");
+        pintar(lblElCanta,"Blanco");
+        claseGeneral.miJuego.setRonda(false);
+        apagarTodosBotones();
+        claseGeneral.miJuego.setEsperando("retruco");
+        claseGeneral.miJuego.setInstanciaTruco(2);
+    }
+    
+    private void cantarValeCuatro(){
+        int miId=claseGeneral.getMiId();
+        if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOTRC3"+miId);}
+                else{SimpleClient.enviarDatos("JGOTRC3"+miId);}
+                pintar(lblYoCanto,"ValeCuatro");
+                pintar(lblElCanta,"Blanco");
+                claseGeneral.miJuego.setRonda(false);
+                apagarTodosBotones();
+                claseGeneral.miJuego.setEsperando("valecuatro");
+    }
+    
+    private void cmdTrucoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdTrucoActionPerformed
+        switch(claseGeneral.miJuego.getInstanciaTruco()){
+            case 0:
+                if(claseGeneral.miJuego.getEsperando().equals("truco")){
+                    cantarReTruco();
+                } else{
+                    cantarTruco();
+                }
+                break;
+            case 2:
+                cantarReTruco();
+                break;
+            case 3:
+                cantarValeCuatro();
+                break;
+        }
+    }//GEN-LAST:event_cmdTrucoActionPerformed
+
+    private void cmdQuieroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdQuieroActionPerformed
+        switch(claseGeneral.miJuego.getEsperando()){
+            case "truco":
+                claseGeneral.miJuego.setInstanciaTruco(2);
+                apagarTodosBotones();
+                break;
+            case "retruco":
+                claseGeneral.miJuego.setInstanciaTruco(3);
+                apagarTodosBotones();
+                break;
+            case "valecuatro":
+                claseGeneral.miJuego.setInstanciaTruco(4);
+                apagarTodosBotones();
+                break;
+        }
+        claseGeneral.miJuego.setTieneElQuiero(claseGeneral.getMiId());
+        claseGeneral.enviarQuiero();
+    }//GEN-LAST:event_cmdQuieroActionPerformed
+
+    private void cmdNoQuieroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNoQuieroActionPerformed
+        claseGeneral.enviarNoQuiero();
+    }//GEN-LAST:event_cmdNoQuieroActionPerformed
+
+    private void txtEnviarChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEnviarChatActionPerformed
+        if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOCHAT"+claseGeneral.getMiId()+txtEnviarChat.getText());}
+            else{SimpleClient.enviarDatos("JGOCHAT"+claseGeneral.getMiId()+txtEnviarChat.getText());}
+        SimpleAttributeSet attrs = new SimpleAttributeSet();
+        StyleConstants.setBold(attrs, true);
+        try {
+            //El nombre primero en negrita
+            txtChat.getStyledDocument().insertString(txtChat.getStyledDocument().getLength(),claseGeneral.getMiNombre()+" > ",attrs);
+            StyleConstants.setBold(attrs, false);
+            txtChat.getStyledDocument().insertString(txtChat.getStyledDocument().getLength(),txtEnviarChat.getText()+"\n",attrs);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        txtEnviarChat.setText("");
+
+    }//GEN-LAST:event_txtEnviarChatActionPerformed
+
+    private void cmdAlMazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAlMazoActionPerformed
+        if(cmdAlMazo.getText().equals("Repartir")){
+            claseGeneral.miJuego.pintarCartas();
+            if(claseGeneral.isSoyServer()){
+                SimpleServer.enviarDatos("JGOREPA");
+            } else{
+                SimpleClient.enviarDatos("JGOREPA");
+            }
+            cmdAlMazo.setText("Al Mazo");
+        }
+    }//GEN-LAST:event_cmdAlMazoActionPerformed
+
+    public void miTurno(){
+        claseGeneral.miJuego.setTurno(claseGeneral.getMiId());
+        lblYo.setForeground(Color.BLUE);
+        lblEl.setForeground(Color.BLACK);
+    }
+    
+    public void suTurno(){
+        claseGeneral.miJuego.setTurno(Math.abs(claseGeneral.getMiId()-1));
+        lblYo.setForeground(Color.BLACK);
+        lblEl.setForeground(Color.BLUE);
+    }
+    
+    private void tirarCarta(int id){
+        int miId = claseGeneral.getMiId();
+        if(claseGeneral.miJuego.getTurno()==miId){
+            String stringCarta = claseGeneral.lstJugadores.get(miId).getCartas().get(id).traerCarta();
+            int tiradas = claseGeneral.lstJugadores.get(miId).getCartasTiradas();
+            
+            //<editor-fold defaultstate="collapsed" desc="Dónde tiro la carta">
+            switch(tiradas){
+                case 0:
+                    switch(id){
+                        case 0:
+                            pintar(miCartaTirada1,stringCarta);
+                            frmJuego.miCartaTirada1.repaint();
+                            pintar(miCarta1,"Blanco");
+                            break;
+                        case 1:
+                            pintar(miCartaTirada1,stringCarta);
+                            pintar(miCarta2,"Blanco");
+                            break;
+                        case 2:
+                            pintar(miCartaTirada1,stringCarta);
+                            pintar(miCarta3,"Blanco");
+                            break;
+                    }
+                    break;
+                case 1:
+                    switch(id){
+                        case 0:
+                            pintar(miCartaTirada2,stringCarta);
+                            pintar(miCarta1,"Blanco");
+                            break;
+                        case 1:
+                            pintar(miCartaTirada2,stringCarta);
+                            pintar(miCarta2,"Blanco");
+                            break;
+                        case 2:
+                            pintar(miCartaTirada2,stringCarta);
+                            pintar(miCarta3,"Blanco");
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch(id){
+                        case 0:
+                            pintar(miCartaTirada3,stringCarta);
+                            pintar(miCarta1,"Blanco");
+                            break;
+                        case 1:
+                            pintar(miCartaTirada3,stringCarta);
+                            pintar(miCarta2,"Blanco");
+                            break;
+                        case 2:
+                            pintar(miCartaTirada3,stringCarta);
+                            pintar(miCarta3,"Blanco");
+                            break;
+                    }
+                    break;
+            }
+            //</editor-fold>
+
+            //Envio la carta tirada
+            if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOCRTA"+miId+id);}
+            else{SimpleClient.enviarDatos("JGOCRTA"+miId+id);}   
+            
+            //Actualizo el juego
+            claseGeneral.lstJugadores.get(miId).setCartasTiradas(tiradas+1); //Tiré la primer carta
+            
+            boolean yoGano=false,yoPierdo=false;
+            
+            if(claseGeneral.miJuego.isPrimeraCarta()){
+                frmPrincipal.log("Es la primera carta");
+                suTurno();
+                claseGeneral.miJuego.setCartaInstancia(claseGeneral.lstJugadores.get(miId).getCartas().get(id));
+                claseGeneral.miJuego.setPrimeraCarta(false);
+                apagarTodosBotones();
+            } else{
+                int suID = Math.abs(miId-1);
+                frmPrincipal.log("No es la primera carta");
+                if(Juego.compararCartas(claseGeneral.lstJugadores.get(miId).getCartas().get(id),claseGeneral.miJuego.getCartaInstancia())){
+                    frmPrincipal.log("Mi carta es más grande, mi turno");
+                    miTurno();
+                    claseGeneral.miJuego.setPrimeraCarta(true);
+                    apagarTodosBotones();
+                    claseGeneral.lstJugadores.get(miId).setInstanciasGanadas(claseGeneral.lstJugadores.get(miId).getInstanciasGanadas()+1);
+                    frmPrincipal.log("Me sumo una instancia ganada");
+                    
+                    if(claseGeneral.lstJugadores.get(miId).getInstanciasGanadas()==2){
+                        yoGano=true;
+                    }
+                } else{
+                    frmPrincipal.log("Mi carta era más chica");
+                    suTurno();
+                    claseGeneral.miJuego.setPrimeraCarta(true);
+                    claseGeneral.lstJugadores.get(suID).setInstanciasGanadas(claseGeneral.lstJugadores.get(suID).getInstanciasGanadas()+1);
+                    apagarTodosBotones();
+                    frmPrincipal.log("Le toca a él");
+                    if(claseGeneral.lstJugadores.get(suID).getInstanciasGanadas()==2){
+                        yoPierdo=true;
+                    }
+                }
+                int inst = claseGeneral.miJuego.getInstanciaJuego()+1;
+                frmPrincipal.log("Sumo una instancia al juego. Es la instancia Nro "+inst);
+                claseGeneral.miJuego.setInstanciaJuego(claseGeneral.miJuego.getInstanciaJuego()+1);
+                prenderBotones();
+                if(yoGano){
+                    frmPrincipal.log("Gané dos instancias");
+                    Juego.ganarMano(miId);
+                }
+                if(yoPierdo){
+                    frmPrincipal.log("Perdí dos instancias");
+                    Juego.ganarMano(suID);
+                }
+            }
+        }
+    }
     
     public void pintarMisCartas(){
         int miId = claseGeneral.getMiId();
@@ -154,18 +625,36 @@ public class frmJuego extends javax.swing.JInternalFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton cmdAlMazo;
+    public static javax.swing.JButton cmdEnvido;
+    public static javax.swing.JButton cmdFaltaEnvido;
+    public static javax.swing.JButton cmdNoQuiero;
+    public static javax.swing.JButton cmdQuiero;
+    public static javax.swing.JButton cmdRealEnvido;
+    public static javax.swing.JButton cmdTruco;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel miCarta1;
-    private javax.swing.JLabel miCarta2;
-    private javax.swing.JLabel miCarta3;
-    private javax.swing.JLabel miCartaTirada1;
-    private javax.swing.JLabel miCartaTirada2;
-    private javax.swing.JLabel miCartaTirada3;
-    private javax.swing.JLabel suCarta1;
-    private javax.swing.JLabel suCarta2;
-    private javax.swing.JLabel suCarta3;
-    private javax.swing.JLabel suCartaTirada1;
-    private javax.swing.JLabel suCartaTirada2;
-    private javax.swing.JLabel suCartaTirada3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblEl;
+    public static javax.swing.JLabel lblElCanta;
+    private javax.swing.JLabel lblYo;
+    public static javax.swing.JLabel lblYoCanto;
+    public static javax.swing.JLabel miCarta1;
+    public static javax.swing.JLabel miCarta2;
+    public static javax.swing.JLabel miCarta3;
+    public static javax.swing.JLabel miCartaTirada1;
+    public static javax.swing.JLabel miCartaTirada2;
+    public static javax.swing.JLabel miCartaTirada3;
+    public static javax.swing.JLabel suCarta1;
+    public static javax.swing.JLabel suCarta2;
+    public static javax.swing.JLabel suCarta3;
+    public static javax.swing.JLabel suCartaTirada1;
+    public static javax.swing.JLabel suCartaTirada2;
+    public static javax.swing.JLabel suCartaTirada3;
+    public static javax.swing.JTextPane txtChat;
+    public static javax.swing.JTextField txtEl;
+    public static javax.swing.JTextField txtEnviarChat;
+    public static javax.swing.JTextField txtYo;
     // End of variables declaration//GEN-END:variables
 }

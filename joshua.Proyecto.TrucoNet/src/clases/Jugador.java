@@ -12,14 +12,19 @@ import java.util.List;
  * @author Joshua
  */
 public class Jugador {
+    private int puntos;
+    private int cartasTiradas;
     private String nombre;
     private int id;
     private List<Carta> cartas = new ArrayList();
+    private int instanciasGanadas=0;
+    private boolean carta1tirada,carta2tirada,carta3tirada;
 
     Jugador(){
         cartas.add(null);
         cartas.add(null);
         cartas.add(null);
+        cartasTiradas = 0;
     }
     
     Jugador(String nombre, int id){
@@ -28,6 +33,7 @@ public class Jugador {
         cartas.add(null);
         cartas.add(null);
         cartas.add(null);
+        cartasTiradas=0;
     }
     
     public void guardarStringCartas(String cadena){
@@ -48,9 +54,60 @@ public class Jugador {
         }
         return msj;
     }
+
+
+
     
     //<editor-fold defaultstate="collapsed" desc="GetSet">
+    
+    public int getInstanciasGanadas() {
+        return instanciasGanadas;
+    }
 
+    public void setInstanciasGanadas(int instanciasGanadas) {
+        this.instanciasGanadas = instanciasGanadas;
+    }
+
+    public boolean isCarta1tirada() {
+        return carta1tirada;
+    }
+
+    public void setCarta1tirada(boolean carta1tirada) {
+        this.carta1tirada = carta1tirada;
+    }
+
+    public boolean isCarta2tirada() {
+        return carta2tirada;
+    }
+
+    public void setCarta2tirada(boolean carta2tirada) {
+        this.carta2tirada = carta2tirada;
+    }
+
+    public boolean isCarta3tirada() {
+        return carta3tirada;
+    }
+
+    public void setCarta3tirada(boolean carta3tirada) {
+        this.carta3tirada = carta3tirada;
+    }
+    
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
+    }
+
+    public int getCartasTiradas() {
+        return cartasTiradas;
+    }
+
+    public void setCartasTiradas(int cartasTiradas) {
+        this.cartasTiradas = cartasTiradas;
+    }
+    
     public void setCartas(List<Carta> Cartas) {
         //Cartas.get(0)
         this.cartas = Cartas;

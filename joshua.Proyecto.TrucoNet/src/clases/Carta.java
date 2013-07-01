@@ -4,8 +4,6 @@
  */
 package clases;
 
-import java.util.List;
-
 /**
  *
  * @author Joshua
@@ -47,6 +45,7 @@ public class Carta {
                         val=8;
                         break;
                 }
+                break;
                 //</editor-fold>
             case 2:
                 val=9;
@@ -77,6 +76,7 @@ public class Carta {
                         val=4;
                         break;
                 }
+                break;
                 //</editor-fold>
             case 10:
                 val=5;
