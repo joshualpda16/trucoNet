@@ -48,6 +48,7 @@ public class Juego {
         turno=mano;
         envido=true;
         truco=true;
+        esperando="";
     }
     
     public void pintarCartas(){
@@ -162,6 +163,50 @@ public class Juego {
         }
     }
 
+    public static void alMazo(int id){
+        int puntos=0;
+        if(claseGeneral.miJuego.isTruco()){
+            switch(claseGeneral.miJuego.getInstanciaTruco()){
+                case 0:
+                    puntos=1;
+                    break;
+                case 2:
+                    puntos+=1;
+                    break;
+                case 4:
+                    puntos+=3;
+                    break;
+                case 3:
+                    puntos+=2;
+                    break;
+            }
+        }
+        
+        if((claseGeneral.miJuego.getInstanciaJuego()==0)&&(claseGeneral.miJuego.isEnvido())&&(claseGeneral.miJuego.getInstanciaTruco()==0)){
+            puntos++;
+        }
+        
+        claseGeneral.lstJugadores.get(Math.abs(id-1)).setPuntos(claseGeneral.lstJugadores.get(Math.abs(id-1)).getPuntos()+puntos);
+        
+        frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(claseGeneral.getMiId()).getPuntos());
+        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).getPuntos());
+        
+        claseGeneral.miJuego.setRonda(false);
+        
+        claseGeneral.lstJugadores.get(claseGeneral.getMiId()).setInstanciasGanadas(0);
+        claseGeneral.lstJugadores.get(claseGeneral.getMiId()).setCartasTiradas(0);
+        claseGeneral.lstJugadores.get(claseGeneral.getMiId()).setCarta1tirada(false);
+        claseGeneral.lstJugadores.get(claseGeneral.getMiId()).setCarta2tirada(false);
+        claseGeneral.lstJugadores.get(claseGeneral.getMiId()).setCarta3tirada(false);
+        
+        claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).setInstanciasGanadas(0);
+        claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).setCartasTiradas(0);
+        
+        if(claseGeneral.isSoyServer()){
+            nuevaMano();
+        }
+    }
+    
     public static boolean compararCartas(Carta miCarta, Carta suCarta){
         if(miCarta.getValor()>suCarta.getValor()){
             return true;

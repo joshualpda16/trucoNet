@@ -145,6 +145,11 @@ public class frmJuego extends javax.swing.JInternalFrame {
         });
 
         cmdEnvido.setText("Envido");
+        cmdEnvido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdEnvidoActionPerformed(evt);
+            }
+        });
 
         cmdRealEnvido.setText("Real Envido");
 
@@ -373,7 +378,6 @@ public class frmJuego extends javax.swing.JInternalFrame {
         int miId=claseGeneral.getMiId();
         if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOTRC1"+miId);}
         else{SimpleClient.enviarDatos("JGOTRC1"+miId);}
-        frmPrincipal.log("Envié el Truco!");
         pintar(lblYoCanto,"Truco");
         pintar(lblElCanta,"Blanco");
         claseGeneral.miJuego.setRonda(false);
@@ -409,15 +413,20 @@ public class frmJuego extends javax.swing.JInternalFrame {
             case 0:
                 if(claseGeneral.miJuego.getEsperando().equals("truco")){
                     cantarReTruco();
+                    claseGeneral.agregarAlChat("notif", "Quiero Re Truco", claseGeneral.getMiId());
                 } else{
                     cantarTruco();
+                    claseGeneral.agregarAlChat("notif", "Truco!", claseGeneral.getMiId());
                 }
                 break;
             case 2:
                 cantarReTruco();
+                claseGeneral.agregarAlChat("notif", "Quiero Re Truco!", claseGeneral.getMiId());
                 break;
             case 3:
                 cantarValeCuatro();
+                
+                    claseGeneral.agregarAlChat("notif", "Quiero Vale 4!", claseGeneral.getMiId());
                 break;
         }
     }//GEN-LAST:event_cmdTrucoActionPerformed
@@ -425,16 +434,22 @@ public class frmJuego extends javax.swing.JInternalFrame {
     private void cmdQuieroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdQuieroActionPerformed
         switch(claseGeneral.miJuego.getEsperando()){
             case "truco":
+                claseGeneral.miJuego.setEnvido(false);
                 claseGeneral.miJuego.setInstanciaTruco(2);
                 apagarTodosBotones();
+                claseGeneral.agregarAlChat("quiero", "Truco", claseGeneral.getMiId());
                 break;
             case "retruco":
+                claseGeneral.miJuego.setEnvido(false);
                 claseGeneral.miJuego.setInstanciaTruco(3);
                 apagarTodosBotones();
+                claseGeneral.agregarAlChat("quiero", "Re Truco", claseGeneral.getMiId());
                 break;
             case "valecuatro":
+                claseGeneral.miJuego.setEnvido(false);
                 claseGeneral.miJuego.setInstanciaTruco(4);
                 apagarTodosBotones();
+                claseGeneral.agregarAlChat("quiero", "Vale Cuatro", claseGeneral.getMiId());
                 break;
         }
         claseGeneral.miJuego.setTieneElQuiero(claseGeneral.getMiId());
@@ -442,7 +457,26 @@ public class frmJuego extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmdQuieroActionPerformed
 
     private void cmdNoQuieroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNoQuieroActionPerformed
+        switch(claseGeneral.miJuego.getEsperando()){
+            case "truco":
+                claseGeneral.miJuego.setInstanciaTruco(2);
+                apagarTodosBotones();
+                claseGeneral.agregarAlChat("noquiero", "Truco", claseGeneral.getMiId());
+                break;
+            case "retruco":
+                claseGeneral.miJuego.setInstanciaTruco(3);
+                apagarTodosBotones();
+                claseGeneral.agregarAlChat("noquiero", "Re Truco", claseGeneral.getMiId());
+                break;
+            case "valecuatro":
+                claseGeneral.miJuego.setInstanciaTruco(4);
+                apagarTodosBotones();
+                claseGeneral.agregarAlChat("noquiero", "Vale Cuatro", claseGeneral.getMiId());
+                break;
+        }
+        claseGeneral.miJuego.setTieneElQuiero(claseGeneral.getMiId());
         claseGeneral.enviarNoQuiero();
+        Juego.alMazo(claseGeneral.getMiId());
     }//GEN-LAST:event_cmdNoQuieroActionPerformed
 
     private void txtEnviarChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEnviarChatActionPerformed
@@ -471,8 +505,36 @@ public class frmJuego extends javax.swing.JInternalFrame {
                 SimpleClient.enviarDatos("JGOREPA");
             }
             cmdAlMazo.setText("Al Mazo");
+        } else{
+            int miId=claseGeneral.getMiId();
+            if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOMAZO"+miId);}
+            else{SimpleClient.enviarDatos("JGOMAZO"+miId);}
+            claseGeneral.agregarAlChat("almazo", "", claseGeneral.getMiId());
+            
+            switch(claseGeneral.miJuego.getEsperando()){
+                case "truco":
+                    claseGeneral.miJuego.setInstanciaTruco(2);
+                    apagarTodosBotones();
+                    break;
+                case "retruco":
+                    claseGeneral.miJuego.setInstanciaTruco(3);
+                    apagarTodosBotones();
+                    break;
+                case "valecuatro":
+                    claseGeneral.miJuego.setInstanciaTruco(4);
+                    apagarTodosBotones();
+                    break;
+            }
+            Juego.alMazo(claseGeneral.getMiId());
         }
     }//GEN-LAST:event_cmdAlMazoActionPerformed
+
+    private void cmdEnvidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEnvidoActionPerformed
+        if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOENV1"+claseGeneral.getMiId());}
+        else{SimpleClient.enviarDatos("JGOENV1"+claseGeneral.getMiId());}
+        pintar(lblYoCanto,"Envido");
+        claseGeneral.miJuego.setRonda(false);
+    }//GEN-LAST:event_cmdEnvidoActionPerformed
 
     public void miTurno(){
         claseGeneral.miJuego.setTurno(claseGeneral.getMiId());

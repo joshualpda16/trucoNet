@@ -5,6 +5,7 @@
 package formularios;
 
 import clases.claseGeneral;
+import javax.swing.*;
 
 /**
  *
@@ -200,6 +201,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try {
+                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+                }
                 frmPrincipal princ = new frmPrincipal();
                 princ.setExtendedState(frmPrincipal.MAXIMIZED_BOTH);
                 princ.setVisible(true);

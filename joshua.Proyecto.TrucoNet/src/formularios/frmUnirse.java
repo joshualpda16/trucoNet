@@ -38,12 +38,6 @@ public class frmUnirse extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Unirse a una sala");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
@@ -51,7 +45,13 @@ public class frmUnirse extends javax.swing.JInternalFrame {
             }
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
             public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
         });
 
@@ -104,7 +104,7 @@ public class frmUnirse extends javax.swing.JInternalFrame {
                     .addComponent(txtPuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(cmdUnirse)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -114,7 +114,6 @@ public class frmUnirse extends javax.swing.JInternalFrame {
         if((!txtHost.getText().equals(""))&&(!txtPuerto.getText().equals(""))){
             claseGeneral general = claseGeneral.getInstance();
             general.conectarAlServidor(txtHost.getText(),Integer.parseInt(txtPuerto.getText()));
-            this.dispose();
         } else{
             JOptionPane.showMessageDialog(rootPane, "Debe ingresar Host y Puerto para unirse", "Error", WIDTH);
         }

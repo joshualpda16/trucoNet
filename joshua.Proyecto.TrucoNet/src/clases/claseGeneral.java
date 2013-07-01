@@ -108,7 +108,7 @@ public class claseGeneral {
                     SimpleAttributeSet attrs = new SimpleAttributeSet();
                     StyleConstants.setBold(attrs, true);
                     try {
-                        frmChatPrevio.txtChatPrevio.getStyledDocument().insertString(frmChatPrevio.txtChatPrevio.getStyledDocument().getLength(),"El cliente "+lstJugadores.get(1).getNombre()+" está listo.\n",attrs);
+                        frmChatPrevio.txtChatPrevio.getStyledDocument().insertString(frmChatPrevio.txtChatPrevio.getStyledDocument().getLength(),"El jugador "+lstJugadores.get(1).getNombre()+" está listo.\n",attrs);
                     } catch (BadLocationException ex) {
                         Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -140,6 +140,7 @@ public class claseGeneral {
                 //<editor-fold defaultstate="collapsed" desc="Juego">
                 switch(msj){
                     case "CHAT":
+                        //<editor-fold defaultstate="collapsed" desc="Chat del juego">
                         int suId=Integer.parseInt(mensaje.substring(7,8));
                         
                         SimpleAttributeSet attrs = new SimpleAttributeSet();
@@ -153,42 +154,106 @@ public class claseGeneral {
                             Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         break;
+                        //</editor-fold>
                     case "SISI":
-                        frmPrincipal.log("Recibí el Quiero");
+                        //<editor-fold defaultstate="collapsed" desc="Oponente dijo Quiero">
+                        int suid=Integer.parseInt(mensaje.substring(7));
                         formJuego.pintar(frmJuego.lblElCanta, "Quiero");
                         switch(miJuego.getEsperando()){
                             case "truco":
                                 miJuego.setInstanciaTruco(2);
                                 miJuego.setRonda(true);
                                 miJuego.setEnvido(true);
+                                SimpleAttributeSet atrs = new SimpleAttributeSet();
+                                StyleConstants.setBold(atrs, true);
+                                try {
+                                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(suid).getNombre()+" quizo el Truco.\n",atrs);
+                                } catch (BadLocationException ex) {
+                                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                                 break;
                             case "retruco":
                                 miJuego.setInstanciaTruco(3);
                                 miJuego.setRonda(true);
                                 miJuego.setEnvido(true);
+                                SimpleAttributeSet aatrs = new SimpleAttributeSet();
+                                StyleConstants.setBold(aatrs, true);
+                                try {
+                                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(suid).getNombre()+" quizo el Re Truco.\n",aatrs);
+                                } catch (BadLocationException ex) {
+                                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                                 break;
                             case "valecuatro":
                                 miJuego.setInstanciaTruco(4);
                                 miJuego.setRonda(true);
                                 miJuego.setEnvido(true);
+                                SimpleAttributeSet aaatrs = new SimpleAttributeSet();
+                                StyleConstants.setBold(aaatrs, true);
+                                try {
+                                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(suid).getNombre()+" quizo el vale 4!\n",aaatrs);
+                                } catch (BadLocationException ex) {
+                                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                break;
+                        }
+                        //</editor-fold>
+                        break;
+                    case "NONO":
+                        int suuid=Integer.parseInt(mensaje.substring(7));
+                        formJuego.pintar(frmJuego.lblElCanta, "NoQuiero");
+                        switch(miJuego.getEsperando()){
+                            case "truco":
+                                miJuego.setInstanciaTruco(2);
+                                miJuego.setEnvido(true);
+                                SimpleAttributeSet atrs = new SimpleAttributeSet();
+                                StyleConstants.setBold(atrs, true);
+                                try {
+                                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(suuid).getNombre()+" quizo el Truco.\n",atrs);
+                                } catch (BadLocationException ex) {
+                                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                break;
+                            case "retruco":
+                                miJuego.setInstanciaTruco(3);
+                                miJuego.setRonda(true);
+                                miJuego.setEnvido(true);
+                                SimpleAttributeSet aatrs = new SimpleAttributeSet();
+                                StyleConstants.setBold(aatrs, true);
+                                try {
+                                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(suuid).getNombre()+" quizo el Re Truco.\n",aatrs);
+                                } catch (BadLocationException ex) {
+                                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                break;
+                            case "valecuatro":
+                                miJuego.setInstanciaTruco(4);
+                                miJuego.setRonda(true);
+                                miJuego.setEnvido(true);
+                                SimpleAttributeSet aaatrs = new SimpleAttributeSet();
+                                StyleConstants.setBold(aaatrs, true);
+                                try {
+                                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(suuid).getNombre()+" quizo el vale 4!\n",aaatrs);
+                                } catch (BadLocationException ex) {
+                                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                                 break;
                         }
                         break;
-                    case "NONO":
-                        frmPrincipal.log("No quiso");
-                        break;
                     case "CCTS":
-                        //Recibo mis cartas
+                        //<editor-fold defaultstate="collapsed" desc="Recibo mis cartas">
                         String ctas1 = mensaje.substring(7);
                         lstJugadores.get(miId).guardarStringCartas(ctas1);
+                        //</editor-fold>
                         break;
                     case "SVCT":
-                        //Recibo cartas del servidor
+                        //<editor-fold defaultstate="collapsed" desc="Recibo cartas del servidor">
                         String ctas3 = mensaje.substring(7);
                         lstJugadores.get(0).guardarStringCartas(ctas3);
+                        //</editor-fold>
                         break;
                     case "NVMN":
-                        //Nueva mano
+                        //<editor-fold defaultstate="collapsed" desc="Nueva Mano">
                         miJuego.inicializar();
                         if(miJuego.getMano()!=miId){
                             formJuego.apagarTodosBotones();
@@ -199,19 +264,22 @@ public class claseGeneral {
                             formJuego.apagarTodosBotones();
                             claseGeneral.formJuego.miTurno();
                         }
+                        //</editor-fold>
                         break;
                     case "REPA":
-                        //Repartir. Pinto las cartas solamente.
+                        //<editor-fold defaultstate="collapsed" desc="Repartir. Solo pinto las cartas">
                         miJuego.pintarCartas();
+                        //</editor-fold>
                         break;
                     case "SCTS":
-                        //Recibo cartas del servidor
+                        //<editor-fold defaultstate="collapsed" desc="Recibo las cartas del servidor">
                         String ctas2 = mensaje.substring(7);
                         lstJugadores.get(0).guardarStringCartas(ctas2);
                         abrirJuego();
                         miJuego = new Juego();
+                        //</editor-fold>
                         break;
-                    case "CRTA": //El contrincante tiró una carta.
+                    case "CRTA":
                         //<editor-fold defaultstate="collapsed" desc="Llegó una carta">
                         //Traigo la carta y el jugador
                         frmPrincipal.log("Llegó la carta");
@@ -281,15 +349,20 @@ public class claseGeneral {
                         }
                         //</editor-fold>
                         break;
-                    case "TRC1": //El contrincante cantó truco
+                    case "TRC1":
+                        //<editor-fold defaultstate="collapsed" desc="El contrincante cantó truco">
                         formJuego.pintar(frmJuego.lblElCanta, "Truco");
                         frmJuego.cmdQuiero.setEnabled(true);
                         frmJuego.cmdNoQuiero.setEnabled(true);
                         frmJuego.cmdTruco.setText("Quiero Re Truco");
                         frmJuego.cmdTruco.setEnabled(true);
                         miJuego.setEsperando("truco");
+                        miJuego.setInstanciaTruco(1);
+                        agregarAlChat("notif","Truco",Integer.parseInt(mensaje.substring(7)));
+                        //</editor-fold>
                         break;
-                    case "TRC2": //El contrincante cantó Re Truco
+                    case "TRC2":
+                        //<editor-fold defaultstate="collapsed" desc="El contrincante cantó Re Truco">
                         formJuego.pintar(frmJuego.lblElCanta,"ReTruco");
                         formJuego.pintar(frmJuego.lblYoCanto,"Blanco");
                         frmJuego.cmdQuiero.setEnabled(true);
@@ -298,8 +371,11 @@ public class claseGeneral {
                         frmJuego.cmdTruco.setEnabled(true);
                         miJuego.setEsperando("retruco");
                         miJuego.setRonda(false);
+                        agregarAlChat("notif","Quiero Re Truco!",Integer.parseInt(mensaje.substring(7)));
                         break;
+                        //</editor-fold>
                     case "TRC3":
+                        //<editor-fold defaultstate="collapsed" desc="El contrincante cantó Vale 4">
                         formJuego.pintar(frmJuego.lblElCanta,"ValeCuatro");
                         formJuego.pintar(frmJuego.lblYoCanto,"Blanco");
                         frmJuego.cmdQuiero.setEnabled(true);
@@ -307,7 +383,53 @@ public class claseGeneral {
                         frmJuego.cmdTruco.setEnabled(false);
                         miJuego.setEsperando("valecuatro");
                         miJuego.setRonda(false);
+                        agregarAlChat("notif","Quiero Vale 4!",Integer.parseInt(mensaje.substring(7)));
                         //</editor-fold>
+                    case "MAZO":
+                        int suIDD=Integer.parseInt(mensaje.substring(7));
+                        Juego.alMazo(suIDD);
+                        agregarAlChat("almazo","",suIDD);
+                        //</editor-fold>
+                }
+                break;
+        }
+    }
+    
+    public static void agregarAlChat(String modo,String notif,int id){
+        SimpleAttributeSet atrs = new SimpleAttributeSet();
+        switch (modo) {
+            case "notif":
+                //<editor-fold defaultstate="collapsed" desc="notif">
+                StyleConstants.setBold(atrs, true);
+                try {
+                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(id).getNombre()+" cantó "+notif+"\n",atrs);
+                } catch (BadLocationException ex) {
+                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+                //</editor-fold>
+            case "quiero":
+                StyleConstants.setBold(atrs, true);
+                try {
+                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(id).getNombre()+" quiso el "+notif+"\n",atrs);
+                } catch (BadLocationException ex) {
+                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case "noquiero":
+                StyleConstants.setBold(atrs, true);
+                try {
+                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(id).getNombre()+" no quiso el "+notif+"\n",atrs);
+                } catch (BadLocationException ex) {
+                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case "almazo":
+                StyleConstants.setBold(atrs, true);
+                try {
+                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(id).getNombre()+" se fue al mazo\n",atrs);
+                } catch (BadLocationException ex) {
+                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
         }
@@ -315,20 +437,21 @@ public class claseGeneral {
     
     public static void enviarQuiero(){
         if(claseGeneral.isSoyServer()){
-            SimpleServer.enviarDatos("JGOSISI");
+            SimpleServer.enviarDatos("JGOSISI"+miId);
         } else{
-            SimpleClient.enviarDatos("JGOSISI");
+            SimpleClient.enviarDatos("JGOSISI"+miId);
         }
         miJuego.setRonda(true);
         formJuego.pintar(frmJuego.lblYoCanto, "Quiero");
     }
     
-     public static void enviarNoQuiero(){
+    public static void enviarNoQuiero(){
         if(claseGeneral.isSoyServer()){
-            SimpleServer.enviarDatos("JGONONO");
+            SimpleServer.enviarDatos("JGONONO"+miId);
         } else{
-            SimpleClient.enviarDatos("JGONONO");
+            SimpleClient.enviarDatos("JGONONO"+miId);
         }
+        formJuego.pintar(frmJuego.lblYoCanto, "NoQuiero");
     }
     
     public void guardarNombre(String nombre){
@@ -409,7 +532,7 @@ public class claseGeneral {
                 miNombre="Anonimo";
             }catch(IOException e){
             };
-            if(seleccion<0){
+            if(seleccion==0){
                 mostrarOpciones();
             } else{
                 
@@ -483,6 +606,8 @@ public class claseGeneral {
     public void cerrarSala(){
         try {
             simpleServer.stop();
+            soyServer=false;
+            this.svActivo=false;
         } catch (IOException e) {
             log("IOException in closeServer(): " + e.getMessage());
         }
@@ -492,6 +617,7 @@ public class claseGeneral {
         simpleClient = new SimpleClient(host, port);
         simpleClient.run();
         soyServer=false;
+        formUnirse.dispose();
     }
     //</editor-fold>
     
