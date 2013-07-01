@@ -6,6 +6,7 @@ package clases;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -22,14 +23,31 @@ public class Juego {
         this.nombreSala = nombreSala;
     }
     
-    public List crearCartasRandom(){
+    public static List separarCartas(List cartas,int mitad){
+        List<Carta> lstCartas=new ArrayList();
+        int x=0;
+        if(mitad==2) {
+            x=3;
+        }
+        int fin=3+x;
+        while(x!=fin){
+            lstCartas.add((Carta) cartas.get(x));
+            x++;
+        }
+        return lstCartas;
+    }
+    
+    public static List crearCartasRandom(){
         List<Carta> lstCartas=new ArrayList();
         boolean repetido=false;
         int x=0;
         while(x<=5){
+            repetido=false;
             
             //<editor-fold defaultstate="collapsed" desc="Creo el Palo">
-            int codPalo=(int)(Math.random()*(4-1))+1;
+            Random rand = new Random();
+            int codPalo= rand.nextInt(4);
+            codPalo++;
             char palo='Z';
             switch(codPalo){
                 case 1:
@@ -47,7 +65,8 @@ public class Juego {
             }
             //</editor-fold>
             //<editor-fold defaultstate="collapsed" desc="Creo el Número">
-            int codNumero=(int)(Math.random()*(10-1))+1;
+            Random rand1 = new Random();
+            int codNumero=(rand1.nextInt(4))+1;
             int numero;
             switch(codNumero){
                 case 8:
@@ -68,7 +87,7 @@ public class Juego {
             
             int cantCartas = lstCartas.size();
             if(x!=0){
-                for(int z=0;z<cantCartas;x++){
+                for(int z=0;z<cantCartas;z++){
                     if((lstCartas.get(z).getNumero()==numero)&&(lstCartas.get(z).getPalo()==palo)){
                         repetido=true;
                     }

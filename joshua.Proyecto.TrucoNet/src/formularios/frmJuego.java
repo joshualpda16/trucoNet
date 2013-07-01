@@ -36,11 +36,16 @@ public class frmJuego extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         suCarta3 = new javax.swing.JLabel();
         suCarta2 = new javax.swing.JLabel();
-        suCarta1 = new javax.swing.JLabel();
+        suCartaTirada3 = new javax.swing.JLabel();
         miCarta3 = new javax.swing.JLabel();
         miCarta2 = new javax.swing.JLabel();
         miCarta1 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        suCarta1 = new javax.swing.JLabel();
+        suCartaTirada1 = new javax.swing.JLabel();
+        suCartaTirada2 = new javax.swing.JLabel();
+        miCartaTirada3 = new javax.swing.JLabel();
+        miCartaTirada2 = new javax.swing.JLabel();
+        miCartaTirada1 = new javax.swing.JLabel();
 
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -64,14 +69,42 @@ public class frmJuego extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(suCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 90, 140));
-        jPanel1.add(suCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 90, 140));
-        jPanel1.add(suCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 90, 140));
-        jPanel1.add(miCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 390, 90, 140));
-        jPanel1.add(miCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, 90, 140));
-        jPanel1.add(miCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 90, 140));
 
-        jLabel1.setText("jLabel1");
+        suCarta3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(suCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 70, 110));
+
+        suCarta2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(suCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 70, 110));
+
+        suCartaTirada3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(suCartaTirada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, 80, 120));
+
+        miCarta3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(miCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 480, 100, 140));
+
+        miCarta2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(miCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 100, 140));
+
+        miCarta1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(miCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 480, 100, 140));
+
+        suCarta1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(suCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 70, 110));
+
+        suCartaTirada1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(suCartaTirada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 80, 120));
+
+        suCartaTirada2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(suCartaTirada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 80, 120));
+
+        miCartaTirada3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(miCartaTirada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, 80, 120));
+
+        miCartaTirada2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(miCartaTirada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 80, 120));
+
+        miCartaTirada1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(miCartaTirada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 80, 120));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,16 +114,12 @@ public class frmJuego extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(188, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -101,33 +130,13 @@ public class frmJuego extends javax.swing.JInternalFrame {
         this.setTitle("Jugando en sala -"+claseGeneral.getNombreSala()+"-");
     }//GEN-LAST:event_formInternalFrameOpened
 
-    public void quitarCarta(int num,int jugador){
-        if(jugador==2){
-            switch(num){
-                case 1:
-                    pintar(suCarta1,"Blanco");
-                    break;
-                case 2:
-                    pintar(suCarta2,"Blanco");
-                    break;
-                case 3:
-                    pintar(suCarta3,"Blanco");
-                    break;
-            }
-        }
-        if(jugador==1) {
-            switch(num){
-                case 1:
-                    pintar(miCarta1,"Blanco");
-                    break;
-                case 2:
-                    pintar(miCarta2,"Blanco");
-                    break;
-                case 3:
-                    pintar(miCarta3,"Blanco");
-                    break;
-            }
-        }
+    
+    public void pintarMisCartas(){
+        int miId = claseGeneral.getMiId();
+        pintar(miCarta1,claseGeneral.lstJugadores.get(miId).getCartas().get(0).traerCarta());
+        pintar(miCarta2,claseGeneral.lstJugadores.get(miId).getCartas().get(1).traerCarta());
+        pintar(miCarta3,claseGeneral.lstJugadores.get(miId).getCartas().get(2).traerCarta());
+        pintarCartasOponente();
     }
     
     public void pintarCartasOponente(){
@@ -140,18 +149,23 @@ public class frmJuego extends javax.swing.JInternalFrame {
         String path = "/Cartas/"+valor+".jpg";
         URL url = this.getClass().getResource(path);
         ImageIcon icon = new ImageIcon(url);
-        Icon icono = new ImageIcon(icon.getImage().getScaledInstance(suCarta1.getWidth(), suCarta1.getHeight(), Image.SCALE_DEFAULT));
+        Icon icono = new ImageIcon(icon.getImage().getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_DEFAULT));
         lbl.setIcon(icono);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel miCarta1;
     private javax.swing.JLabel miCarta2;
     private javax.swing.JLabel miCarta3;
+    private javax.swing.JLabel miCartaTirada1;
+    private javax.swing.JLabel miCartaTirada2;
+    private javax.swing.JLabel miCartaTirada3;
     private javax.swing.JLabel suCarta1;
     private javax.swing.JLabel suCarta2;
     private javax.swing.JLabel suCarta3;
+    private javax.swing.JLabel suCartaTirada1;
+    private javax.swing.JLabel suCartaTirada2;
+    private javax.swing.JLabel suCartaTirada3;
     // End of variables declaration//GEN-END:variables
 }

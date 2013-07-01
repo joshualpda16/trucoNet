@@ -4,9 +4,14 @@
  */
 package formularios;
 
+import clases.Carta;
+import clases.Juego;
+import clases.Jugador;
 import clases.SimpleClient;
 import clases.SimpleServer;
 import clases.claseGeneral;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.BadLocationException;
@@ -171,9 +176,24 @@ public class frmChatPrevio extends javax.swing.JInternalFrame {
     private void cmdListoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListoActionPerformed
         if(claseGeneral.isSoyServer()){
             SimpleServer.enviarDatos("CHP0ready");
+            
+            List<Carta> lst6Cartas=new ArrayList();
+            
+            lst6Cartas = Juego.crearCartasRandom();
+            
+            claseGeneral.lstJugadores.get(0).setCartas(Juego.separarCartas(lst6Cartas,1));
+            claseGeneral.lstJugadores.get(1).setCartas(Juego.separarCartas(lst6Cartas,2));
+            
+            Jugador j1 = (Jugador) claseGeneral.lstJugadores.get(1);
+            Jugador j0 = (Jugador) claseGeneral.lstJugadores.get(0);
+            
+            SimpleServer.enviarDatos("JGOCCTS"+j1.cartasToString(j1.getCartas()));
+            SimpleServer.enviarDatos("JGOSCTS"+j0.cartasToString(j0.getCartas()));
+            
             claseGeneral.abrirJuego();
+            claseGeneral.miJuego = new Juego();
         } else{
-            try {
+            try{
                 SimpleClient.enviarDatos("CHP1ready");
                 cmdListo.setEnabled(false);
                 SimpleAttributeSet attrs = new SimpleAttributeSet();

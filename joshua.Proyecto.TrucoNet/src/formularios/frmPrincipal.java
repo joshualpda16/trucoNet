@@ -5,6 +5,7 @@
 package formularios;
 
 import clases.claseGeneral;
+import java.util.Random;
 
 /**
  *
@@ -36,6 +37,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         txtLog = new javax.swing.JTextArea();
         cmdCrearSala = new javax.swing.JButton();
         cmdUnirse = new javax.swing.JButton();
+        cmdProbarRandom = new javax.swing.JButton();
+        txtRandom = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuArchivo = new javax.swing.JMenu();
         mnuOpciones = new javax.swing.JMenuItem();
@@ -76,6 +79,13 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        cmdProbarRandom.setText("Random");
+        cmdProbarRandom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdProbarRandomActionPerformed(evt);
+            }
+        });
+
         mnuArchivo.setText("Archivo");
 
         mnuOpciones.setText("Opciones");
@@ -109,9 +119,15 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmdCrearSala, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmdUnirse, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cmdCrearSala, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmdUnirse, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmdProbarRandom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtRandom))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jDesktopPane1))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE))
@@ -129,7 +145,11 @@ public class frmPrincipal extends javax.swing.JFrame {
                         .addComponent(cmdCrearSala, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmdUnirse, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 357, Short.MAX_VALUE)))
+                        .addGap(113, 113, 113)
+                        .addComponent(cmdProbarRandom)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRandom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -164,6 +184,12 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void mnuOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuOpcionesActionPerformed
         general.mostrarOpciones();
     }//GEN-LAST:event_mnuOpcionesActionPerformed
+
+    private void cmdProbarRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdProbarRandomActionPerformed
+        Random rand = new Random();
+        int x = rand.nextInt(4);
+        txtRandom.setText(""+(x+1));
+    }//GEN-LAST:event_cmdProbarRandomActionPerformed
 
     static public void log(String txt){
         txtLog.append(txt+"\n");
@@ -209,6 +235,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton cmdCrearSala;
+    private javax.swing.JButton cmdProbarRandom;
     public static javax.swing.JButton cmdUnirse;
     public static javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenuBar jMenuBar1;
@@ -218,5 +245,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuOpciones;
     private javax.swing.JMenuItem mnuSalir;
     public static javax.swing.JTextArea txtLog;
+    private javax.swing.JTextField txtRandom;
     // End of variables declaration//GEN-END:variables
 }

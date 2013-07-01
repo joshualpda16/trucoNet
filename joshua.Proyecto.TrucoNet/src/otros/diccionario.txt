@@ -18,8 +18,11 @@ Mensajes del tipo conexión (CNX):
 Mensajes del tipo chat previo (CHP):
         "CHP0Hola" -El servidor envió el mensaje "Hola" al chat previo
         "CHP1ready" -El cliente está listo.
+        "CHP0ready" -El servidor empezó el juego.
 
-
+Mensajes del tipo Juego (JGO):
+        "JGOCCTS" -Las nuevas cartas del cliente
+        "JGOSCTS" -Las nuevas cartas del servidor
 
 
 Valor de las cartas:

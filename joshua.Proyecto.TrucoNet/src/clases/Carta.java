@@ -4,6 +4,8 @@
  */
 package clases;
 
+import java.util.List;
+
 /**
  *
  * @author Joshua
@@ -18,7 +20,15 @@ public class Carta {
         this.numero = numero;
         this.valor=calcularValor();
     }
-
+    
+    public String traerCarta(){
+        if(numero<=9){
+            return ""+palo+"0"+numero;
+        } else{
+            return ""+palo+numero;
+        }
+    }
+    
     private int calcularValor(){
         int val=0;
         switch(this.numero){
@@ -93,4 +103,14 @@ public class Carta {
     public int getValor() {
         return valor;
     }
+
+    public void setPalo(char palo) {
+        this.palo = palo;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+    
+    
 }

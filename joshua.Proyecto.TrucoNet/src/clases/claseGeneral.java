@@ -33,6 +33,7 @@ public class claseGeneral {
     static int miId;
     static String salaActual;
     static boolean soyServer;
+    static public Juego miJuego;
     
     //Juego
     static public List<Jugador> lstJugadores=new ArrayList();
@@ -111,7 +112,13 @@ public class claseGeneral {
                         Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else if(mensaje.equals("CHP0ready")){ //CHP0ready es el servidor listo
-                    abrirJuego();
+                    SimpleAttributeSet attrs = new SimpleAttributeSet();
+                    StyleConstants.setBold(attrs, true);
+                    try {
+                        frmChatPrevio.txtChatPrevio.getStyledDocument().insertString(frmChatPrevio.txtChatPrevio.getStyledDocument().getLength(),lstJugadores.get(1).getNombre()+" está listo.\nEsperando inicio del juego\n",attrs);
+                    } catch (BadLocationException ex) {
+                        Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 } else{
                     //El nombre primero en negrita
                     SimpleAttributeSet attrs = new SimpleAttributeSet();
@@ -129,7 +136,20 @@ public class claseGeneral {
                 break;
                 //</editor-fold>
             case "JGO":
-                
+                switch(msj){
+                    case "CCTS":
+                        //Recibo mis cartas
+                        String ctas1 = mensaje.substring(7);
+                        lstJugadores.get(1).guardarStringCartas(ctas1);
+                        break;
+                    case "SCTS":
+                        //Recibo cartas del servidor
+                        String ctas2 = mensaje.substring(7);
+                        lstJugadores.get(0).guardarStringCartas(ctas2);
+                        abrirJuego();
+                        miJuego = new Juego();
+                        break;
+                }
                 break;
         }
     }
@@ -244,6 +264,7 @@ public class claseGeneral {
         frmPrincipal.jDesktopPane1.add(formJuego);
         formJuego.setLocation(10,10);
         formJuego.show();
+        formJuego.pintarMisCartas();
     }
     
     public void mostrarCrearSala(){
@@ -327,6 +348,10 @@ public class claseGeneral {
     
     public static String getMiNombre() {
         return miNombre;
+    }
+
+    public static int getMiId() {
+        return miId;
     }
     
     public static String getNombreSala(){
