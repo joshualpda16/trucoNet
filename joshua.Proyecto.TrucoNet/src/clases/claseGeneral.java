@@ -153,24 +153,132 @@ public class claseGeneral {
                         } catch (BadLocationException ex) {
                             Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        break;
                         //</editor-fold>
+                        break;
                     case "SISI":
                         //<editor-fold defaultstate="collapsed" desc="Oponente dijo Quiero">
                         int suid=Integer.parseInt(mensaje.substring(7));
                         formJuego.pintar(frmJuego.lblElCanta, "Quiero");
                         switch(miJuego.getEsperando()){
+                            case "envido":
+                                //<editor-fold defaultstate="collapsed" desc="Quiso el Envido">
+                                agregarAlChat("quiero","Envido",Integer.parseInt(mensaje.substring(7)));
+                                
+                                if(miJuego.getMano()==getMiId()){
+                                    int miTantos=lstJugadores.get(getMiId()).contarTantos();
+                                    frmJuego.lblMisTantos.setText(""+miTantos);
+                                } else{
+                                    int suTantos=lstJugadores.get(Integer.parseInt(mensaje.substring(7))).contarTantos();
+                                    frmJuego.lblSusTantos.setText(""+suTantos);
+                                    formJuego.apagarTodosBotones();
+                                    frmJuego.cmdQuiero.setText("Cantar");
+                                    frmJuego.cmdQuiero.setEnabled(true);
+                                    frmJuego.cmdNoQuiero.setText("Son Buenas");
+                                    frmJuego.cmdNoQuiero.setEnabled(true);
+                                }
+                                break;
+                                //</editor-fold>
+                                
+                            case "envidoenvido":
+                                //<editor-fold defaultstate="collapsed" desc="Quiso el Env-Env">
+                                agregarAlChat("quiero","Envido-Envido",Integer.parseInt(mensaje.substring(7)));
+                                
+                                if(miJuego.getMano()==getMiId()){
+                                    int miTantos=lstJugadores.get(getMiId()).contarTantos();
+                                    frmJuego.lblMisTantos.setText(""+miTantos);
+                                } else{
+                                    int suTantos=lstJugadores.get(Integer.parseInt(mensaje.substring(7))).contarTantos();
+                                    frmJuego.lblSusTantos.setText(""+suTantos);
+                                    formJuego.apagarTodosBotones();
+                                    frmJuego.cmdQuiero.setText("Cantar");
+                                    frmJuego.cmdQuiero.setEnabled(true);
+                                    frmJuego.cmdNoQuiero.setText("Son Buenas");
+                                    frmJuego.cmdNoQuiero.setEnabled(true);
+                                }
+                                //</editor-fold>
+                                break;
+                                
+                            case "envidoenvidorealenvido":
+                                //<editor-fold defaultstate="collapsed" desc="Quiso el Env-Env-Real">
+                                agregarAlChat("quiero","Envido-Envido-Real Envido",Integer.parseInt(mensaje.substring(7)));
+                                
+                                if(miJuego.getMano()==getMiId()){
+                                    int miTantos=lstJugadores.get(getMiId()).contarTantos();
+                                    frmJuego.lblMisTantos.setText(""+miTantos);
+                                } else{
+                                    int suTantos=lstJugadores.get(Integer.parseInt(mensaje.substring(7))).contarTantos();
+                                    frmJuego.lblSusTantos.setText(""+suTantos);
+                                    formJuego.apagarTodosBotones();
+                                    frmJuego.cmdQuiero.setText("Cantar");
+                                    frmJuego.cmdQuiero.setEnabled(true);
+                                    frmJuego.cmdNoQuiero.setText("Son Buenas");
+                                    frmJuego.cmdNoQuiero.setEnabled(true);
+                                }
+                                //</editor-fold>
+                                break;
+                                
+                            case "envidorealenvido":
+                                //<editor-fold defaultstate="collapsed" desc="Quiso el Env-Real">
+                                agregarAlChat("quiero","Envido-Real Envido",Integer.parseInt(mensaje.substring(7)));
+                                
+                                if(miJuego.getMano()==getMiId()){
+                                    int miTantos=lstJugadores.get(getMiId()).contarTantos();
+                                    frmJuego.lblMisTantos.setText(""+miTantos);
+                                } else{
+                                    int suTantos=lstJugadores.get(Integer.parseInt(mensaje.substring(7))).contarTantos();
+                                    frmJuego.lblSusTantos.setText(""+suTantos);
+                                    formJuego.apagarTodosBotones();
+                                    frmJuego.cmdQuiero.setText("Cantar");
+                                    frmJuego.cmdQuiero.setEnabled(true);
+                                    frmJuego.cmdNoQuiero.setText("Son Buenas");
+                                    frmJuego.cmdNoQuiero.setEnabled(true);
+                                }
+                                //</editor-fold>
+                                break;
+                            
+                            case "realenvido":
+                                //<editor-fold defaultstate="collapsed" desc="Quiso el Real Envido">
+                                agregarAlChat("quiero","Real Envido",Integer.parseInt(mensaje.substring(7)));
+                                
+                                if(miJuego.getMano()==getMiId()){
+                                    int miTantos=lstJugadores.get(getMiId()).contarTantos();
+                                    frmJuego.lblMisTantos.setText(""+miTantos);
+                                } else{
+                                    int suTantos=lstJugadores.get(Integer.parseInt(mensaje.substring(7))).contarTantos();
+                                    frmJuego.lblSusTantos.setText(""+suTantos);
+                                    formJuego.apagarTodosBotones();
+                                    frmJuego.cmdQuiero.setText("Cantar");
+                                    frmJuego.cmdQuiero.setEnabled(true);
+                                    frmJuego.cmdNoQuiero.setText("Son Buenas");
+                                    frmJuego.cmdNoQuiero.setEnabled(true);
+                                }
+                                //</editor-fold> 
+                                break;
+                                                               
+                            case "faltaenvido":
+                                agregarAlChat("quiero","Falta Envido",Integer.parseInt(mensaje.substring(7)));
+                                
+                                if(miJuego.getMano()==getMiId()){
+                                    int miTantos=lstJugadores.get(getMiId()).contarTantos();
+                                    frmJuego.lblMisTantos.setText(""+miTantos);
+                                } else{
+                                    int suTantos=lstJugadores.get(Integer.parseInt(mensaje.substring(7))).contarTantos();
+                                    frmJuego.lblSusTantos.setText(""+suTantos);
+                                    formJuego.apagarTodosBotones();
+                                    frmJuego.cmdQuiero.setText("Cantar");
+                                    frmJuego.cmdQuiero.setEnabled(true);
+                                    frmJuego.cmdNoQuiero.setText("Son Buenas");
+                                    frmJuego.cmdNoQuiero.setEnabled(true);
+                                }
+                                break;
+                                
                             case "truco":
                                 miJuego.setInstanciaTruco(2);
                                 miJuego.setRonda(true);
                                 miJuego.setEnvido(true);
                                 SimpleAttributeSet atrs = new SimpleAttributeSet();
                                 StyleConstants.setBold(atrs, true);
-                                try {
-                                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(suid).getNombre()+" quizo el Truco.\n",atrs);
-                                } catch (BadLocationException ex) {
-                                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
-                                }
+                                agregarAlChat("quiero","Truco",Integer.parseInt(mensaje.substring(7)));
                                 break;
                             case "retruco":
                                 miJuego.setInstanciaTruco(3);
@@ -178,11 +286,7 @@ public class claseGeneral {
                                 miJuego.setEnvido(true);
                                 SimpleAttributeSet aatrs = new SimpleAttributeSet();
                                 StyleConstants.setBold(aatrs, true);
-                                try {
-                                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(suid).getNombre()+" quizo el Re Truco.\n",aatrs);
-                                } catch (BadLocationException ex) {
-                                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
-                                }
+                                agregarAlChat("quiero","Re Truco",Integer.parseInt(mensaje.substring(7)));
                                 break;
                             case "valecuatro":
                                 miJuego.setInstanciaTruco(4);
@@ -190,55 +294,41 @@ public class claseGeneral {
                                 miJuego.setEnvido(true);
                                 SimpleAttributeSet aaatrs = new SimpleAttributeSet();
                                 StyleConstants.setBold(aaatrs, true);
-                                try {
-                                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(suid).getNombre()+" quizo el vale 4!\n",aaatrs);
-                                } catch (BadLocationException ex) {
-                                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
-                                }
+                                agregarAlChat("quiero","Vale Cuatro",Integer.parseInt(mensaje.substring(7)));
                                 break;
                         }
                         //</editor-fold>
                         break;
                     case "NONO":
+                        //<editor-fold defaultstate="collapsed" desc="Oponente dijo No Quiero">
                         int suuid=Integer.parseInt(mensaje.substring(7));
                         formJuego.pintar(frmJuego.lblElCanta, "NoQuiero");
                         switch(miJuego.getEsperando()){
+                            case "envido":
+                                
                             case "truco":
                                 miJuego.setInstanciaTruco(2);
-                                miJuego.setEnvido(true);
-                                SimpleAttributeSet atrs = new SimpleAttributeSet();
-                                StyleConstants.setBold(atrs, true);
-                                try {
-                                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(suuid).getNombre()+" quizo el Truco.\n",atrs);
-                                } catch (BadLocationException ex) {
-                                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
-                                }
+                                formJuego.pintar(frmJuego.lblElCanta,"NoQuiero");
+                                Juego.alMazo(suuid);
+                                
+                                agregarAlChat("noquiero","Truco",suuid);
                                 break;
                             case "retruco":
                                 miJuego.setInstanciaTruco(3);
-                                miJuego.setRonda(true);
-                                miJuego.setEnvido(true);
-                                SimpleAttributeSet aatrs = new SimpleAttributeSet();
-                                StyleConstants.setBold(aatrs, true);
-                                try {
-                                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(suuid).getNombre()+" quizo el Re Truco.\n",aatrs);
-                                } catch (BadLocationException ex) {
-                                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
-                                }
+                                formJuego.pintar(frmJuego.lblElCanta,"NoQuiero");
+                                Juego.alMazo(suuid);
+                                
+                                agregarAlChat("noquiero","Re Truco",suuid);
                                 break;
                             case "valecuatro":
                                 miJuego.setInstanciaTruco(4);
-                                miJuego.setRonda(true);
-                                miJuego.setEnvido(true);
-                                SimpleAttributeSet aaatrs = new SimpleAttributeSet();
-                                StyleConstants.setBold(aaatrs, true);
-                                try {
-                                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),lstJugadores.get(suuid).getNombre()+" quizo el vale 4!\n",aaatrs);
-                                } catch (BadLocationException ex) {
-                                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
-                                }
+                                formJuego.pintar(frmJuego.lblElCanta,"NoQuiero");
+                                Juego.alMazo(suuid);
+                                
+                                agregarAlChat("noquiero","Vale 4",suuid);
                                 break;
                         }
+                        //</editor-fold>
                         break;
                     case "CCTS":
                         //<editor-fold defaultstate="collapsed" desc="Recibo mis cartas">
@@ -357,7 +447,6 @@ public class claseGeneral {
                         frmJuego.cmdTruco.setText("Quiero Re Truco");
                         frmJuego.cmdTruco.setEnabled(true);
                         miJuego.setEsperando("truco");
-                        miJuego.setInstanciaTruco(1);
                         agregarAlChat("notif","Truco",Integer.parseInt(mensaje.substring(7)));
                         //</editor-fold>
                         break;
@@ -372,6 +461,7 @@ public class claseGeneral {
                         miJuego.setEsperando("retruco");
                         miJuego.setRonda(false);
                         agregarAlChat("notif","Quiero Re Truco!",Integer.parseInt(mensaje.substring(7)));
+                        miJuego.setInstanciaTruco(2);
                         break;
                         //</editor-fold>
                     case "TRC3":
@@ -384,12 +474,103 @@ public class claseGeneral {
                         miJuego.setEsperando("valecuatro");
                         miJuego.setRonda(false);
                         agregarAlChat("notif","Quiero Vale 4!",Integer.parseInt(mensaje.substring(7)));
+                        miJuego.setInstanciaTruco(3);
+                        break;
                         //</editor-fold>
                     case "MAZO":
+                        //<editor-fold defaultstate="collapsed" desc="Oponente se fue al Mazo">
                         int suIDD=Integer.parseInt(mensaje.substring(7));
                         Juego.alMazo(suIDD);
                         agregarAlChat("almazo","",suIDD);
                         //</editor-fold>
+                        break;
+                    case "TANT":
+                        //<editor-fold defaultstate="collapsed" desc="El pie avisa que mostró">
+                        int misTantos = claseGeneral.lstJugadores.get(claseGeneral.getMiId()).contarTantos();
+                        int susTantos = claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).contarTantos();
+                        
+                        frmJuego.lblSusTantos.setText(""+susTantos);
+                        if(misTantos>susTantos){
+                            Juego.sumarTantos(miId);
+                        } else{
+                            Juego.sumarTantos(Math.abs(claseGeneral.getMiId()-1));
+                        }
+                        
+                        formJuego.apagarTodosBotones();
+                        frmJuego.cmdQuiero.setText("Quiero");
+                        claseGeneral.miJuego.setEnvido(false);
+                        claseGeneral.miJuego.setRonda(true);
+                        formJuego.prenderBotones();
+                        //</editor-fold>
+                        break;
+                    case "ENV1":
+                        //<editor-fold defaultstate="collapsed" desc="El contrincante cantó Envido">
+                        formJuego.pintar(frmJuego.lblElCanta, "Envido");
+                        formJuego.apagarTodosBotones();
+                        frmJuego.cmdQuiero.setEnabled(true);
+                        frmJuego.cmdNoQuiero.setEnabled(true);
+                        miJuego.setRonda(false);
+                        switch(miJuego.getInstanciaEnvido()){
+                            case 0:
+                                miJuego.setInstanciaEnvido(1);
+                                miJuego.setEsperando("envido");
+                                formJuego.prenderBotones();
+                                break;
+                            case 1:
+                                miJuego.setInstanciaEnvido(2);
+                                miJuego.setEsperando("envidoenvido");
+                                formJuego.prenderBotones();
+                                break;
+                        }
+                        agregarAlChat("notif","Envido",Integer.parseInt(mensaje.substring(7)));
+                        //</editor-fold>
+                        break;
+                        
+                    case "ENV2":
+                        //<editor-fold defaultstate="collapsed" desc="Cantó Real Envido">
+                        formJuego.pintar(frmJuego.lblElCanta, "RealEnvido");
+                        formJuego.apagarTodosBotones();
+                        frmJuego.cmdQuiero.setEnabled(true);
+                        frmJuego.cmdNoQuiero.setEnabled(true);
+                        miJuego.setRonda(false);
+                        switch(miJuego.getInstanciaEnvido()){
+                            case 0:
+                                miJuego.setInstanciaEnvido(6);
+                                miJuego.setEsperando("realenvido");
+                                formJuego.prenderBotones();
+                                break;
+                            case 1:
+                                miJuego.setInstanciaEnvido(3);
+                                miJuego.setEsperando("envidorealenvido");
+                                formJuego.prenderBotones();
+                                break;
+                            case 2:
+                                miJuego.setInstanciaEnvido(4);
+                                miJuego.setEsperando("envidoenvidorealenvido");
+                                formJuego.prenderBotones();
+                                break;
+                        }
+                        agregarAlChat("notif","Real Envido",Integer.parseInt(mensaje.substring(7)));
+                        //</editor-fold>
+                        break;
+                    
+                    case "ENV3":
+                        //<editor-fold defaultstate="collapsed" desc="Cantó Falta Envido">
+                        formJuego.pintar(frmJuego.lblElCanta, "RealEnvido");
+                        formJuego.apagarTodosBotones();
+                        frmJuego.cmdQuiero.setEnabled(true);
+                        frmJuego.cmdNoQuiero.setEnabled(true);
+                        miJuego.setRonda(false);
+                        
+                        miJuego.setInstanciaEnvido(5);
+                        miJuego.setEsperando("faltaenvido");
+                        formJuego.prenderBotones();
+                        
+                        agregarAlChat("notif","Falta Envido",Integer.parseInt(mensaje.substring(7)));
+                        //</editor-fold>
+                        break;
+                        //</editor-fold>
+                        
                 }
                 break;
         }

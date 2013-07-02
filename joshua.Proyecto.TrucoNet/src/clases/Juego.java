@@ -65,6 +65,10 @@ public class Juego {
         frmJuego.cmdAlMazo.setEnabled(true);
         if(claseGeneral.miJuego.getTurno()==claseGeneral.getMiId()){
             claseGeneral.formJuego.prenderBotones();
+            frmJuego.cmdQuiero.setText("Quiero");
+            frmJuego.cmdNoQuiero.setText("No Quiero");
+            frmJuego.cmdQuiero.setEnabled(false);
+            frmJuego.cmdNoQuiero.setEnabled(false);
         }
     }
 
@@ -73,6 +77,8 @@ public class Juego {
             
         lst6Cartas = Juego.crearCartasRandom();
 
+        claseGeneral.miJuego.inicializar();
+        
         claseGeneral.lstJugadores.get(0).setCartas(Juego.separarCartas(lst6Cartas,1));
         claseGeneral.lstJugadores.get(1).setCartas(Juego.separarCartas(lst6Cartas,2));
 
@@ -83,7 +89,7 @@ public class Juego {
         SimpleServer.enviarDatos("JGOSVCT"+j0.cartasToString(j0.getCartas()));
         SimpleServer.enviarDatos("JGONVMN");
         
-        claseGeneral.miJuego.inicializar();
+        
         
         if(claseGeneral.miJuego.getMano()!=claseGeneral.getMiId()){
             claseGeneral.formJuego.apagarTodosBotones();
@@ -104,27 +110,6 @@ public class Juego {
     
     public static void ganarMano(int id){
         int puntos=0;
-        /*switch(claseGeneral.miJuego.getInstanciaEnvido()){
-            case 1:
-                puntos=2;
-                break;
-            case 2:
-                puntos=4;
-                break;
-            case 3:
-                puntos=5;
-                break;
-            case 4:
-                puntos=7;
-                break;
-            case 5:
-                if(claseGeneral.lstJugadores.get(Math.abs(id-1)).getPuntos()<15){
-                    puntos=15-claseGeneral.lstJugadores.get(Math.abs(id-1)).getPuntos();
-                } else if(claseGeneral.lstJugadores.get(Math.abs(id-1)).getPuntos()>15){
-                    puntos=30-claseGeneral.lstJugadores.get(Math.abs(id-1)).getPuntos();
-                }
-                break;
-        }*/
         
         if(claseGeneral.miJuego.isTruco()){
             switch(claseGeneral.miJuego.getInstanciaTruco()){
@@ -160,6 +145,8 @@ public class Juego {
         
         if(claseGeneral.isSoyServer()){
             nuevaMano();
+        } else{
+            frmJuego.cmdAlMazo.setEnabled(false);
         }
     }
 
@@ -215,6 +202,40 @@ public class Juego {
         }
     }
 
+    public static void sumarTantos(int id){
+        int ptos=0;
+        switch(claseGeneral.miJuego.getInstanciaEnvido()){
+            case 1:
+                ptos=2;
+                break;
+            case 2:
+                ptos=4;
+                break;
+            case 3:
+                ptos=5;
+                break;
+            case 4:
+                ptos=7;
+                break;
+            case 5:
+                int susPuntos=claseGeneral.lstJugadores.get(Math.abs(id-1)).getPuntos();
+                if(susPuntos<15){
+                    ptos=15-susPuntos;
+                } else{
+                    ptos=30-susPuntos;
+                }
+                break;
+            case 6:
+                ptos=3;
+                break;
+        }
+        
+        claseGeneral.lstJugadores.get(id).setPuntos(ptos+claseGeneral.lstJugadores.get(id).getPuntos());
+        
+        frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(claseGeneral.miId).getPuntos());
+        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(Math.abs(claseGeneral.miId-1)).getPuntos());
+    }
+    
     public static List separarCartas(List cartas,int mitad){
         List<Carta> lstCartas=new ArrayList();
         int x=0;

@@ -36,6 +36,106 @@ public class Jugador {
         cartasTiradas=0;
     }
     
+    public int contarTantos(){
+        int tantos=0;
+        //Si el Palo de la primera es igual al de la segunda
+        int num1=cartas.get(0).getNumero();
+        int num2=cartas.get(1).getNumero();
+        int num3=cartas.get(2).getNumero();
+        
+        char palo1=cartas.get(0).getPalo();
+        char palo2=cartas.get(1).getPalo();
+        char palo3=cartas.get(2).getPalo();
+        
+        int max=0,mid=0,min = 0;
+        
+        //<editor-fold defaultstate="collapsed" desc="Busco max,mid,min">
+        if((num1>num2)&&(num1>num3)){
+            max=num1;
+        } else if((num2>num1)&&(num2>num3)){
+            max=num2;
+        } else if((num3>num1)&&(num3>num2)){
+            max=num3;
+        }
+        
+        if(((num1>num2)&&(num1<num3))||((num1<num2)&&(num1>num3))){
+            mid=num1;
+        } else if(((num2>num1)&&(num2<num3))||((num2<num1)&&(num2>num3))){
+            mid=num2;
+        } else if(((num3>num1)&&(num3<num2))||((num3<num1)&&(num3>num2))){
+            mid=num3;
+        }
+        
+        if((num1<num2)&&(num1<num3)){
+            min=num1;
+        } else if((num2<num1)&&(num2<num3)){
+            min=num2;
+        } else if((num3<num1)&&(num3<num2)){
+            min=num3;
+        }
+        //</editor-fold>
+
+        if (palo1==palo2){
+            //20 asegurados
+            tantos=20;
+            //Si son las 3 del mismo palo, sumo las mejores
+            if(palo2==palo3){
+                if((num1<8)&&(num2<8)&&(num3<8)){
+                    tantos+=max+mid;
+                } else if((num1<8)&&(num2<8)&&(num3>7)){
+                    tantos+=num1+num2;
+                } else if((num1<8)&&(num2>7)&&(num3<8)){
+                    tantos+=num1+num3;
+                } else if((num1<8)&&(num2>7)&&(num3>7)){
+                    tantos+=num1;
+                } else if((num1>7)&&(num2<8)&&(num3<8)){
+                    tantos+=num2+num3;
+                } else if((num1>7)&&(num2<8)&&(num3>7)){
+                    tantos+=num2;
+                } else if((num1>7)&&(num2>7)&&(num3<8)){
+                    tantos+=num3;
+                }
+            } else{
+                if((num1<8)&&(num2<8)){
+                    tantos+=num1+num2;
+                } else if((num1<8)&&(num2>7)){
+                    tantos+=num1;
+                } else if((num1>7)&&(num2<8)){
+                    tantos+=num2;
+                }
+            }
+        } else if(palo1==palo3){
+            tantos=20;
+            if((num1<8)&&(num3<8)){
+                tantos+=num1+num3;
+            } else if((num1<8)&&(num3>7)){
+                tantos+=num1;
+            } else if((num1>7)&&(num3<8)){
+                tantos+=num3;
+            }
+        } else if(palo2==palo3){
+            tantos=20;
+            if((num2<8)&(num3<8)){
+                tantos+=num2+num3;
+            } else if((num2>7)&&(num3<8)){
+                tantos+=num3;
+            } else if((num2<8)&&(num3>7)){
+                tantos+=num2;
+            }
+        } else{
+            if(max<8){
+                tantos=max;
+            } else if(mid<8){
+                tantos=mid;
+            } else if(min<8){
+                tantos=min;
+            } else{
+                tantos=0;
+            }
+        }
+        return tantos;
+    }
+    
     public void guardarStringCartas(String cadena){
         for(int x=0;x<3;x++){
             String cta = cadena.substring(x*3, (x*3+3));

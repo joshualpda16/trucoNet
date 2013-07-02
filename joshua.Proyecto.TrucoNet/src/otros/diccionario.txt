@@ -21,6 +21,8 @@ Mensajes del tipo chat previo (CHP):
         "CHP0ready" -El servidor empezó el juego.
 
 Mensajes del tipo Juego (JGO):
+        "JGOPIET" -El pie avisa que mostró los tantos
+        "JGOMANT" -El mano avisa que mostró los tantos
         "JGOREPA" -Repartir las cartas (Solo las pinta)
         "JGONVMN" -El servidor envia Nueva mano
         "JGOCCTS" -Las nuevas cartas del cliente
@@ -54,3 +56,4 @@ Tantos:
     Envido+RealEnvido:          3
     Envido+Envido+RealEnvido    4
     FaltaEnvido                 5
+    Real Envido                 6
