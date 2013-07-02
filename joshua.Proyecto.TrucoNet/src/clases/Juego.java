@@ -8,6 +8,7 @@ import formularios.frmJuego;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -131,6 +132,24 @@ public class Juego {
         claseGeneral.lstJugadores.get(id).setPuntos(claseGeneral.lstJugadores.get(id).getPuntos()+puntos);
         frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(claseGeneral.getMiId()).getPuntos());
         frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).getPuntos());
+        if(Integer.parseInt(frmJuego.txtYo.getText())>=30){
+            int seleccion = JOptionPane.showOptionDialog(null, "Felicitaciones, ganaste!\nVa la revancha?",
+            "No existe",
+            JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,new Object[]{"Si","No"},
+            null);
+            System.exit(1);
+        } else if(Integer.parseInt(frmJuego.txtEl.getText())>=30){
+            int seleccion = JOptionPane.showOptionDialog(null, "Que lástima, perdiste.\nVa la revancha?",
+            "No existe",
+            JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,new Object[]{"Si","No"},
+            null);
+            System.exit(1);
+        }
+        
         
         claseGeneral.miJuego.setRonda(false);
         
@@ -191,6 +210,24 @@ public class Juego {
         
         frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(claseGeneral.getMiId()).getPuntos());
         frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).getPuntos());
+        
+        if(Integer.parseInt(frmJuego.txtYo.getText())>=30){
+            int seleccion = JOptionPane.showOptionDialog(null, "Felicitaciones, ganaste!\nVa la revancha?",
+            "No existe",
+            JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,new Object[]{"Si","No"},
+            null);
+            System.exit(1);
+        } else if(Integer.parseInt(frmJuego.txtEl.getText())>=30){
+            int seleccion = JOptionPane.showOptionDialog(null, "Que lástima, perdiste.\nVa la revancha?",
+            "No existe",
+            JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,new Object[]{"Si","No"},
+            null);
+            System.exit(1);
+        }
         
         claseGeneral.miJuego.setRonda(false);
         

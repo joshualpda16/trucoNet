@@ -78,60 +78,60 @@ public class frmJuego extends javax.swing.JInternalFrame {
 
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameOpened(evt);
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
             public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
         });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(suCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 70, 110));
-        jPanel1.add(suCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 70, 110));
-        jPanel1.add(suCartaTirada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 80, 120));
+        jPanel1.add(suCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 60, 100));
+        jPanel1.add(suCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 60, 100));
+        jPanel1.add(suCartaTirada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 70, 110));
 
         miCarta3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 miCarta3MouseClicked(evt);
             }
         });
-        jPanel1.add(miCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 410, 100, 140));
+        jPanel1.add(miCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 90, 130));
 
         miCarta2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 miCarta2MouseClicked(evt);
             }
         });
-        jPanel1.add(miCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, 100, 140));
+        jPanel1.add(miCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, 90, 130));
 
         miCarta1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 miCarta1MouseClicked(evt);
             }
         });
-        jPanel1.add(miCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 100, 140));
-        jPanel1.add(suCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 70, 110));
-        jPanel1.add(suCartaTirada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 80, 120));
-        jPanel1.add(suCartaTirada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 80, 120));
-        jPanel1.add(miCartaTirada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 80, 120));
-        jPanel1.add(miCartaTirada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 280, 80, 120));
-        jPanel1.add(miCartaTirada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 80, 120));
+        jPanel1.add(miCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 90, 130));
+        jPanel1.add(suCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 60, 100));
+        jPanel1.add(suCartaTirada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 70, 110));
+        jPanel1.add(suCartaTirada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 70, 110));
+        jPanel1.add(miCartaTirada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 70, 110));
+        jPanel1.add(miCartaTirada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 70, 110));
+        jPanel1.add(miCartaTirada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 70, 110));
 
         lblYo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblYo.setText("Yo");
-        jPanel1.add(lblYo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 510, 30, -1));
+        jPanel1.add(lblYo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 30, -1));
 
         lblEl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblEl.setText("Él");
@@ -139,13 +139,13 @@ public class frmJuego extends javax.swing.JInternalFrame {
 
         lblSusTantos.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         lblSusTantos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(lblSusTantos, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 80, 60));
+        jPanel1.add(lblSusTantos, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, 80, 60));
 
         lblMisTantos.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         lblMisTantos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(lblMisTantos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 80, 60));
-        jPanel1.add(lblYoCanto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 120, 70));
-        jPanel1.add(lblElCanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, 120, 70));
+        jPanel1.add(lblMisTantos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 80, 60));
+        jPanel1.add(lblYoCanto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 120, 70));
+        jPanel1.add(lblElCanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 120, 70));
 
         cmdAlMazo.setText("Al Mazo");
         cmdAlMazo.addActionListener(new java.awt.event.ActionListener() {
@@ -223,38 +223,35 @@ public class frmJuego extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtEnviarChat)
+                    .addComponent(jScrollPane2)
+                    .addComponent(cmdAlMazo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmdFaltaEnvido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmdEnvido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmdQuiero, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEnviarChat)
-                            .addComponent(jScrollPane2)
-                            .addComponent(cmdAlMazo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmdFaltaEnvido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmdEnvido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cmdQuiero, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmdNoQuiero, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cmdTruco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmdRealEnvido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
+                        .addComponent(cmdNoQuiero, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmdTruco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmdRealEnvido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEl, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtYo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(txtYo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEl, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -262,26 +259,23 @@ public class frmJuego extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtYo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
                             .addComponent(txtEl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmdAlMazo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmdNoQuiero, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                            .addComponent(cmdQuiero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmdTruco, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmdQuiero, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                            .addComponent(cmdNoQuiero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmdTruco, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cmdFaltaEnvido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmdRealEnvido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmdEnvido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmdEnvido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -921,21 +915,21 @@ public class frmJuego extends javax.swing.JInternalFrame {
             boolean yoGano=false,yoPierdo=false;
             
             if(claseGeneral.miJuego.isPrimeraCarta()){
-                frmPrincipal.log("Es la primera carta");
+                //frmPrincipal.log("Es la primera carta");
                 suTurno();
                 claseGeneral.miJuego.setCartaInstancia(claseGeneral.lstJugadores.get(miId).getCartas().get(id));
                 claseGeneral.miJuego.setPrimeraCarta(false);
                 apagarTodosBotones();
             } else{
                 int suID = Math.abs(miId-1);
-                frmPrincipal.log("No es la primera carta");
+                //frmPrincipal.log("No es la primera carta");
                 if(Juego.compararCartas(claseGeneral.lstJugadores.get(miId).getCartas().get(id),claseGeneral.miJuego.getCartaInstancia())){
-                    frmPrincipal.log("Mi carta es más grande, mi turno");
+                    //frmPrincipal.log("Mi carta es más grande, mi turno");
                     miTurno();
                     claseGeneral.miJuego.setPrimeraCarta(true);
                     apagarTodosBotones();
                     claseGeneral.lstJugadores.get(miId).setInstanciasGanadas(claseGeneral.lstJugadores.get(miId).getInstanciasGanadas()+1);
-                    frmPrincipal.log("Me sumo una instancia ganada");
+                    //frmPrincipal.log("Me sumo una instancia ganada");
                     
                     if(claseGeneral.miJuego.getInstanciaJuego()==0){claseGeneral.miJuego.setPrimeraEnCasa(miId);}
                     
@@ -945,7 +939,7 @@ public class frmJuego extends javax.swing.JInternalFrame {
                 } else if(Juego.mismosPuntos(claseGeneral.lstJugadores.get(miId).getCartas().get(id),claseGeneral.miJuego.getCartaInstancia())){
                     if(claseGeneral.miJuego.getInstanciaJuego()==0){
                         claseGeneral.lstJugadores.get(miId).setInstanciasGanadas(claseGeneral.lstJugadores.get(miId).getInstanciasGanadas()+1);
-                        frmPrincipal.log("Parda");
+                        //frmPrincipal.log("Parda");
                         claseGeneral.miJuego.setPrimeraCarta(true);
                         apagarTodosBotones();
                         claseGeneral.miJuego.setTurno(claseGeneral.miJuego.getMano());
@@ -965,12 +959,12 @@ public class frmJuego extends javax.swing.JInternalFrame {
                                     }
                                 }
                 } else{
-                    frmPrincipal.log("Mi carta era más chica");
+                    //frmPrincipal.log("Mi carta era más chica");
                     suTurno();
                     claseGeneral.miJuego.setPrimeraCarta(true);
                     claseGeneral.lstJugadores.get(suID).setInstanciasGanadas(claseGeneral.lstJugadores.get(suID).getInstanciasGanadas()+1);
                     apagarTodosBotones();
-                    frmPrincipal.log("Le toca a él");
+                    //frmPrincipal.log("Le toca a él");
                     if(claseGeneral.lstJugadores.get(suID).getInstanciasGanadas()==2){
                         yoPierdo=true;
                     }

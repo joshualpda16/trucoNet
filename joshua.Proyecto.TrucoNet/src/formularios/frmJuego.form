@@ -28,39 +28,31 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" pref="590" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtEnviarChat" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPane2" max="32767" attributes="0"/>
-                          <Component id="cmdAlMazo" max="32767" attributes="0"/>
-                          <Component id="cmdFaltaEnvido" alignment="0" max="32767" attributes="0"/>
-                          <Component id="cmdEnvido" alignment="1" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="cmdQuiero" min="-2" pref="85" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cmdNoQuiero" min="-2" pref="89" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="cmdTruco" max="32767" attributes="0"/>
-                          <Component id="cmdRealEnvido" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="txtEnviarChat" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" max="32767" attributes="0"/>
+                  <Component id="cmdAlMazo" max="32767" attributes="0"/>
+                  <Component id="cmdFaltaEnvido" alignment="0" max="32767" attributes="0"/>
+                  <Component id="cmdEnvido" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="cmdQuiero" min="-2" pref="85" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtEl" min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="txtYo" min="-2" pref="60" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="cmdNoQuiero" min="-2" pref="89" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="cmdTruco" max="32767" attributes="0"/>
+                  <Component id="cmdRealEnvido" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtYo" min="-2" pref="60" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtEl" min="-2" pref="60" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -69,6 +61,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jPanel1" min="-2" pref="510" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="jScrollPane2" min="-2" pref="236" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -77,9 +70,6 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtYo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtEl" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -87,11 +77,11 @@
                       <Component id="cmdAlMazo" min="-2" pref="33" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="cmdNoQuiero" pref="34" max="32767" attributes="0"/>
-                          <Component id="cmdQuiero" max="32767" attributes="0"/>
+                          <Component id="cmdQuiero" pref="27" max="32767" attributes="0"/>
+                          <Component id="cmdNoQuiero" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="cmdTruco" min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cmdTruco" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="cmdFaltaEnvido" min="-2" pref="33" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -99,9 +89,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cmdEnvido" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jPanel1" min="-2" pref="564" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -129,7 +118,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="360" y="10" width="70" height="110"/>
+              <AbsoluteConstraints x="360" y="10" width="60" height="100"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -139,7 +128,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="250" y="10" width="70" height="110"/>
+              <AbsoluteConstraints x="250" y="10" width="60" height="100"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -149,7 +138,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="380" y="140" width="80" height="120"/>
+              <AbsoluteConstraints x="380" y="120" width="70" height="110"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -162,7 +151,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="360" y="410" width="100" height="140"/>
+              <AbsoluteConstraints x="360" y="370" width="90" height="130"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -175,7 +164,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="250" y="410" width="100" height="140"/>
+              <AbsoluteConstraints x="250" y="370" width="90" height="130"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -188,7 +177,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="140" y="410" width="100" height="140"/>
+              <AbsoluteConstraints x="140" y="370" width="90" height="130"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -198,7 +187,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="140" y="10" width="70" height="110"/>
+              <AbsoluteConstraints x="140" y="10" width="60" height="100"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -208,7 +197,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="120" y="140" width="80" height="120"/>
+              <AbsoluteConstraints x="120" y="120" width="70" height="110"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -218,7 +207,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="250" y="140" width="80" height="120"/>
+              <AbsoluteConstraints x="250" y="120" width="70" height="110"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -228,7 +217,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="380" y="280" width="80" height="120"/>
+              <AbsoluteConstraints x="380" y="240" width="70" height="110"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -238,7 +227,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="250" y="280" width="80" height="120"/>
+              <AbsoluteConstraints x="250" y="240" width="70" height="110"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -248,7 +237,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="120" y="280" width="80" height="120"/>
+              <AbsoluteConstraints x="120" y="240" width="70" height="110"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -261,7 +250,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="50" y="510" width="30" height="-1"/>
+              <AbsoluteConstraints x="60" y="480" width="30" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -290,7 +279,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="470" y="130" width="80" height="60"/>
+              <AbsoluteConstraints x="470" y="120" width="80" height="60"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -306,7 +295,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="350" width="80" height="60"/>
+              <AbsoluteConstraints x="30" y="340" width="80" height="60"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -316,7 +305,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="420" width="120" height="70"/>
+              <AbsoluteConstraints x="10" y="410" width="120" height="70"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -326,7 +315,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="450" y="60" width="120" height="70"/>
+              <AbsoluteConstraints x="450" y="50" width="120" height="70"/>
             </Constraint>
           </Constraints>
         </Component>

@@ -451,7 +451,7 @@ public class claseGeneral {
                     case "CRTA":
                         //<editor-fold defaultstate="collapsed" desc="Llegó una carta">
                         //Traigo la carta y el jugador
-                        frmPrincipal.log("Llegó la carta");
+                        //frmPrincipal.log("Llegó la carta");
                         int suID=Integer.parseInt(mensaje.substring(7, 8));
                         int idCarta=Integer.parseInt(mensaje.substring(8,9));
                         String carta = lstJugadores.get(suID).getCartas().get(idCarta).traerCarta();
@@ -482,13 +482,13 @@ public class claseGeneral {
                             frmPrincipal.log("Me toca a mi");
                             //</editor-fold>
                         } else{
-                            frmPrincipal.log("No es la primera carta");
+                            //frmPrincipal.log("No es la primera carta");
                             if(Juego.compararCartas(miJuego.getCartaInstancia(),lstJugadores.get(suID).getCartas().get(idCarta))){
                                 //<editor-fold defaultstate="collapsed" desc="Mi Carta es más grande">
-                                frmPrincipal.log("Mi carta es más grande");
+                                //frmPrincipal.log("Mi carta es más grande");
                                 formJuego.miTurno();
                                 miJuego.setPrimeraCarta(true);
-                                frmPrincipal.log("Mi turno");
+                                //frmPrincipal.log("Mi turno");
                                 formJuego.apagarTodosBotones();
                                 
                                 if(miJuego.getInstanciaJuego()==0){miJuego.setPrimeraEnCasa(miId);}
@@ -503,7 +503,7 @@ public class claseGeneral {
                                 if(miJuego.getInstanciaJuego()==0){
                                     lstJugadores.get(miId).setInstanciasGanadas(lstJugadores.get(miId).getInstanciasGanadas()+1);
                                     lstJugadores.get(suID).setInstanciasGanadas(lstJugadores.get(suID).getInstanciasGanadas()+1);
-                                    frmPrincipal.log("Parda");
+                                    //frmPrincipal.log("Parda");
                                     miJuego.setPrimeraCarta(true);
                                     formJuego.apagarTodosBotones();
                                     miJuego.setTurno(miJuego.getMano());
@@ -524,12 +524,12 @@ public class claseGeneral {
                                 //</editor-fold>
                             }else{
                                 //<editor-fold defaultstate="collapsed" desc="Mi Carta es más chica">
-                                frmPrincipal.log("Mi carta es más chica");
+                                //frmPrincipal.log("Mi carta es más chica");
                                 formJuego.suTurno();
                                 lstJugadores.get(suID).setInstanciasGanadas(lstJugadores.get(suID).getInstanciasGanadas()+1);
                                 formJuego.apagarTodosBotones();
                                 miJuego.setPrimeraCarta(true);
-                                frmPrincipal.log("Su turno");
+                                //frmPrincipal.log("Su turno");
                                 
                                 if(lstJugadores.get(suID).getInstanciasGanadas()==2){
                                     yoPierdo=true;
@@ -537,18 +537,18 @@ public class claseGeneral {
                                 //</editor-fold>
                             }
                             miJuego.setInstanciaJuego(miJuego.getInstanciaJuego()+1);
-                            frmPrincipal.log("Suma una instancia al juego. Estamos en la "+(miJuego.getInstanciaJuego()));
+                            //frmPrincipal.log("Suma una instancia al juego. Estamos en la "+(miJuego.getInstanciaJuego()));
                             
                         }
                         formJuego.prenderBotones();
-                        frmPrincipal.log("Sus cartas tiradas son "+(susCartasTiradas+1));
+                        //frmPrincipal.log("Sus cartas tiradas son "+(susCartasTiradas+1));
                         lstJugadores.get(suID).setCartasTiradas(susCartasTiradas+1);
                         if(yoGano){
-                            frmPrincipal.log("Gané dos instancias");
+                            //frmPrincipal.log("Gané dos instancias");
                             Juego.ganarMano(miId);
                         }
                         if(yoPierdo){
-                            frmPrincipal.log("Ganó dos instancias");
+                            //frmPrincipal.log("Ganó dos instancias");
                             Juego.ganarMano(suID);
                         }
                         //</editor-fold>
@@ -783,7 +783,7 @@ public class claseGeneral {
     public void guardarNombre(String nombre){
         //Escritura
         File f;
-        String ruta="src/otros/config.cfg";
+        String ruta="lib/config.cfg";
         f = new File(ruta);
         try{
             FileWriter w = new FileWriter(f);
@@ -797,7 +797,7 @@ public class claseGeneral {
     }
     
     public void verificarConfig(){
-        String ruta = "src/otros/config.cfg";
+        String ruta = "lib/config.cfg";
         String estado = estadoConfig(ruta);
         if(estado.equals("existe")){
             //<editor-fold defaultstate="collapsed" desc="Si existe">

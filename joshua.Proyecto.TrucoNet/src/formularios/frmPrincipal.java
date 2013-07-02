@@ -5,7 +5,10 @@
 package formularios;
 
 import clases.claseGeneral;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.*;
+import otros.fondoJDP;
 
 /**
  *
@@ -13,12 +16,22 @@ import javax.swing.*;
  */
 public class frmPrincipal extends javax.swing.JFrame {
     
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("otros/Ico.png"));
+
+
+        return retValue;
+    }
+    
     private claseGeneral general;
     /**
      * Creates new form frmPrincipal
      */
     public frmPrincipal() {
         initComponents();
+        jDesktopPane1.setBorder(new fondoJDP());
         general = claseGeneral.getInstance();
         general.verificarConfig();
     }
@@ -44,16 +57,18 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuJuego = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Truco Net 2.0");
+        setIconImage(getIconImage());
 
         jDesktopPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         txtLog.setColumns(20);
         txtLog.setRows(5);
         txtLog.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 txtLogInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         txtLog.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -124,14 +139,14 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jDesktopPane1)
-                        .addGap(4, 4, 4))
+                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cmdCrearSala, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmdUnirse, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 357, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
