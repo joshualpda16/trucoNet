@@ -313,8 +313,12 @@ public class frmJuego extends javax.swing.JInternalFrame {
         if(claseGeneral.miJuego.getInstanciaJuego()==0){
             if(claseGeneral.miJuego.isEnvido()){
                 switch(claseGeneral.miJuego.getInstanciaEnvido()){
-                    case 1:
                     case 0:
+                        cmdEnvido.setEnabled(true);
+                        cmdRealEnvido.setEnabled(true);
+                        cmdFaltaEnvido.setEnabled(true);
+                        break;
+                    case 1:
                         cmdEnvido.setEnabled(true);
                     case 2:
                         cmdRealEnvido.setEnabled(true);
@@ -322,6 +326,7 @@ public class frmJuego extends javax.swing.JInternalFrame {
                     case 4:
                         cmdQuiero.setEnabled(true);
                         cmdNoQuiero.setEnabled(true);
+                    
                     case 6:
                         cmdFaltaEnvido.setEnabled(true);
                         break;
@@ -335,12 +340,16 @@ public class frmJuego extends javax.swing.JInternalFrame {
                     cmdTruco.setEnabled(true);
                     break;
                 case 2:
-                    cmdTruco.setText("Quiero re truco!");
-                    cmdTruco.setEnabled(true);
+                    if(claseGeneral.miJuego.getTieneElQuiero()==claseGeneral.getMiId()){
+                        cmdTruco.setText("Quiero re truco!");
+                        cmdTruco.setEnabled(true);
+                    }
                     break;
                 case 3:
-                    cmdTruco.setText("Quiero vale cuatro!");
-                    cmdTruco.setEnabled(true);
+                    if(claseGeneral.miJuego.getTieneElQuiero()==claseGeneral.getMiId()){
+                        cmdTruco.setText("Quiero vale cuatro!");
+                        cmdTruco.setEnabled(true);
+                    }
                     break;
             }
         }
@@ -483,26 +492,31 @@ public class frmJuego extends javax.swing.JInternalFrame {
                 switch(claseGeneral.miJuego.getEsperando()){
                     case "truco":
                         //<editor-fold defaultstate="collapsed" desc="Quiero el Truco">
+                        claseGeneral.miJuego.setTrucoJugando(true);
                         claseGeneral.miJuego.setEnvido(false);
                         claseGeneral.miJuego.setInstanciaTruco(2);
                         apagarTodosBotones();
                         claseGeneral.agregarAlChat("quiero", "Truco", claseGeneral.getMiId());
                         claseGeneral.miJuego.setTieneElQuiero(claseGeneral.getMiId());
                         claseGeneral.enviarQuiero();
+                        
                         //</editor-fold>
                         break;
                     case "retruco":
                         //<editor-fold defaultstate="collapsed" desc="Quiero el Retruco">
+                        claseGeneral.miJuego.setTrucoJugando(true);
                         claseGeneral.miJuego.setEnvido(false);
                         claseGeneral.miJuego.setInstanciaTruco(3);
                         apagarTodosBotones();
                         claseGeneral.agregarAlChat("quiero", "Re Truco", claseGeneral.getMiId());
                         claseGeneral.miJuego.setTieneElQuiero(claseGeneral.getMiId());
                         claseGeneral.enviarQuiero();
+                        claseGeneral.miJuego.setTieneElQuiero(claseGeneral.getMiId());
                         //</editor-fold>
                         break;
                     case "valecuatro":
                         //<editor-fold defaultstate="collapsed" desc="Quiero el Vale 4">
+                        claseGeneral.miJuego.setTrucoJugando(true);
                         claseGeneral.miJuego.setEnvido(false);
                         claseGeneral.miJuego.setInstanciaTruco(4);
                         apagarTodosBotones();
@@ -584,6 +598,7 @@ public class frmJuego extends javax.swing.JInternalFrame {
                 
                 apagarTodosBotones();
                 frmJuego.cmdQuiero.setText("Quiero");
+                frmJuego.cmdNoQuiero.setText("No Quiero");
                 claseGeneral.miJuego.setEnvido(false);
                 claseGeneral.miJuego.setRonda(true);
                 prenderBotones();
@@ -592,95 +607,126 @@ public class frmJuego extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmdQuieroActionPerformed
 
     private void cmdNoQuieroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNoQuieroActionPerformed
-        int suid=Math.abs(claseGeneral.getMiId()-1);
-        switch(claseGeneral.miJuego.getEsperando()){
-            case "truco":
-                claseGeneral.miJuego.setInstanciaTruco(2);
+        switch(cmdNoQuiero.getText()){
+            case "Son Buenas":
+                int miId=claseGeneral.getMiId();
+                int suId=Math.abs(claseGeneral.getMiId()-1);
+                
+                if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOSONB"+miId);}
+                else{SimpleClient.enviarDatos("JGOSONB"+miId);}
+                
+                pintar(lblYoCanto,"SonBuenas");
+                
+                Juego.sumarTantos(suId);
+                
                 apagarTodosBotones();
-                claseGeneral.agregarAlChat("noquiero", "Truco", claseGeneral.getMiId());
-                Juego.alMazo(claseGeneral.getMiId());
-                break;
-            case "retruco":
-                claseGeneral.miJuego.setInstanciaTruco(3);
-                apagarTodosBotones();
-                claseGeneral.agregarAlChat("noquiero", "Re Truco", claseGeneral.getMiId());
-                Juego.alMazo(claseGeneral.getMiId());
-                break;
-            case "valecuatro":
-                claseGeneral.miJuego.setInstanciaTruco(4);
-                apagarTodosBotones();
-                claseGeneral.agregarAlChat("noquiero", "Vale Cuatro", claseGeneral.getMiId());
-                Juego.alMazo(claseGeneral.getMiId());
-                break;
-            case "envido":
-                //<editor-fold defaultstate="collapsed" desc="No Quiero El Envido">
-                claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+1);
-                frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
-                apagarTodosBotones();
+                frmJuego.cmdQuiero.setText("Quiero");
+                frmJuego.cmdNoQuiero.setText("No Quiero");
                 claseGeneral.miJuego.setEnvido(false);
-                prenderBotones();
-                claseGeneral.agregarAlChat("noquiero", "Envido", claseGeneral.getMiId());
                 claseGeneral.miJuego.setRonda(true);
-                break;
-                //</editor-fold>
-            case "realenvido":
-                //<editor-fold defaultstate="collapsed" desc="No Quiero el Real Envido">
-                claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+1);
-                frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
-                apagarTodosBotones();
-                claseGeneral.miJuego.setEnvido(false);
                 prenderBotones();
-                claseGeneral.agregarAlChat("noquiero", "Real Envido", claseGeneral.getMiId());
-                claseGeneral.miJuego.setRonda(true);
                 break;
-                //</editor-fold>
-            case "faltaenvido":
-                //<editor-fold defaultstate="collapsed" desc="No Quiero el Falta Envido">
-                claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+1);
-                frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
-                apagarTodosBotones();
-                claseGeneral.miJuego.setEnvido(false);
-                prenderBotones();
-                claseGeneral.agregarAlChat("noquiero", "Falta Envido", claseGeneral.getMiId());
-                claseGeneral.miJuego.setRonda(true);
-                break;
-                //</editor-fold>
-            case "envidoenvido":
-                //<editor-fold defaultstate="collapsed" desc="No Quiero el Envido-Envido">
-                claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+2);
-                frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
-                apagarTodosBotones();
-                claseGeneral.miJuego.setEnvido(false);
-                prenderBotones();
-                claseGeneral.agregarAlChat("noquiero", "Envido-Envido", claseGeneral.getMiId());
-                claseGeneral.miJuego.setRonda(true);
-                //</editor-fold>
-                break;
-            case "envidorealenvido":
-                //<editor-fold defaultstate="collapsed" desc="No Quiero el Envido-Real Envido">
-                claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+2);
-                frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
-                apagarTodosBotones();
-                claseGeneral.miJuego.setEnvido(false);
-                prenderBotones();
-                claseGeneral.agregarAlChat("noquiero", "Envido-Real Envido", claseGeneral.getMiId());
-                claseGeneral.miJuego.setRonda(true);
-                //</editor-fold>
-                break;
-            case "envidoenvidorealenvido":
-                //<editor-fold defaultstate="collapsed" desc="No Quiero el Envido-Envido-Real Envido">
-                claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+4);
-                frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
-                apagarTodosBotones();
-                claseGeneral.miJuego.setEnvido(false);
-                prenderBotones();
-                claseGeneral.agregarAlChat("noquiero", "Envido-Envido-Real Envido", claseGeneral.getMiId());
-                claseGeneral.miJuego.setRonda(true);
-                //</editor-fold>
-                break;
+            case "No Quiero":
+                int suid=Math.abs(claseGeneral.getMiId()-1);
+                switch(claseGeneral.miJuego.getEsperando()){
+                    case "truco":
+                        claseGeneral.miJuego.setEnvido(false);
+                        claseGeneral.miJuego.setInstanciaTruco(2);
+                        apagarTodosBotones();
+                        claseGeneral.agregarAlChat("noquiero", "Truco", claseGeneral.getMiId());
+                        claseGeneral.enviarNoQuiero();
+                        Juego.alMazo(claseGeneral.getMiId());
+                        break;
+                    case "retruco":
+                        claseGeneral.miJuego.setInstanciaTruco(3);
+                        apagarTodosBotones();
+                        claseGeneral.agregarAlChat("noquiero", "Re Truco", claseGeneral.getMiId());
+                        claseGeneral.enviarNoQuiero();
+                        Juego.alMazo(claseGeneral.getMiId());
+                        break;
+                    case "valecuatro":
+                        claseGeneral.miJuego.setInstanciaTruco(4);
+                        apagarTodosBotones();
+                        claseGeneral.agregarAlChat("noquiero", "Vale Cuatro", claseGeneral.getMiId());
+                        claseGeneral.enviarNoQuiero();
+                        Juego.alMazo(claseGeneral.getMiId());
+                        break;
+                    case "envido":
+                        //<editor-fold defaultstate="collapsed" desc="No Quiero El Envido">
+                        claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+1);
+                        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
+                        apagarTodosBotones();
+                        claseGeneral.miJuego.setEnvido(false);
+                        prenderBotones();
+                        claseGeneral.agregarAlChat("noquiero", "Envido", claseGeneral.getMiId());
+                        claseGeneral.miJuego.setRonda(true);
+                        claseGeneral.enviarNoQuiero();
+                        break;
+                        //</editor-fold>
+                    case "realenvido":
+                        //<editor-fold defaultstate="collapsed" desc="No Quiero el Real Envido">
+                        claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+1);
+                        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
+                        apagarTodosBotones();
+                        claseGeneral.miJuego.setEnvido(false);
+                        prenderBotones();
+                        claseGeneral.agregarAlChat("noquiero", "Real Envido", claseGeneral.getMiId());
+                        claseGeneral.miJuego.setRonda(true);
+                        claseGeneral.enviarNoQuiero();
+                        break;
+                        //</editor-fold>
+                    case "faltaenvido":
+                        //<editor-fold defaultstate="collapsed" desc="No Quiero el Falta Envido">
+                        claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+1);
+                        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
+                        apagarTodosBotones();
+                        claseGeneral.miJuego.setEnvido(false);
+                        prenderBotones();
+                        claseGeneral.agregarAlChat("noquiero", "Falta Envido", claseGeneral.getMiId());
+                        claseGeneral.miJuego.setRonda(true);
+                        claseGeneral.enviarNoQuiero();
+                        break;
+                        //</editor-fold>
+                    case "envidoenvido":
+                        //<editor-fold defaultstate="collapsed" desc="No Quiero el Envido-Envido">
+                        claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+2);
+                        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
+                        apagarTodosBotones();
+                        claseGeneral.miJuego.setEnvido(false);
+                        prenderBotones();
+                        claseGeneral.agregarAlChat("noquiero", "Envido-Envido", claseGeneral.getMiId());
+                        claseGeneral.miJuego.setRonda(true);
+                        claseGeneral.enviarNoQuiero();
+                        //</editor-fold>
+                        break;
+                    case "envidorealenvido":
+                        //<editor-fold defaultstate="collapsed" desc="No Quiero el Envido-Real Envido">
+                        claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+2);
+                        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
+                        apagarTodosBotones();
+                        claseGeneral.miJuego.setEnvido(false);
+                        prenderBotones();
+                        claseGeneral.agregarAlChat("noquiero", "Envido-Real Envido", claseGeneral.getMiId());
+                        claseGeneral.miJuego.setRonda(true);
+                        claseGeneral.enviarNoQuiero();
+                        //</editor-fold>
+                        break;
+                    case "envidoenvidorealenvido":
+                        //<editor-fold defaultstate="collapsed" desc="No Quiero el Envido-Envido-Real Envido">
+                        claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+4);
+                        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
+                        apagarTodosBotones();
+                        claseGeneral.miJuego.setEnvido(false);
+                        prenderBotones();
+                        claseGeneral.agregarAlChat("noquiero", "Envido-Envido-Real Envido", claseGeneral.getMiId());
+                        claseGeneral.miJuego.setRonda(true);
+                        claseGeneral.enviarNoQuiero();
+                        //</editor-fold>
+                        break;
+                }
         }
         cmdNoQuiero.setText("No Quiero");
-        claseGeneral.enviarNoQuiero();
+
     }//GEN-LAST:event_cmdNoQuieroActionPerformed
 
     private void txtEnviarChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEnviarChatActionPerformed
@@ -713,12 +759,14 @@ public class frmJuego extends javax.swing.JInternalFrame {
                 break;
             case "Al Mazo":
                 int miId=claseGeneral.getMiId();
+                String esperando = claseGeneral.miJuego.getEsperando();
                 if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOMAZO"+miId);}
                 else{SimpleClient.enviarDatos("JGOMAZO"+miId);}
                 claseGeneral.agregarAlChat("almazo", "", claseGeneral.getMiId());
 
-                switch(claseGeneral.miJuego.getEsperando()){
+                switch(esperando){
                     case "truco":
+                        claseGeneral.miJuego.setTrucoJugando(true);
                         claseGeneral.miJuego.setInstanciaTruco(2);
                         apagarTodosBotones();
                         break;
@@ -889,9 +937,33 @@ public class frmJuego extends javax.swing.JInternalFrame {
                     claseGeneral.lstJugadores.get(miId).setInstanciasGanadas(claseGeneral.lstJugadores.get(miId).getInstanciasGanadas()+1);
                     frmPrincipal.log("Me sumo una instancia ganada");
                     
+                    if(claseGeneral.miJuego.getInstanciaJuego()==0){claseGeneral.miJuego.setPrimeraEnCasa(miId);}
+                    
                     if(claseGeneral.lstJugadores.get(miId).getInstanciasGanadas()==2){
                         yoGano=true;
                     }
+                } else if(Juego.mismosPuntos(claseGeneral.lstJugadores.get(miId).getCartas().get(id),claseGeneral.miJuego.getCartaInstancia())){
+                    if(claseGeneral.miJuego.getInstanciaJuego()==0){
+                        claseGeneral.lstJugadores.get(miId).setInstanciasGanadas(claseGeneral.lstJugadores.get(miId).getInstanciasGanadas()+1);
+                        frmPrincipal.log("Parda");
+                        claseGeneral.miJuego.setPrimeraCarta(true);
+                        apagarTodosBotones();
+                        claseGeneral.miJuego.setTurno(claseGeneral.miJuego.getMano());
+                        if(claseGeneral.miJuego.getTurno()==claseGeneral.getMiId()){
+                            miTurno();
+                        } else{
+                            suTurno();
+                        }
+                        
+                    } else if((claseGeneral.miJuego.getInstanciaJuego()==1)||(claseGeneral.miJuego.getInstanciaJuego()==2)){
+                                    if(claseGeneral.miJuego.getPrimeraEnCasa()==miId){
+                                        yoGano=true;
+                                        apagarTodosBotones();
+                                    } else{
+                                        yoPierdo=true;
+                                        apagarTodosBotones();
+                                    }
+                                }
                 } else{
                     frmPrincipal.log("Mi carta era más chica");
                     suTurno();
@@ -905,7 +977,7 @@ public class frmJuego extends javax.swing.JInternalFrame {
                 }
                 int inst = claseGeneral.miJuego.getInstanciaJuego()+1;
                 frmPrincipal.log("Sumo una instancia al juego. Es la instancia Nro "+inst);
-                claseGeneral.miJuego.setInstanciaJuego(claseGeneral.miJuego.getInstanciaJuego()+1);
+                claseGeneral.miJuego.setInstanciaJuego(inst);
                 prenderBotones();
                 if(yoGano){
                     frmPrincipal.log("Gané dos instancias");

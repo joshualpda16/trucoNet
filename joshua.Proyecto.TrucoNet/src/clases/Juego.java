@@ -27,6 +27,8 @@ public class Juego {
     private Carta cartaInstancia;
     private boolean primeraCarta;
     private String esperando="";
+    private boolean trucoJugando=false;
+    private int primeraEnCasa;
 
     public Juego() {
         instanciaJuego=0;
@@ -49,6 +51,7 @@ public class Juego {
         envido=true;
         truco=true;
         esperando="";
+        trucoJugando=false;
     }
     
     public void pintarCartas(){
@@ -77,7 +80,6 @@ public class Juego {
             
         lst6Cartas = Juego.crearCartasRandom();
 
-        claseGeneral.miJuego.inicializar();
         
         claseGeneral.lstJugadores.get(0).setCartas(Juego.separarCartas(lst6Cartas,1));
         claseGeneral.lstJugadores.get(1).setCartas(Juego.separarCartas(lst6Cartas,2));
@@ -89,7 +91,7 @@ public class Juego {
         SimpleServer.enviarDatos("JGOSVCT"+j0.cartasToString(j0.getCartas()));
         SimpleServer.enviarDatos("JGONVMN");
         
-        
+        claseGeneral.miJuego.inicializar();
         
         if(claseGeneral.miJuego.getMano()!=claseGeneral.getMiId()){
             claseGeneral.formJuego.apagarTodosBotones();
@@ -111,21 +113,19 @@ public class Juego {
     public static void ganarMano(int id){
         int puntos=0;
         
-        if(claseGeneral.miJuego.isTruco()){
-            switch(claseGeneral.miJuego.getInstanciaTruco()){
-                case 0:
-                    puntos=1;
-                    break;
-                case 2:
-                    puntos+=2;
-                    break;
-                case 4:
-                    puntos+=4;
-                    break;
-                case 3:
-                    puntos+=3;
-                    break;
-            }
+        switch(claseGeneral.miJuego.getInstanciaTruco()){
+            case 0:
+                puntos=1;
+                break;
+            case 2:
+                puntos+=2;
+                break;
+            case 4:
+                puntos+=4;
+                break;
+            case 3:
+                puntos+=3;
+                break;
         }
         
         claseGeneral.lstJugadores.get(id).setPuntos(claseGeneral.lstJugadores.get(id).getPuntos()+puntos);
@@ -150,7 +150,7 @@ public class Juego {
 
     public static void alMazo(int id){
         int puntos=0;
-        if(claseGeneral.miJuego.isTruco()){
+        if(claseGeneral.miJuego.isTruco()&&!claseGeneral.miJuego.isTrucoJugando()&&claseGeneral.lstJugadores.get(Math.abs(id-1)).getCartasTiradas()>0){
             switch(claseGeneral.miJuego.getInstanciaTruco()){
                 case 0:
                     puntos=1;
@@ -165,9 +165,25 @@ public class Juego {
                     puntos+=2;
                     break;
             }
+            
+        } else{
+            switch(claseGeneral.miJuego.getInstanciaTruco()){
+                case 0:
+                    puntos+=1;
+                    break;
+                case 2:
+                    puntos+=2;
+                    break;
+                case 4:
+                    puntos+=4;
+                    break;
+                case 3:
+                    puntos+=3;
+                    break;
+            }
         }
         
-        if((claseGeneral.miJuego.getInstanciaJuego()==0)&&(claseGeneral.miJuego.isEnvido())&&(claseGeneral.miJuego.getInstanciaTruco()==0)){
+        if((claseGeneral.miJuego.getInstanciaJuego()==0)&&(claseGeneral.miJuego.isEnvido())&&(claseGeneral.miJuego.getInstanciaTruco()==0)&&(claseGeneral.lstJugadores.get(Math.abs(id-1)).getCartasTiradas()==0)){
             puntos++;
         }
         
@@ -200,6 +216,14 @@ public class Juego {
         }
     }
 
+    public static boolean mismosPuntos(Carta miCarta, Carta suCarta){
+        if(miCarta.getValor()==suCarta.getValor()){
+            return true;
+        } else{
+            return false;
+        }
+    }
+    
     public static void sumarTantos(int id){
         int ptos=0;
         switch(claseGeneral.miJuego.getInstanciaEnvido()){
@@ -320,6 +344,24 @@ public class Juego {
         this.cartaInstancia = cartaInstancia;
     }
 
+    public int getPrimeraEnCasa() {
+        return primeraEnCasa;
+    }
+
+    public void setPrimeraEnCasa(int primeraEnCasa) {
+        this.primeraEnCasa = primeraEnCasa;
+    }
+
+    
+    
+    public boolean isTrucoJugando() {
+        return trucoJugando;
+    }
+
+    public void setTrucoJugando(boolean trucoJugando) {
+        this.trucoJugando = trucoJugando;
+    }
+    
     public int getTieneElQuiero() {
         return tieneElQuiero;
     }

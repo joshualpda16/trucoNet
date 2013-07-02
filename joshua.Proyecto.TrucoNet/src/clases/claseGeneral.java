@@ -256,6 +256,7 @@ public class claseGeneral {
                                 break;
                                                                
                             case "faltaenvido":
+                                //<editor-fold defaultstate="collapsed" desc="Quiso el Falta Envido">
                                 agregarAlChat("quiero","Falta Envido",Integer.parseInt(mensaje.substring(7)));
                                 
                                 if(miJuego.getMano()==getMiId()){
@@ -270,28 +271,36 @@ public class claseGeneral {
                                     frmJuego.cmdNoQuiero.setText("Son Buenas");
                                     frmJuego.cmdNoQuiero.setEnabled(true);
                                 }
+                                //</editor-fold>
                                 break;
                                 
                             case "truco":
+                                miJuego.setTrucoJugando(true);
                                 miJuego.setInstanciaTruco(2);
                                 miJuego.setRonda(true);
                                 miJuego.setEnvido(true);
+                                miJuego.setTieneElQuiero(suid);
                                 SimpleAttributeSet atrs = new SimpleAttributeSet();
                                 StyleConstants.setBold(atrs, true);
                                 agregarAlChat("quiero","Truco",Integer.parseInt(mensaje.substring(7)));
                                 break;
                             case "retruco":
+                                miJuego.setTrucoJugando(true);
                                 miJuego.setInstanciaTruco(3);
                                 miJuego.setRonda(true);
                                 miJuego.setEnvido(true);
+                                miJuego.setTieneElQuiero(suid);
                                 SimpleAttributeSet aatrs = new SimpleAttributeSet();
                                 StyleConstants.setBold(aatrs, true);
                                 agregarAlChat("quiero","Re Truco",Integer.parseInt(mensaje.substring(7)));
                                 break;
                             case "valecuatro":
+                                miJuego.setTrucoJugando(true);
                                 miJuego.setInstanciaTruco(4);
                                 miJuego.setRonda(true);
                                 miJuego.setEnvido(true);
+                                miJuego.setTruco(false);
+                                miJuego.setTieneElQuiero(suid);
                                 SimpleAttributeSet aaatrs = new SimpleAttributeSet();
                                 StyleConstants.setBold(aaatrs, true);
                                 agregarAlChat("quiero","Vale Cuatro",Integer.parseInt(mensaje.substring(7)));
@@ -464,40 +473,75 @@ public class claseGeneral {
                                 break;
                         }
                         if(miJuego.isPrimeraCarta()){
+                            //<editor-fold defaultstate="collapsed" desc="La primera carta de la instancia">
                             frmPrincipal.log("Es la primera carta");
                             miJuego.setCartaInstancia(lstJugadores.get(suID).getCartas().get(idCarta));
                             miJuego.setPrimeraCarta(false);
                             formJuego.miTurno();
+                            
                             frmPrincipal.log("Me toca a mi");
+                            //</editor-fold>
                         } else{
                             frmPrincipal.log("No es la primera carta");
                             if(Juego.compararCartas(miJuego.getCartaInstancia(),lstJugadores.get(suID).getCartas().get(idCarta))){
+                                //<editor-fold defaultstate="collapsed" desc="Mi Carta es más grande">
                                 frmPrincipal.log("Mi carta es más grande");
                                 formJuego.miTurno();
                                 miJuego.setPrimeraCarta(true);
                                 frmPrincipal.log("Mi turno");
                                 formJuego.apagarTodosBotones();
+                                
+                                if(miJuego.getInstanciaJuego()==0){miJuego.setPrimeraEnCasa(miId);}
                                 lstJugadores.get(miId).setInstanciasGanadas(lstJugadores.get(miId).getInstanciasGanadas()+1);
                                 
                                 if(lstJugadores.get(miId).getInstanciasGanadas()==2){
                                     yoGano=true;
                                 }
-                            } else{
+                                //</editor-fold>
+                            } else if(Juego.mismosPuntos(miJuego.getCartaInstancia(),lstJugadores.get(suID).getCartas().get(idCarta))){
+                                //<editor-fold defaultstate="collapsed" desc="Son Iguales (Parda)">
+                                if(miJuego.getInstanciaJuego()==0){
+                                    lstJugadores.get(miId).setInstanciasGanadas(lstJugadores.get(miId).getInstanciasGanadas()+1);
+                                    lstJugadores.get(suID).setInstanciasGanadas(lstJugadores.get(suID).getInstanciasGanadas()+1);
+                                    frmPrincipal.log("Parda");
+                                    miJuego.setPrimeraCarta(true);
+                                    formJuego.apagarTodosBotones();
+                                    miJuego.setTurno(miJuego.getMano());
+                                    if(miJuego.getTurno()==miId){
+                                        formJuego.miTurno();
+                                    } else{
+                                        formJuego.suTurno();
+                                    }
+                                } else if((miJuego.getInstanciaJuego()==1)||(miJuego.getInstanciaJuego()==2)){
+                                    if(miJuego.getPrimeraEnCasa()==miId){
+                                        yoGano=true;
+                                        formJuego.apagarTodosBotones();
+                                    } else{
+                                        yoPierdo=true;
+                                        formJuego.apagarTodosBotones();
+                                    }
+                                }
+                                //</editor-fold>
+                            }else{
+                                //<editor-fold defaultstate="collapsed" desc="Mi Carta es más chica">
                                 frmPrincipal.log("Mi carta es más chica");
                                 formJuego.suTurno();
                                 lstJugadores.get(suID).setInstanciasGanadas(lstJugadores.get(suID).getInstanciasGanadas()+1);
                                 formJuego.apagarTodosBotones();
                                 miJuego.setPrimeraCarta(true);
                                 frmPrincipal.log("Su turno");
+                                
                                 if(lstJugadores.get(suID).getInstanciasGanadas()==2){
                                     yoPierdo=true;
                                 }
+                                //</editor-fold>
                             }
                             miJuego.setInstanciaJuego(miJuego.getInstanciaJuego()+1);
                             frmPrincipal.log("Suma una instancia al juego. Estamos en la "+(miJuego.getInstanciaJuego()));
+                            
                         }
                         formJuego.prenderBotones();
-                        frmPrincipal.log("Sus cartas tiradas son "+susCartasTiradas+1);
+                        frmPrincipal.log("Sus cartas tiradas son "+(susCartasTiradas+1));
                         lstJugadores.get(suID).setCartasTiradas(susCartasTiradas+1);
                         if(yoGano){
                             frmPrincipal.log("Gané dos instancias");
@@ -514,6 +558,7 @@ public class claseGeneral {
                         formJuego.pintar(frmJuego.lblElCanta, "Truco");
                         frmJuego.cmdQuiero.setEnabled(true);
                         frmJuego.cmdNoQuiero.setEnabled(true);
+                        frmJuego.cmdAlMazo.setEnabled(false);
                         frmJuego.cmdTruco.setText("Quiero Re Truco");
                         frmJuego.cmdTruco.setEnabled(true);
                         miJuego.setEsperando("truco");
@@ -526,6 +571,7 @@ public class claseGeneral {
                         formJuego.pintar(frmJuego.lblYoCanto,"Blanco");
                         frmJuego.cmdQuiero.setEnabled(true);
                         frmJuego.cmdNoQuiero.setEnabled(true);
+                        frmJuego.cmdAlMazo.setEnabled(false);
                         frmJuego.cmdTruco.setText("Quiero vale 4");
                         frmJuego.cmdTruco.setEnabled(true);
                         miJuego.setEsperando("retruco");
@@ -541,6 +587,7 @@ public class claseGeneral {
                         frmJuego.cmdQuiero.setEnabled(true);
                         frmJuego.cmdNoQuiero.setEnabled(true);
                         frmJuego.cmdTruco.setEnabled(false);
+                        frmJuego.cmdAlMazo.setEnabled(false);
                         miJuego.setEsperando("valecuatro");
                         miJuego.setRonda(false);
                         agregarAlChat("notif","Quiero Vale 4!",Integer.parseInt(mensaje.substring(7)));
@@ -550,6 +597,21 @@ public class claseGeneral {
                     case "MAZO":
                         //<editor-fold defaultstate="collapsed" desc="Oponente se fue al Mazo">
                         int suIDD=Integer.parseInt(mensaje.substring(7));
+                            switch(claseGeneral.miJuego.getEsperando()){
+                                case "truco":
+                                    claseGeneral.miJuego.setInstanciaTruco(2);
+                                    formJuego.apagarTodosBotones();
+                                    break;
+                                case "retruco":
+                                    claseGeneral.miJuego.setInstanciaTruco(3);
+                                    formJuego.apagarTodosBotones();
+                                    break;
+                                case "valecuatro":
+                                    claseGeneral.miJuego.setInstanciaTruco(4);
+                                    formJuego.apagarTodosBotones();
+                                    break;
+                            }
+                        
                         Juego.alMazo(suIDD);
                         agregarAlChat("almazo","",suIDD);
                         //</editor-fold>
@@ -638,6 +700,19 @@ public class claseGeneral {
                         
                         agregarAlChat("notif","Falta Envido",Integer.parseInt(mensaje.substring(7)));
                         //</editor-fold>
+                        break;
+                        
+                    case "SONB":
+                        formJuego.pintar(frmJuego.lblElCanta,"SonBuenas");
+                        Juego.sumarTantos(getMiId());
+                        
+                        formJuego.apagarTodosBotones();
+                        frmJuego.cmdQuiero.setText("Quiero");
+                        frmJuego.cmdNoQuiero.setText("No Quiero");
+                        miJuego.setEnvido(false);
+                        miJuego.setRonda(true);
+                        formJuego.prenderBotones();
+                        
                         break;
                         //</editor-fold>
                         
