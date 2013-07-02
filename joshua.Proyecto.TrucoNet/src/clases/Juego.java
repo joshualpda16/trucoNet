@@ -145,8 +145,6 @@ public class Juego {
         
         if(claseGeneral.isSoyServer()){
             nuevaMano();
-        } else{
-            frmJuego.cmdAlMazo.setEnabled(false);
         }
     }
 

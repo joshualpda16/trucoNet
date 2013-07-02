@@ -305,7 +305,77 @@ public class claseGeneral {
                         formJuego.pintar(frmJuego.lblElCanta, "NoQuiero");
                         switch(miJuego.getEsperando()){
                             case "envido":
-                                
+                                //<editor-fold defaultstate="collapsed" desc="No Quiso el Envido">
+                                claseGeneral.lstJugadores.get(miId).setPuntos(claseGeneral.lstJugadores.get(miId).getPuntos()+1);
+                                formJuego.apagarTodosBotones();
+                                miJuego.setEnvido(false);
+                                miJuego.setRonda(true);
+                                formJuego.prenderBotones();
+                                claseGeneral.agregarAlChat("noquiero", "Envido", Math.abs(miId-1));
+                                frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(miId).getPuntos());
+                                frmJuego.cmdNoQuiero.setText("No Quiero");
+                                break;
+                                //</editor-fold>
+                            case "realenvido":
+                                //<editor-fold defaultstate="collapsed" desc="No Quiso el Real Envido">
+                                claseGeneral.lstJugadores.get(miId).setPuntos(claseGeneral.lstJugadores.get(miId).getPuntos()+1);
+                                formJuego.apagarTodosBotones();
+                                miJuego.setEnvido(false);
+                                miJuego.setRonda(true);
+                                formJuego.prenderBotones();
+                                claseGeneral.agregarAlChat("noquiero", "Real Envido", Math.abs(miId-1));
+                                frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(miId).getPuntos());
+                                frmJuego.cmdNoQuiero.setText("No Quiero");
+                                break;
+                                //</editor-fold>
+                            case "envidoenvido":
+                                //<editor-fold defaultstate="collapsed" desc="No Quiso el Envido-Envido">
+                                claseGeneral.lstJugadores.get(miId).setPuntos(claseGeneral.lstJugadores.get(miId).getPuntos()+2);
+                                formJuego.apagarTodosBotones();
+                                miJuego.setEnvido(false);
+                                miJuego.setRonda(true);
+                                formJuego.prenderBotones();
+                                claseGeneral.agregarAlChat("noquiero", "Envido-Envido", Math.abs(miId-1));
+                                frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(miId).getPuntos());
+                                frmJuego.cmdNoQuiero.setText("No Quiero");
+                                break;
+                                //</editor-fold>
+                            case "envidorealenvido":
+                                //<editor-fold defaultstate="collapsed" desc="NoQuiso el Envido-Real Envido">
+                                claseGeneral.lstJugadores.get(miId).setPuntos(claseGeneral.lstJugadores.get(miId).getPuntos()+2);
+                                formJuego.apagarTodosBotones();
+                                miJuego.setEnvido(false);
+                                miJuego.setRonda(true);
+                                formJuego.prenderBotones();
+                                claseGeneral.agregarAlChat("noquiero", "Envido-Real Envido", Math.abs(miId-1));
+                                frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(miId).getPuntos());
+                                frmJuego.cmdNoQuiero.setText("No Quiero");
+                                break;
+                                //</editor-fold>
+                            case "envidoenvidorealenvido":
+                                //<editor-fold defaultstate="collapsed" desc="No Quiso el Envido-Envido-RealEnvido">
+                                claseGeneral.lstJugadores.get(miId).setPuntos(claseGeneral.lstJugadores.get(miId).getPuntos()+4);
+                                formJuego.apagarTodosBotones();
+                                miJuego.setEnvido(false);
+                                miJuego.setRonda(true);
+                                formJuego.prenderBotones();
+                                claseGeneral.agregarAlChat("noquiero", "Envido-Envido-Real Envido", Math.abs(miId-1));
+                                frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(miId).getPuntos());
+                                frmJuego.cmdNoQuiero.setText("No Quiero");
+                                break;
+                                //</editor-fold>
+                            case "faltaenvido":
+                                //<editor-fold defaultstate="collapsed" desc="No Quiso el Falta Envido">
+                                claseGeneral.lstJugadores.get(miId).setPuntos(claseGeneral.lstJugadores.get(miId).getPuntos()+1);
+                                formJuego.apagarTodosBotones();
+                                miJuego.setEnvido(false);
+                                miJuego.setRonda(true);
+                                formJuego.prenderBotones();
+                                claseGeneral.agregarAlChat("noquiero", "Falta Envido", Math.abs(miId-1));
+                                frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(miId).getPuntos());
+                                frmJuego.cmdNoQuiero.setText("No Quiero");
+                                break;
+                                //</editor-fold>
                             case "truco":
                                 miJuego.setInstanciaTruco(2);
                                 formJuego.pintar(frmJuego.lblElCanta,"NoQuiero");
