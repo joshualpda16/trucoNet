@@ -15,22 +15,26 @@ import javax.swing.JOptionPane;
  * @author Joshua
  */
 public class Juego {
+    
+    //<editor-fold defaultstate="collapsed" desc="Atributos">
     private String nombreSala;
+    private String esperando="";
     private int instanciaJuego;
-    private boolean ronda;
     private int instanciaTruco;
     private int instanciaEnvido;
-    private boolean envido=true;//Se puede cantar
-    private boolean truco=true;//True es que si se puede cantar
     private int tieneElQuiero;
     private int mano;
     private int turno;
-    private Carta cartaInstancia;
-    private boolean primeraCarta;
-    private String esperando="";
-    private boolean trucoJugando=false;
     private int primeraEnCasa;
+    private boolean trucoJugando=false;
+    private boolean ronda;
+    private boolean envido=true;//Se puede cantar
+    private boolean truco=true;//True es que si se puede cantar
+    private boolean primeraCarta;
+    private Carta cartaInstancia;
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Métodos">
     public Juego() {
         instanciaJuego=0;
         ronda=true;
@@ -40,7 +44,7 @@ public class Juego {
         mano=0;
         turno=mano;
     }
-
+    
     public void inicializar(){
         instanciaJuego=0;
         ronda=false;
@@ -75,19 +79,16 @@ public class Juego {
             frmJuego.cmdNoQuiero.setEnabled(false);
         }
     }
-
+    
     public static void nuevaMano(){
-        List<Carta> lst6Cartas=new ArrayList();
-            
-        lst6Cartas = Juego.crearCartasRandom();
-
+        List<Carta> lst6Cartas=Juego.crearCartasRandom();
         
         claseGeneral.lstJugadores.get(0).setCartas(Juego.separarCartas(lst6Cartas,1));
         claseGeneral.lstJugadores.get(1).setCartas(Juego.separarCartas(lst6Cartas,2));
-
+        
         Jugador j1 = (Jugador) claseGeneral.lstJugadores.get(1);
         Jugador j0 = (Jugador) claseGeneral.lstJugadores.get(0);
-
+        
         SimpleServer.enviarDatos("JGOCCTS"+j1.cartasToString(j1.getCartas()));
         SimpleServer.enviarDatos("JGOSVCT"+j0.cartasToString(j0.getCartas()));
         SimpleServer.enviarDatos("JGONVMN");
@@ -105,10 +106,6 @@ public class Juego {
             frmJuego.cmdAlMazo.setEnabled(false);
             claseGeneral.formJuego.miTurno();
         }
-    }
-
-    public Carta getCartaInstancia() {
-        return cartaInstancia;
     }
     
     public static void ganarMano(int id){
@@ -130,26 +127,8 @@ public class Juego {
         }
         
         claseGeneral.lstJugadores.get(id).setPuntos(claseGeneral.lstJugadores.get(id).getPuntos()+puntos);
-        frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(claseGeneral.getMiId()).getPuntos());
-        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).getPuntos());
-        if(Integer.parseInt(frmJuego.txtYo.getText())>=30){
-            int seleccion = JOptionPane.showOptionDialog(null, "Felicitaciones, ganaste!\nVa la revancha?",
-            "No existe",
-            JOptionPane.YES_NO_CANCEL_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,new Object[]{"Si","No"},
-            null);
-            System.exit(1);
-        } else if(Integer.parseInt(frmJuego.txtEl.getText())>=30){
-            int seleccion = JOptionPane.showOptionDialog(null, "Que lástima, perdiste.\nVa la revancha?",
-            "No existe",
-            JOptionPane.YES_NO_CANCEL_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,new Object[]{"Si","No"},
-            null);
-            System.exit(1);
-        }
         
+        claseGeneral.formJuego.actualizarPuntos();
         
         claseGeneral.miJuego.setRonda(false);
         
@@ -166,7 +145,7 @@ public class Juego {
             nuevaMano();
         }
     }
-
+    
     public static void alMazo(int id){
         int puntos=0;
         if(claseGeneral.miJuego.isTruco()&&!claseGeneral.miJuego.isTrucoJugando()&&claseGeneral.lstJugadores.get(Math.abs(id-1)).getCartasTiradas()>0){
@@ -208,26 +187,7 @@ public class Juego {
         
         claseGeneral.lstJugadores.get(Math.abs(id-1)).setPuntos(claseGeneral.lstJugadores.get(Math.abs(id-1)).getPuntos()+puntos);
         
-        frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(claseGeneral.getMiId()).getPuntos());
-        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).getPuntos());
-        
-        if(Integer.parseInt(frmJuego.txtYo.getText())>=30){
-            int seleccion = JOptionPane.showOptionDialog(null, "Felicitaciones, ganaste!\nVa la revancha?",
-            "No existe",
-            JOptionPane.YES_NO_CANCEL_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,new Object[]{"Si","No"},
-            null);
-            System.exit(1);
-        } else if(Integer.parseInt(frmJuego.txtEl.getText())>=30){
-            int seleccion = JOptionPane.showOptionDialog(null, "Que lástima, perdiste.\nVa la revancha?",
-            "No existe",
-            JOptionPane.YES_NO_CANCEL_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,new Object[]{"Si","No"},
-            null);
-            System.exit(1);
-        }
+        claseGeneral.formJuego.actualizarPuntos();
         
         claseGeneral.miJuego.setRonda(false);
         
@@ -252,7 +212,7 @@ public class Juego {
             return false;
         }
     }
-
+    
     public static boolean mismosPuntos(Carta miCarta, Carta suCarta){
         if(miCarta.getValor()==suCarta.getValor()){
             return true;
@@ -291,8 +251,7 @@ public class Juego {
         
         claseGeneral.lstJugadores.get(id).setPuntos(ptos+claseGeneral.lstJugadores.get(id).getPuntos());
         
-        frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(claseGeneral.miId).getPuntos());
-        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(Math.abs(claseGeneral.miId-1)).getPuntos());
+        claseGeneral.formJuego.actualizarPuntos();
     }
     
     public static List separarCartas(List cartas,int mitad){
@@ -374,27 +333,29 @@ public class Juego {
         }
         return lstCartas;
     }
+    //</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="Gets y Sets">
+    public Carta getCartaInstancia() {
+        return cartaInstancia;
+    }
     
-    //Gets y Sets
     public void setCartaInstancia(Carta cartaInstancia) {
         this.cartaInstancia = cartaInstancia;
     }
-
+    
     public int getPrimeraEnCasa() {
         return primeraEnCasa;
     }
-
+    
     public void setPrimeraEnCasa(int primeraEnCasa) {
         this.primeraEnCasa = primeraEnCasa;
     }
-
-    
     
     public boolean isTrucoJugando() {
         return trucoJugando;
     }
-
+    
     public void setTrucoJugando(boolean trucoJugando) {
         this.trucoJugando = trucoJugando;
     }
@@ -402,7 +363,7 @@ public class Juego {
     public int getTieneElQuiero() {
         return tieneElQuiero;
     }
-
+    
     public void setTieneElQuiero(int tieneElQuiero) {
         this.tieneElQuiero = tieneElQuiero;
     }
@@ -410,7 +371,7 @@ public class Juego {
     public String getEsperando() {
         return esperando;
     }
-
+    
     public void setEsperando(String esperando) {
         this.esperando = esperando;
     }
@@ -418,7 +379,7 @@ public class Juego {
     public boolean isPrimeraCarta() {
         return primeraCarta;
     }
-
+    
     public void setPrimeraCarta(boolean primeraCarta) {
         this.primeraCarta = primeraCarta;
     }
@@ -430,47 +391,47 @@ public class Juego {
     public int getInstanciaJuego() {
         return instanciaJuego;
     }
-
+    
     public void setInstanciaJuego(int instanciaJuego) {
         this.instanciaJuego = instanciaJuego;
     }
-
+    
     public boolean isRonda() {
         return ronda;
     }
-
+    
     public void setRonda(boolean ronda) {
         this.ronda = ronda;
     }
-
+    
     public int getInstanciaTruco() {
         return instanciaTruco;
     }
-
+    
     public void setInstanciaTruco(int instanciaTruco) {
         this.instanciaTruco = instanciaTruco;
     }
-
+    
     public int getInstanciaEnvido() {
         return instanciaEnvido;
     }
-
+    
     public void setInstanciaEnvido(int instanciaEnvido) {
         this.instanciaEnvido = instanciaEnvido;
     }
-
+    
     public boolean isEnvido() {
         return envido;
     }
-
+    
     public void setEnvido(boolean envido) {
         this.envido = envido;
     }
-
+    
     public boolean isTruco() {
         return truco;
     }
-
+    
     public void setTruco(boolean truco) {
         this.truco = truco;
     }
@@ -478,16 +439,17 @@ public class Juego {
     public int getTurno() {
         return turno;
     }
-
+    
     public int getMano() {
         return mano;
     }
-
+    
     public String getNombreSala() {
         return nombreSala;
     }
-
+    
     public void setNombreSala(String nombreSala) {
         this.nombreSala = nombreSala;
     }
+    //</editor-fold>
 }

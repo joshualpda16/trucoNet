@@ -43,7 +43,7 @@ public class claseGeneral {
     private frmUnirse formUnirse;
     private frmOpciones formOpciones;
     static frmChatPrevio formChatPrevio;
-    static frmJuego formJuego;
+    static public frmJuego formJuego;
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Variables de conexión">
@@ -283,6 +283,8 @@ public class claseGeneral {
                                 SimpleAttributeSet atrs = new SimpleAttributeSet();
                                 StyleConstants.setBold(atrs, true);
                                 agregarAlChat("quiero","Truco",Integer.parseInt(mensaje.substring(7)));
+                                miJuego.setEnvido(false);
+                                formJuego.prenderBotones();
                                 break;
                             case "retruco":
                                 miJuego.setTrucoJugando(true);
@@ -293,6 +295,7 @@ public class claseGeneral {
                                 SimpleAttributeSet aatrs = new SimpleAttributeSet();
                                 StyleConstants.setBold(aatrs, true);
                                 agregarAlChat("quiero","Re Truco",Integer.parseInt(mensaje.substring(7)));
+                                miJuego.setEnvido(false);
                                 break;
                             case "valecuatro":
                                 miJuego.setTrucoJugando(true);
@@ -304,6 +307,8 @@ public class claseGeneral {
                                 SimpleAttributeSet aaatrs = new SimpleAttributeSet();
                                 StyleConstants.setBold(aaatrs, true);
                                 agregarAlChat("quiero","Vale Cuatro",Integer.parseInt(mensaje.substring(7)));
+                                miJuego.setEnvido(false);
+                                formJuego.prenderBotones();
                                 break;
                         }
                         //</editor-fold>
@@ -321,7 +326,7 @@ public class claseGeneral {
                                 miJuego.setRonda(true);
                                 formJuego.prenderBotones();
                                 claseGeneral.agregarAlChat("noquiero", "Envido", Math.abs(miId-1));
-                                frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(miId).getPuntos());
+                                formJuego.actualizarPuntos();
                                 frmJuego.cmdNoQuiero.setText("No Quiero");
                                 break;
                                 //</editor-fold>
@@ -333,7 +338,7 @@ public class claseGeneral {
                                 miJuego.setRonda(true);
                                 formJuego.prenderBotones();
                                 claseGeneral.agregarAlChat("noquiero", "Real Envido", Math.abs(miId-1));
-                                frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(miId).getPuntos());
+                                formJuego.actualizarPuntos();
                                 frmJuego.cmdNoQuiero.setText("No Quiero");
                                 break;
                                 //</editor-fold>
@@ -345,7 +350,7 @@ public class claseGeneral {
                                 miJuego.setRonda(true);
                                 formJuego.prenderBotones();
                                 claseGeneral.agregarAlChat("noquiero", "Envido-Envido", Math.abs(miId-1));
-                                frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(miId).getPuntos());
+                                formJuego.actualizarPuntos();
                                 frmJuego.cmdNoQuiero.setText("No Quiero");
                                 break;
                                 //</editor-fold>
@@ -357,7 +362,7 @@ public class claseGeneral {
                                 miJuego.setRonda(true);
                                 formJuego.prenderBotones();
                                 claseGeneral.agregarAlChat("noquiero", "Envido-Real Envido", Math.abs(miId-1));
-                                frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(miId).getPuntos());
+                                formJuego.actualizarPuntos();
                                 frmJuego.cmdNoQuiero.setText("No Quiero");
                                 break;
                                 //</editor-fold>
@@ -369,7 +374,7 @@ public class claseGeneral {
                                 miJuego.setRonda(true);
                                 formJuego.prenderBotones();
                                 claseGeneral.agregarAlChat("noquiero", "Envido-Envido-Real Envido", Math.abs(miId-1));
-                                frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(miId).getPuntos());
+                                formJuego.actualizarPuntos();
                                 frmJuego.cmdNoQuiero.setText("No Quiero");
                                 break;
                                 //</editor-fold>
@@ -381,7 +386,7 @@ public class claseGeneral {
                                 miJuego.setRonda(true);
                                 formJuego.prenderBotones();
                                 claseGeneral.agregarAlChat("noquiero", "Falta Envido", Math.abs(miId-1));
-                                frmJuego.txtYo.setText(""+claseGeneral.lstJugadores.get(miId).getPuntos());
+                                formJuego.actualizarPuntos();
                                 frmJuego.cmdNoQuiero.setText("No Quiero");
                                 break;
                                 //</editor-fold>

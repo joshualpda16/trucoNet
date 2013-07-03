@@ -42,6 +42,7 @@ public class frmJuego extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox();
         jPanel1 = new javax.swing.JPanel();
         suCarta3 = new javax.swing.JLabel();
         suCarta2 = new javax.swing.JLabel();
@@ -67,14 +68,28 @@ public class frmJuego extends javax.swing.JInternalFrame {
         cmdFaltaEnvido = new javax.swing.JButton();
         cmdNoQuiero = new javax.swing.JButton();
         cmdTruco = new javax.swing.JButton();
-        txtEnviarChat = new javax.swing.JTextField();
+        cmdQuiero = new javax.swing.JButton();
+        tabChatPuntos = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtChat = new javax.swing.JTextPane();
-        txtYo = new javax.swing.JTextField();
-        txtEl = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        cmdQuiero = new javax.swing.JButton();
+        txtEnviarChat = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        lblMisPuntos3 = new javax.swing.JLabel();
+        lblMisPuntos1 = new javax.swing.JLabel();
+        lblMisPuntos2 = new javax.swing.JLabel();
+        lblMisPuntos4 = new javax.swing.JLabel();
+        lblMisPuntos5 = new javax.swing.JLabel();
+        lblMisPuntos6 = new javax.swing.JLabel();
+        lblSusPuntos1 = new javax.swing.JLabel();
+        lblSusPuntos2 = new javax.swing.JLabel();
+        lblSusPuntos3 = new javax.swing.JLabel();
+        lblSusPuntos4 = new javax.swing.JLabel();
+        lblSusPuntos5 = new javax.swing.JLabel();
+        lblSusPuntos6 = new javax.swing.JLabel();
+        lblTabla = new javax.swing.JLabel();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -98,10 +113,17 @@ public class frmJuego extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        suCarta3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(suCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 60, 100));
+
+        suCarta2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(suCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 60, 100));
+
+        suCartaTirada3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(suCartaTirada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 70, 110));
 
+        miCarta3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         miCarta3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 miCarta3MouseClicked(evt);
@@ -109,6 +131,7 @@ public class frmJuego extends javax.swing.JInternalFrame {
         });
         jPanel1.add(miCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 90, 130));
 
+        miCarta2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         miCarta2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 miCarta2MouseClicked(evt);
@@ -116,17 +139,30 @@ public class frmJuego extends javax.swing.JInternalFrame {
         });
         jPanel1.add(miCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, 90, 130));
 
+        miCarta1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         miCarta1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 miCarta1MouseClicked(evt);
             }
         });
         jPanel1.add(miCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 90, 130));
+
+        suCarta1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(suCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 60, 100));
+
+        suCartaTirada1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(suCartaTirada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 70, 110));
+
+        suCartaTirada2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(suCartaTirada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 70, 110));
+
+        miCartaTirada3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(miCartaTirada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 70, 110));
+
+        miCartaTirada2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(miCartaTirada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 70, 110));
+
+        miCartaTirada1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(miCartaTirada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 70, 110));
 
         lblYo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -190,24 +226,6 @@ public class frmJuego extends javax.swing.JInternalFrame {
             }
         });
 
-        txtEnviarChat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEnviarChatActionPerformed(evt);
-            }
-        });
-
-        jScrollPane2.setViewportView(txtChat);
-
-        txtYo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtYoActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Yo");
-
-        jLabel2.setText("Él");
-
         cmdQuiero.setText("Quiero");
         cmdQuiero.setEnabled(false);
         cmdQuiero.addActionListener(new java.awt.event.ActionListener() {
@@ -215,6 +233,53 @@ public class frmJuego extends javax.swing.JInternalFrame {
                 cmdQuieroActionPerformed(evt);
             }
         });
+
+        txtChat.setEditable(false);
+        jScrollPane2.setViewportView(txtChat);
+
+        txtEnviarChat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEnviarChatActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtEnviarChat)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtEnviarChat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        tabChatPuntos.addTab("Chat", jPanel3);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.add(lblMisPuntos3, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 108, 38, 35));
+        jPanel2.add(lblMisPuntos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 36, 38, 35));
+        jPanel2.add(lblMisPuntos2, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 72, 38, 35));
+        jPanel2.add(lblMisPuntos4, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 144, 38, 35));
+        jPanel2.add(lblMisPuntos5, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 180, 38, 35));
+        jPanel2.add(lblMisPuntos6, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 216, 38, 35));
+        jPanel2.add(lblSusPuntos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 36, 38, 35));
+        jPanel2.add(lblSusPuntos2, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 72, 38, 35));
+        jPanel2.add(lblSusPuntos3, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 108, 38, 35));
+        jPanel2.add(lblSusPuntos4, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 144, 38, 35));
+        jPanel2.add(lblSusPuntos5, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 180, 38, 35));
+        jPanel2.add(lblSusPuntos6, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 216, 38, 35));
+        jPanel2.add(lblTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 172, 260));
+
+        tabChatPuntos.addTab("Puntos", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -225,43 +290,27 @@ public class frmJuego extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEnviarChat)
-                    .addComponent(jScrollPane2)
                     .addComponent(cmdAlMazo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cmdFaltaEnvido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cmdEnvido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmdQuiero, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmdNoQuiero, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(cmdTruco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cmdRealEnvido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(cmdQuiero, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtYo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEl, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmdNoQuiero, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(tabChatPuntos))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEnviarChat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtYo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtEl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                        .addComponent(tabChatPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmdAlMazo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -270,29 +319,72 @@ public class frmJuego extends javax.swing.JInternalFrame {
                             .addComponent(cmdNoQuiero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmdTruco, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmdFaltaEnvido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmdRealEnvido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmdEnvido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void cantarTruco(){
+        int miId=claseGeneral.getMiId();
+        if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOTRC1"+miId);}
+        else{SimpleClient.enviarDatos("JGOTRC1"+miId);}
+        pintar(lblYoCanto,"Truco");
+        pintar(lblElCanta,"Blanco");
+        claseGeneral.miJuego.setRonda(false);
+        apagarTodosBotones();
+        claseGeneral.miJuego.setEsperando("truco");
+    }
+    
+    private void cantarReTruco(){
+        int miId=claseGeneral.getMiId();
+        if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOTRC2"+miId);}
+        else{SimpleClient.enviarDatos("JGOTRC2"+miId);}
+        pintar(lblYoCanto,"ReTruco");
+        pintar(lblElCanta,"Blanco");
+        claseGeneral.miJuego.setRonda(false);
+        apagarTodosBotones();
+        claseGeneral.miJuego.setInstanciaTruco(2);
+        claseGeneral.miJuego.setEsperando("retruco");
+    }
+    
+    private void cantarValeCuatro(){
+        int miId=claseGeneral.getMiId();
+        if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOTRC3"+miId);}
+        else{SimpleClient.enviarDatos("JGOTRC3"+miId);}
+        pintar(lblYoCanto,"ValeCuatro");
+        pintar(lblElCanta,"Blanco");
+        claseGeneral.miJuego.setRonda(false);
+        apagarTodosBotones();
+        claseGeneral.miJuego.setEsperando("valecuatro");
+        claseGeneral.miJuego.setInstanciaTruco(3);
+    }
+    
+    private void quieroLosTantos(){
+        if(claseGeneral.miJuego.getMano()==claseGeneral.getMiId()){
+            //Si soy mano, muestro mis cartas
+            lblMisTantos.setText(""+claseGeneral.lstJugadores.get(claseGeneral.getMiId()).contarTantos());
+            //Envío el quiero
+            claseGeneral.enviarQuiero();
+            //Espero a que muestre
+        } else{
+            lblSusTantos.setText(""+claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).contarTantos());
 
-    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        this.setTitle("Jugando en sala -"+claseGeneral.getNombreSala()+"-");
-        lblYo.setForeground(Color.BLUE);
-        lblEl.setForeground(Color.BLACK);
-        if(!claseGeneral.isSoyServer()){
-            apagarTodosBotones();
-            lblYo.setForeground(Color.BLACK);
-            lblEl.setForeground(Color.BLUE);
+            frmJuego.cmdQuiero.setText("Cantar");
+            frmJuego.cmdQuiero.setEnabled(true);
+            frmJuego.cmdNoQuiero.setText("Son Buenas");
+            frmJuego.cmdNoQuiero.setEnabled(true);
+            
+             claseGeneral.enviarQuiero();
         }
-    }//GEN-LAST:event_formInternalFrameOpened
-
+    }
+    
     public void apagarTodosBotones(){
         cmdEnvido.setEnabled(false);
         cmdRealEnvido.setEnabled(false);
@@ -349,6 +441,259 @@ public class frmJuego extends javax.swing.JInternalFrame {
         }
     }
     
+    public void miTurno(){
+        claseGeneral.miJuego.setTurno(claseGeneral.getMiId());
+        lblYo.setForeground(Color.BLUE);
+        lblEl.setForeground(Color.BLACK);
+    }
+    
+    public void suTurno(){
+        claseGeneral.miJuego.setTurno(Math.abs(claseGeneral.getMiId()-1));
+        lblYo.setForeground(Color.BLACK);
+        lblEl.setForeground(Color.BLUE);
+    }
+    
+    private void tirarCarta(int id){
+        int miId = claseGeneral.getMiId();
+        if(claseGeneral.miJuego.getTurno()==miId){
+            String stringCarta = claseGeneral.lstJugadores.get(miId).getCartas().get(id).traerCarta();
+            int tiradas = claseGeneral.lstJugadores.get(miId).getCartasTiradas();
+            
+            //<editor-fold defaultstate="collapsed" desc="Dónde tiro la carta">
+            switch(tiradas){
+                case 0:
+                    switch(id){
+                        case 0:
+                            pintar(miCartaTirada1,stringCarta);
+                            frmJuego.miCartaTirada1.repaint();
+                            pintar(miCarta1,"Blanco");
+                            break;
+                        case 1:
+                            pintar(miCartaTirada1,stringCarta);
+                            pintar(miCarta2,"Blanco");
+                            break;
+                        case 2:
+                            pintar(miCartaTirada1,stringCarta);
+                            pintar(miCarta3,"Blanco");
+                            break;
+                    }
+                    break;
+                case 1:
+                    switch(id){
+                        case 0:
+                            pintar(miCartaTirada2,stringCarta);
+                            pintar(miCarta1,"Blanco");
+                            break;
+                        case 1:
+                            pintar(miCartaTirada2,stringCarta);
+                            pintar(miCarta2,"Blanco");
+                            break;
+                        case 2:
+                            pintar(miCartaTirada2,stringCarta);
+                            pintar(miCarta3,"Blanco");
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch(id){
+                        case 0:
+                            pintar(miCartaTirada3,stringCarta);
+                            pintar(miCarta1,"Blanco");
+                            break;
+                        case 1:
+                            pintar(miCartaTirada3,stringCarta);
+                            pintar(miCarta2,"Blanco");
+                            break;
+                        case 2:
+                            pintar(miCartaTirada3,stringCarta);
+                            pintar(miCarta3,"Blanco");
+                            break;
+                    }
+                    break;
+            }
+            //</editor-fold>
+
+            //Envio la carta tirada
+            if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOCRTA"+miId+id);}
+            else{SimpleClient.enviarDatos("JGOCRTA"+miId+id);}   
+            
+            //Actualizo el juego
+            claseGeneral.lstJugadores.get(miId).setCartasTiradas(tiradas+1); //Tiré la primer carta
+            
+            boolean yoGano=false,yoPierdo=false;
+            
+            if(claseGeneral.miJuego.isPrimeraCarta()){
+                //frmPrincipal.log("Es la primera carta");
+                suTurno();
+                claseGeneral.miJuego.setCartaInstancia(claseGeneral.lstJugadores.get(miId).getCartas().get(id));
+                claseGeneral.miJuego.setPrimeraCarta(false);
+                apagarTodosBotones();
+            } else{
+                int suID = Math.abs(miId-1);
+                //frmPrincipal.log("No es la primera carta");
+                if(Juego.compararCartas(claseGeneral.lstJugadores.get(miId).getCartas().get(id),claseGeneral.miJuego.getCartaInstancia())){
+                    //frmPrincipal.log("Mi carta es más grande, mi turno");
+                    miTurno();
+                    claseGeneral.miJuego.setPrimeraCarta(true);
+                    apagarTodosBotones();
+                    claseGeneral.lstJugadores.get(miId).setInstanciasGanadas(claseGeneral.lstJugadores.get(miId).getInstanciasGanadas()+1);
+                    //frmPrincipal.log("Me sumo una instancia ganada");
+                    
+                    if(claseGeneral.miJuego.getInstanciaJuego()==0){claseGeneral.miJuego.setPrimeraEnCasa(miId);}
+                    
+                    if(claseGeneral.lstJugadores.get(miId).getInstanciasGanadas()==2){
+                        yoGano=true;
+                    }
+                } else if(Juego.mismosPuntos(claseGeneral.lstJugadores.get(miId).getCartas().get(id),claseGeneral.miJuego.getCartaInstancia())){
+                    if(claseGeneral.miJuego.getInstanciaJuego()==0){
+                        claseGeneral.lstJugadores.get(miId).setInstanciasGanadas(claseGeneral.lstJugadores.get(miId).getInstanciasGanadas()+1);
+                        //frmPrincipal.log("Parda");
+                        claseGeneral.miJuego.setPrimeraCarta(true);
+                        apagarTodosBotones();
+                        claseGeneral.miJuego.setTurno(claseGeneral.miJuego.getMano());
+                        if(claseGeneral.miJuego.getTurno()==claseGeneral.getMiId()){
+                            miTurno();
+                        } else{
+                            suTurno();
+                        }
+                        
+                    } else if((claseGeneral.miJuego.getInstanciaJuego()==1)||(claseGeneral.miJuego.getInstanciaJuego()==2)){
+                                    if(claseGeneral.miJuego.getPrimeraEnCasa()==miId){
+                                        yoGano=true;
+                                        apagarTodosBotones();
+                                    } else{
+                                        yoPierdo=true;
+                                        apagarTodosBotones();
+                                    }
+                                }
+                } else{
+                    //frmPrincipal.log("Mi carta era más chica");
+                    suTurno();
+                    claseGeneral.miJuego.setPrimeraCarta(true);
+                    claseGeneral.lstJugadores.get(suID).setInstanciasGanadas(claseGeneral.lstJugadores.get(suID).getInstanciasGanadas()+1);
+                    apagarTodosBotones();
+                    //frmPrincipal.log("Le toca a él");
+                    if(claseGeneral.lstJugadores.get(suID).getInstanciasGanadas()==2){
+                        yoPierdo=true;
+                    }
+                }
+                int inst = claseGeneral.miJuego.getInstanciaJuego()+1;
+                frmPrincipal.log("Sumo una instancia al juego. Es la instancia Nro "+inst);
+                claseGeneral.miJuego.setInstanciaJuego(inst);
+                prenderBotones();
+                if(yoGano){
+                    frmPrincipal.log("Gané dos instancias");
+                    Juego.ganarMano(miId);
+                }
+                if(yoPierdo){
+                    frmPrincipal.log("Perdí dos instancias");
+                    Juego.ganarMano(suID);
+                }
+            }
+        }
+    }
+    
+    public void pintarMisCartas(){
+        int miId = claseGeneral.getMiId();
+        pintar(miCarta1,claseGeneral.lstJugadores.get(miId).getCartas().get(0).traerCarta());
+        pintar(miCarta2,claseGeneral.lstJugadores.get(miId).getCartas().get(1).traerCarta());
+        pintar(miCarta3,claseGeneral.lstJugadores.get(miId).getCartas().get(2).traerCarta());
+        pintarCartasOponente();
+    }
+    
+    public void pintarCartasOponente(){
+        pintar(suCarta1,"CartaAzul1");
+        pintar(suCarta2,"CartaAzul2");
+        pintar(suCarta3,"CartaAzul1");
+    }
+    
+    public void pintar(JLabel lbl, String valor){
+        String path = "/Cartas/"+valor+".jpg";
+        URL url = this.getClass().getResource(path);
+        ImageIcon icon = new ImageIcon(url);
+        Icon icono = new ImageIcon(icon.getImage().getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_DEFAULT));
+        lbl.setIcon(icono);
+    }
+    
+    public void actualizarPuntos(){
+        int puntos;
+        puntos = claseGeneral.lstJugadores.get(claseGeneral.getMiId()).getPuntos();
+        if(puntos!=0){
+            if(puntos<=5){
+                pintar(lblMisPuntos1,"puntos"+puntos);
+            } else if(puntos<=10){
+                pintar(lblMisPuntos1,"puntos5");
+                pintar(lblMisPuntos2,"puntos"+(puntos-5));
+            } else if(puntos<=15){
+                pintar(lblMisPuntos1,"puntos5");
+                pintar(lblMisPuntos2,"puntos5");
+                pintar(lblMisPuntos3,"puntos"+(puntos-10));
+            } else if(puntos<=20){
+                pintar(lblMisPuntos1,"puntos5");
+                pintar(lblMisPuntos2,"puntos5");
+                pintar(lblMisPuntos3,"puntos5");
+                pintar(lblMisPuntos4,"puntos"+(puntos-15));
+            } else if(puntos<=25){
+                pintar(lblMisPuntos1,"puntos5");
+                pintar(lblMisPuntos2,"puntos5");
+                pintar(lblMisPuntos3,"puntos5");
+                pintar(lblMisPuntos4,"puntos5");
+                pintar(lblMisPuntos5,"puntos"+(puntos-20));
+            } else if(puntos<=30){
+                pintar(lblMisPuntos1,"puntos5");
+                pintar(lblMisPuntos2,"puntos5");
+                pintar(lblMisPuntos3,"puntos5");
+                pintar(lblMisPuntos4,"puntos5");
+                pintar(lblMisPuntos5,"puntos5");
+                pintar(lblMisPuntos6,"puntos"+(puntos-25));
+            }
+        }
+
+        puntos = claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).getPuntos();
+        if(puntos!=0){
+            if(puntos<=5){
+                pintar(lblSusPuntos1,"puntos"+puntos);
+            } else if(puntos<=10){
+                pintar(lblSusPuntos1,"puntos5");
+                pintar(lblSusPuntos2,"puntos"+(puntos-5));
+            } else if(puntos<=15){
+                pintar(lblSusPuntos1,"puntos5");
+                pintar(lblSusPuntos2,"puntos5");
+                pintar(lblSusPuntos3,"puntos"+(puntos-10));
+            } else if(puntos<=20){
+                pintar(lblSusPuntos1,"puntos5");
+                pintar(lblSusPuntos2,"puntos5");
+                pintar(lblSusPuntos3,"puntos5");
+                pintar(lblSusPuntos4,"puntos"+(puntos-15));
+            } else if(puntos<=25){
+                pintar(lblSusPuntos1,"puntos5");
+                pintar(lblSusPuntos2,"puntos5");
+                pintar(lblSusPuntos3,"puntos5");
+                pintar(lblSusPuntos4,"puntos5");
+                pintar(lblSusPuntos5,"puntos"+(puntos-20));
+            } else if(puntos<=30){
+                pintar(lblSusPuntos1,"puntos5");
+                pintar(lblSusPuntos2,"puntos5");
+                pintar(lblSusPuntos3,"puntos5");
+                pintar(lblSusPuntos4,"puntos5");
+                pintar(lblSusPuntos5,"puntos5");
+                pintar(lblSusPuntos6,"puntos"+(puntos-25));
+            }
+        }
+    }
+    
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        this.setTitle("Jugando en sala -"+claseGeneral.getNombreSala()+"-");
+        lblYo.setForeground(Color.BLUE);
+        lblEl.setForeground(Color.BLACK);
+        if(!claseGeneral.isSoyServer()){
+            apagarTodosBotones();
+            lblYo.setForeground(Color.BLACK);
+            lblEl.setForeground(Color.BLUE);
+        }
+        pintar(lblTabla,"TablaPuntos");
+    }//GEN-LAST:event_formInternalFrameOpened
+  
     private void miCarta1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_miCarta1MouseClicked
         if(claseGeneral.miJuego.isRonda()){
             if(claseGeneral.miJuego.getTurno()==claseGeneral.getMiId()){
@@ -394,64 +739,6 @@ public class frmJuego extends javax.swing.JInternalFrame {
         } 
     }//GEN-LAST:event_miCarta3MouseClicked
 
-    private void txtYoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtYoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtYoActionPerformed
-
-    private void cantarTruco(){
-        int miId=claseGeneral.getMiId();
-        if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOTRC1"+miId);}
-        else{SimpleClient.enviarDatos("JGOTRC1"+miId);}
-        pintar(lblYoCanto,"Truco");
-        pintar(lblElCanta,"Blanco");
-        claseGeneral.miJuego.setRonda(false);
-        apagarTodosBotones();
-        claseGeneral.miJuego.setEsperando("truco");
-    }
-    
-    private void cantarReTruco(){
-        int miId=claseGeneral.getMiId();
-        if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOTRC2"+miId);}
-        else{SimpleClient.enviarDatos("JGOTRC2"+miId);}
-        pintar(lblYoCanto,"ReTruco");
-        pintar(lblElCanta,"Blanco");
-        claseGeneral.miJuego.setRonda(false);
-        apagarTodosBotones();
-        claseGeneral.miJuego.setInstanciaTruco(2);
-        claseGeneral.miJuego.setEsperando("retruco");
-    }
-    
-    private void cantarValeCuatro(){
-        int miId=claseGeneral.getMiId();
-        if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOTRC3"+miId);}
-        else{SimpleClient.enviarDatos("JGOTRC3"+miId);}
-        pintar(lblYoCanto,"ValeCuatro");
-        pintar(lblElCanta,"Blanco");
-        claseGeneral.miJuego.setRonda(false);
-        apagarTodosBotones();
-        claseGeneral.miJuego.setEsperando("valecuatro");
-        claseGeneral.miJuego.setInstanciaTruco(3);
-    }
-    
-    private void quieroLosTantos(){
-        if(claseGeneral.miJuego.getMano()==claseGeneral.getMiId()){
-            //Si soy mano, muestro mis cartas
-            lblMisTantos.setText(""+claseGeneral.lstJugadores.get(claseGeneral.getMiId()).contarTantos());
-            //Envío el quiero
-            claseGeneral.enviarQuiero();
-            //Espero a que muestre
-        } else{
-            lblSusTantos.setText(""+claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).contarTantos());
-
-            frmJuego.cmdQuiero.setText("Cantar");
-            frmJuego.cmdQuiero.setEnabled(true);
-            frmJuego.cmdNoQuiero.setText("Son Buenas");
-            frmJuego.cmdNoQuiero.setEnabled(true);
-            
-             claseGeneral.enviarQuiero();
-        }
-    }
-    
     private void cmdTrucoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdTrucoActionPerformed
         switch(claseGeneral.miJuego.getInstanciaTruco()){
             case 0:
@@ -648,7 +935,7 @@ public class frmJuego extends javax.swing.JInternalFrame {
                     case "envido":
                         //<editor-fold defaultstate="collapsed" desc="No Quiero El Envido">
                         claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+1);
-                        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
+                        actualizarPuntos();
                         apagarTodosBotones();
                         claseGeneral.miJuego.setEnvido(false);
                         prenderBotones();
@@ -660,7 +947,7 @@ public class frmJuego extends javax.swing.JInternalFrame {
                     case "realenvido":
                         //<editor-fold defaultstate="collapsed" desc="No Quiero el Real Envido">
                         claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+1);
-                        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
+                        actualizarPuntos();
                         apagarTodosBotones();
                         claseGeneral.miJuego.setEnvido(false);
                         prenderBotones();
@@ -672,7 +959,7 @@ public class frmJuego extends javax.swing.JInternalFrame {
                     case "faltaenvido":
                         //<editor-fold defaultstate="collapsed" desc="No Quiero el Falta Envido">
                         claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+1);
-                        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
+                        actualizarPuntos();
                         apagarTodosBotones();
                         claseGeneral.miJuego.setEnvido(false);
                         prenderBotones();
@@ -684,7 +971,7 @@ public class frmJuego extends javax.swing.JInternalFrame {
                     case "envidoenvido":
                         //<editor-fold defaultstate="collapsed" desc="No Quiero el Envido-Envido">
                         claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+2);
-                        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
+                        actualizarPuntos();
                         apagarTodosBotones();
                         claseGeneral.miJuego.setEnvido(false);
                         prenderBotones();
@@ -696,7 +983,7 @@ public class frmJuego extends javax.swing.JInternalFrame {
                     case "envidorealenvido":
                         //<editor-fold defaultstate="collapsed" desc="No Quiero el Envido-Real Envido">
                         claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+2);
-                        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
+                        actualizarPuntos();
                         apagarTodosBotones();
                         claseGeneral.miJuego.setEnvido(false);
                         prenderBotones();
@@ -708,7 +995,7 @@ public class frmJuego extends javax.swing.JInternalFrame {
                     case "envidoenvidorealenvido":
                         //<editor-fold defaultstate="collapsed" desc="No Quiero el Envido-Envido-Real Envido">
                         claseGeneral.lstJugadores.get(suid).setPuntos(claseGeneral.lstJugadores.get(suid).getPuntos()+4);
-                        frmJuego.txtEl.setText(""+claseGeneral.lstJugadores.get(suid).getPuntos());
+                        actualizarPuntos();
                         apagarTodosBotones();
                         claseGeneral.miJuego.setEnvido(false);
                         prenderBotones();
@@ -833,179 +1120,6 @@ public class frmJuego extends javax.swing.JInternalFrame {
         claseGeneral.miJuego.setInstanciaEnvido(5);
     }//GEN-LAST:event_cmdFaltaEnvidoActionPerformed
 
-    public void miTurno(){
-        claseGeneral.miJuego.setTurno(claseGeneral.getMiId());
-        lblYo.setForeground(Color.BLUE);
-        lblEl.setForeground(Color.BLACK);
-    }
-    
-    public void suTurno(){
-        claseGeneral.miJuego.setTurno(Math.abs(claseGeneral.getMiId()-1));
-        lblYo.setForeground(Color.BLACK);
-        lblEl.setForeground(Color.BLUE);
-    }
-    
-    private void tirarCarta(int id){
-        int miId = claseGeneral.getMiId();
-        if(claseGeneral.miJuego.getTurno()==miId){
-            String stringCarta = claseGeneral.lstJugadores.get(miId).getCartas().get(id).traerCarta();
-            int tiradas = claseGeneral.lstJugadores.get(miId).getCartasTiradas();
-            
-            //<editor-fold defaultstate="collapsed" desc="Dónde tiro la carta">
-            switch(tiradas){
-                case 0:
-                    switch(id){
-                        case 0:
-                            pintar(miCartaTirada1,stringCarta);
-                            frmJuego.miCartaTirada1.repaint();
-                            pintar(miCarta1,"Blanco");
-                            break;
-                        case 1:
-                            pintar(miCartaTirada1,stringCarta);
-                            pintar(miCarta2,"Blanco");
-                            break;
-                        case 2:
-                            pintar(miCartaTirada1,stringCarta);
-                            pintar(miCarta3,"Blanco");
-                            break;
-                    }
-                    break;
-                case 1:
-                    switch(id){
-                        case 0:
-                            pintar(miCartaTirada2,stringCarta);
-                            pintar(miCarta1,"Blanco");
-                            break;
-                        case 1:
-                            pintar(miCartaTirada2,stringCarta);
-                            pintar(miCarta2,"Blanco");
-                            break;
-                        case 2:
-                            pintar(miCartaTirada2,stringCarta);
-                            pintar(miCarta3,"Blanco");
-                            break;
-                    }
-                    break;
-                case 2:
-                    switch(id){
-                        case 0:
-                            pintar(miCartaTirada3,stringCarta);
-                            pintar(miCarta1,"Blanco");
-                            break;
-                        case 1:
-                            pintar(miCartaTirada3,stringCarta);
-                            pintar(miCarta2,"Blanco");
-                            break;
-                        case 2:
-                            pintar(miCartaTirada3,stringCarta);
-                            pintar(miCarta3,"Blanco");
-                            break;
-                    }
-                    break;
-            }
-            //</editor-fold>
-
-            //Envio la carta tirada
-            if(claseGeneral.isSoyServer()){SimpleServer.enviarDatos("JGOCRTA"+miId+id);}
-            else{SimpleClient.enviarDatos("JGOCRTA"+miId+id);}   
-            
-            //Actualizo el juego
-            claseGeneral.lstJugadores.get(miId).setCartasTiradas(tiradas+1); //Tiré la primer carta
-            
-            boolean yoGano=false,yoPierdo=false;
-            
-            if(claseGeneral.miJuego.isPrimeraCarta()){
-                //frmPrincipal.log("Es la primera carta");
-                suTurno();
-                claseGeneral.miJuego.setCartaInstancia(claseGeneral.lstJugadores.get(miId).getCartas().get(id));
-                claseGeneral.miJuego.setPrimeraCarta(false);
-                apagarTodosBotones();
-            } else{
-                int suID = Math.abs(miId-1);
-                //frmPrincipal.log("No es la primera carta");
-                if(Juego.compararCartas(claseGeneral.lstJugadores.get(miId).getCartas().get(id),claseGeneral.miJuego.getCartaInstancia())){
-                    //frmPrincipal.log("Mi carta es más grande, mi turno");
-                    miTurno();
-                    claseGeneral.miJuego.setPrimeraCarta(true);
-                    apagarTodosBotones();
-                    claseGeneral.lstJugadores.get(miId).setInstanciasGanadas(claseGeneral.lstJugadores.get(miId).getInstanciasGanadas()+1);
-                    //frmPrincipal.log("Me sumo una instancia ganada");
-                    
-                    if(claseGeneral.miJuego.getInstanciaJuego()==0){claseGeneral.miJuego.setPrimeraEnCasa(miId);}
-                    
-                    if(claseGeneral.lstJugadores.get(miId).getInstanciasGanadas()==2){
-                        yoGano=true;
-                    }
-                } else if(Juego.mismosPuntos(claseGeneral.lstJugadores.get(miId).getCartas().get(id),claseGeneral.miJuego.getCartaInstancia())){
-                    if(claseGeneral.miJuego.getInstanciaJuego()==0){
-                        claseGeneral.lstJugadores.get(miId).setInstanciasGanadas(claseGeneral.lstJugadores.get(miId).getInstanciasGanadas()+1);
-                        //frmPrincipal.log("Parda");
-                        claseGeneral.miJuego.setPrimeraCarta(true);
-                        apagarTodosBotones();
-                        claseGeneral.miJuego.setTurno(claseGeneral.miJuego.getMano());
-                        if(claseGeneral.miJuego.getTurno()==claseGeneral.getMiId()){
-                            miTurno();
-                        } else{
-                            suTurno();
-                        }
-                        
-                    } else if((claseGeneral.miJuego.getInstanciaJuego()==1)||(claseGeneral.miJuego.getInstanciaJuego()==2)){
-                                    if(claseGeneral.miJuego.getPrimeraEnCasa()==miId){
-                                        yoGano=true;
-                                        apagarTodosBotones();
-                                    } else{
-                                        yoPierdo=true;
-                                        apagarTodosBotones();
-                                    }
-                                }
-                } else{
-                    //frmPrincipal.log("Mi carta era más chica");
-                    suTurno();
-                    claseGeneral.miJuego.setPrimeraCarta(true);
-                    claseGeneral.lstJugadores.get(suID).setInstanciasGanadas(claseGeneral.lstJugadores.get(suID).getInstanciasGanadas()+1);
-                    apagarTodosBotones();
-                    //frmPrincipal.log("Le toca a él");
-                    if(claseGeneral.lstJugadores.get(suID).getInstanciasGanadas()==2){
-                        yoPierdo=true;
-                    }
-                }
-                int inst = claseGeneral.miJuego.getInstanciaJuego()+1;
-                frmPrincipal.log("Sumo una instancia al juego. Es la instancia Nro "+inst);
-                claseGeneral.miJuego.setInstanciaJuego(inst);
-                prenderBotones();
-                if(yoGano){
-                    frmPrincipal.log("Gané dos instancias");
-                    Juego.ganarMano(miId);
-                }
-                if(yoPierdo){
-                    frmPrincipal.log("Perdí dos instancias");
-                    Juego.ganarMano(suID);
-                }
-            }
-        }
-    }
-    
-    public void pintarMisCartas(){
-        int miId = claseGeneral.getMiId();
-        pintar(miCarta1,claseGeneral.lstJugadores.get(miId).getCartas().get(0).traerCarta());
-        pintar(miCarta2,claseGeneral.lstJugadores.get(miId).getCartas().get(1).traerCarta());
-        pintar(miCarta3,claseGeneral.lstJugadores.get(miId).getCartas().get(2).traerCarta());
-        pintarCartasOponente();
-    }
-    
-    public void pintarCartasOponente(){
-        pintar(suCarta1,"CartaAzul1");
-        pintar(suCarta2,"CartaAzul2");
-        pintar(suCarta3,"CartaAzul1");
-    }
-    
-    public void pintar(JLabel lbl, String valor){
-        String path = "/Cartas/"+valor+".jpg";
-        URL url = this.getClass().getResource(path);
-        ImageIcon icon = new ImageIcon(url);
-        Icon icono = new ImageIcon(icon.getImage().getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_DEFAULT));
-        lbl.setIcon(icono);
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton cmdAlMazo;
@@ -1015,14 +1129,28 @@ public class frmJuego extends javax.swing.JInternalFrame {
     public static javax.swing.JButton cmdQuiero;
     public static javax.swing.JButton cmdRealEnvido;
     public static javax.swing.JButton cmdTruco;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblEl;
     public static javax.swing.JLabel lblElCanta;
+    public static javax.swing.JLabel lblMisPuntos1;
+    public static javax.swing.JLabel lblMisPuntos2;
+    public static javax.swing.JLabel lblMisPuntos3;
+    public static javax.swing.JLabel lblMisPuntos4;
+    public static javax.swing.JLabel lblMisPuntos5;
+    public static javax.swing.JLabel lblMisPuntos6;
     public static javax.swing.JLabel lblMisTantos;
+    public static javax.swing.JLabel lblSusPuntos1;
+    public static javax.swing.JLabel lblSusPuntos2;
+    public static javax.swing.JLabel lblSusPuntos3;
+    public static javax.swing.JLabel lblSusPuntos4;
+    public static javax.swing.JLabel lblSusPuntos5;
+    public static javax.swing.JLabel lblSusPuntos6;
     public static javax.swing.JLabel lblSusTantos;
+    private javax.swing.JLabel lblTabla;
     private javax.swing.JLabel lblYo;
     public static javax.swing.JLabel lblYoCanto;
     public static javax.swing.JLabel miCarta1;
@@ -1037,9 +1165,8 @@ public class frmJuego extends javax.swing.JInternalFrame {
     public static javax.swing.JLabel suCartaTirada1;
     public static javax.swing.JLabel suCartaTirada2;
     public static javax.swing.JLabel suCartaTirada3;
+    private javax.swing.JTabbedPane tabChatPuntos;
     public static javax.swing.JTextPane txtChat;
-    public static javax.swing.JTextField txtEl;
     public static javax.swing.JTextField txtEnviarChat;
-    public static javax.swing.JTextField txtYo;
     // End of variables declaration//GEN-END:variables
 }

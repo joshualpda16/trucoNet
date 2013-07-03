@@ -14,10 +14,10 @@ import java.util.List;
 public class Jugador {
     private int puntos;
     private int cartasTiradas;
-    private String nombre;
     private int id;
-    private List<Carta> cartas = new ArrayList();
     private int instanciasGanadas=0;
+    private String nombre;
+    private List<Carta> cartas = new ArrayList();
     private boolean carta1tirada,carta2tirada,carta3tirada;
 
     Jugador(){
