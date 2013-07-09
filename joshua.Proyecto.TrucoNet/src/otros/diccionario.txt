@@ -21,6 +21,9 @@ Mensajes del tipo chat previo (CHP):
         "CHP0ready" -El servidor empezó el juego.
 
 Mensajes del tipo Juego (JGO):
+        "JGONVJ1" -El servidor avisa que está por arrancar la nueva partida
+        "JGONVJ2" -El cliente está listo para la nueva partida
+        "JGOREVA" -El oponente pide revancha
         "JGOSONB" -Envío "Son buenas" para no cantar los tantos
         "JGOPIET" -El pie avisa que mostró los tantos
         "JGOMANT" -El mano avisa que mostró los tantos

@@ -10,6 +10,7 @@ import clases.SimpleServer;
 import clases.claseGeneral;
 import java.awt.Color;
 import java.awt.Image;
+import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -93,37 +94,31 @@ public class frmJuego extends javax.swing.JInternalFrame {
 
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameOpened(evt);
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
             }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
             }
         });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        suCarta3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(suCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 60, 100));
-
-        suCarta2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(suCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 60, 100));
-
-        suCartaTirada3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(suCartaTirada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 70, 110));
 
-        miCarta3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         miCarta3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 miCarta3MouseClicked(evt);
@@ -131,7 +126,6 @@ public class frmJuego extends javax.swing.JInternalFrame {
         });
         jPanel1.add(miCarta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 90, 130));
 
-        miCarta2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         miCarta2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 miCarta2MouseClicked(evt);
@@ -139,30 +133,17 @@ public class frmJuego extends javax.swing.JInternalFrame {
         });
         jPanel1.add(miCarta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, 90, 130));
 
-        miCarta1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         miCarta1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 miCarta1MouseClicked(evt);
             }
         });
         jPanel1.add(miCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 90, 130));
-
-        suCarta1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(suCarta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 60, 100));
-
-        suCartaTirada1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(suCartaTirada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 70, 110));
-
-        suCartaTirada2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(suCartaTirada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 70, 110));
-
-        miCartaTirada3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(miCartaTirada3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 70, 110));
-
-        miCartaTirada2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(miCartaTirada2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 70, 110));
-
-        miCartaTirada1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(miCartaTirada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 70, 110));
 
         lblYo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -306,7 +287,7 @@ public class frmJuego extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -647,6 +628,13 @@ public class frmJuego extends javax.swing.JInternalFrame {
                 pintar(lblMisPuntos5,"puntos5");
                 pintar(lblMisPuntos6,"puntos"+(puntos-25));
             }
+        } else{
+            pintar(lblMisPuntos1,"Blanco");
+            pintar(lblMisPuntos2,"Blanco");
+            pintar(lblMisPuntos3,"Blanco");
+            pintar(lblMisPuntos4,"Blanco");
+            pintar(lblMisPuntos5,"Blanco");
+            pintar(lblMisPuntos6,"Blanco");
         }
 
         puntos = claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).getPuntos();
@@ -679,6 +667,13 @@ public class frmJuego extends javax.swing.JInternalFrame {
                 pintar(lblSusPuntos5,"puntos5");
                 pintar(lblSusPuntos6,"puntos"+(puntos-25));
             }
+        } else{
+            pintar(lblSusPuntos1,"Blanco");
+            pintar(lblSusPuntos2,"Blanco");
+            pintar(lblSusPuntos3,"Blanco");
+            pintar(lblSusPuntos4,"Blanco");
+            pintar(lblSusPuntos5,"Blanco");
+            pintar(lblSusPuntos6,"Blanco");
         }
     }
     
@@ -1029,6 +1024,9 @@ public class frmJuego extends javax.swing.JInternalFrame {
 
     private void cmdAlMazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAlMazoActionPerformed
         switch(cmdAlMazo.getText()){
+            case "Revancha!":
+                Juego.metodoRevancha();
+                break;
             case "Repartir":
                 claseGeneral.miJuego.pintarCartas();
                 if(claseGeneral.isSoyServer()){
@@ -1120,6 +1118,24 @@ public class frmJuego extends javax.swing.JInternalFrame {
         claseGeneral.miJuego.setInstanciaEnvido(5);
     }//GEN-LAST:event_cmdFaltaEnvidoActionPerformed
 
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        claseGeneral gral = claseGeneral.getInstance();
+        if(claseGeneral.isSoyServer()){
+            SimpleServer.enviarDatos("desconectar");
+            gral.cerrarSala();
+            frmPrincipal.cmdCrearSala.setEnabled(true);
+            this.dispose();
+        } else{
+            SimpleClient.enviarDatos("desconectar");
+            try {
+                gral.desconectarDelServidor();
+            } catch (IOException ex) {
+                Logger.getLogger(frmChatPrevio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.dispose();
+        }
+    }//GEN-LAST:event_formInternalFrameClosed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton cmdAlMazo;
@@ -1165,7 +1181,7 @@ public class frmJuego extends javax.swing.JInternalFrame {
     public static javax.swing.JLabel suCartaTirada1;
     public static javax.swing.JLabel suCartaTirada2;
     public static javax.swing.JLabel suCartaTirada3;
-    private javax.swing.JTabbedPane tabChatPuntos;
+    public static javax.swing.JTabbedPane tabChatPuntos;
     public static javax.swing.JTextPane txtChat;
     public static javax.swing.JTextField txtEnviarChat;
     // End of variables declaration//GEN-END:variables

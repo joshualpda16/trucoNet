@@ -4,11 +4,19 @@
  */
 package clases;
 
+import formularios.frmChatPrevio;
 import formularios.frmJuego;
+import formularios.frmPrincipal;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 
 /**
  *
@@ -141,8 +149,69 @@ public class Juego {
         claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).setInstanciasGanadas(0);
         claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).setCartasTiradas(0);
         
-        if(claseGeneral.isSoyServer()){
+        if(claseGeneral.lstJugadores.get(claseGeneral.getMiId()).getPuntos()>=30){
+            JOptionPane.showMessageDialog(null, "Felicidades!, ganaste la partida!");
+            claseGeneral.formJuego.apagarTodosBotones();
+            frmJuego.cmdAlMazo.setText("Revancha!");
+            frmJuego.cmdAlMazo.setEnabled(true);
+        } else if(claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).getPuntos()>=30){
+            JOptionPane.showMessageDialog(null, "Que lástima, perdiste la partida!");
+            claseGeneral.formJuego.apagarTodosBotones();
+            frmJuego.cmdAlMazo.setText("Revancha!");
+            frmJuego.cmdAlMazo.setEnabled(true);
+        } else if(claseGeneral.isSoyServer()){
             nuevaMano();
+        }
+    }
+    
+    public static void metodoRevancha(){
+        //Pongo los puntos en 0
+        claseGeneral.lstJugadores.get(claseGeneral.getMiId()).setPuntos(0);
+        claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).setPuntos(0);
+        claseGeneral.formJuego.actualizarPuntos();
+
+        //Aviso que estoy esperando la respuesta
+        SimpleAttributeSet attrs = new SimpleAttributeSet();
+        StyleConstants.setBold(attrs, true);
+        try {
+            frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),"Esperando respuesta de revancha!",attrs);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //Pregunto si él me pidió la revancha primero
+        if(claseGeneral.miJuego.getEsperando().equals("revancha")){
+            //Si ya me pidió la revancha...
+            try {
+                frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),"Revancha aceptada!\nComienza nueva partida",attrs);
+            } catch (BadLocationException ex) {
+                Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            if(claseGeneral.isSoyServer()){ 
+                SimpleServer.enviarDatos("JGONVJ10"); //Le aviso que arranca la partida
+            } else{
+                claseGeneral.miJuego.inicializar();
+                SimpleClient.enviarDatos("JGONVJ20"); //Le aviso que acepté
+            }
+
+            if(claseGeneral.isSoyServer()){ //Si soy el server, solo reparto una nueva mano
+                nuevaMano();
+            } //Si soy el cliente, espero las cartas nuevas
+
+        //Si soy el primero en pedir la revancha...
+        } else{
+            //Apago los botones
+            frmJuego.cmdAlMazo.setEnabled(false);
+            claseGeneral.formJuego.apagarTodosBotones();
+
+            if(claseGeneral.isSoyServer()){ 
+                SimpleServer.enviarDatos("JGOREVA"); //Le aviso que quiero la revancha
+            } else{
+                SimpleClient.enviarDatos("JGOREVA"); //Le aviso que quiero la revancha
+            }
+            //Espero la revancha
+            claseGeneral.miJuego.setEsperando("revancha");
         }
     }
     
@@ -200,7 +269,17 @@ public class Juego {
         claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).setInstanciasGanadas(0);
         claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).setCartasTiradas(0);
         
-        if(claseGeneral.isSoyServer()){
+        if(claseGeneral.lstJugadores.get(claseGeneral.getMiId()).getPuntos()>=30){
+            JOptionPane.showMessageDialog(null, "Felicidades!, ganaste la partida!");
+            claseGeneral.formJuego.apagarTodosBotones();
+            frmJuego.cmdAlMazo.setText("Revancha!");
+            frmJuego.cmdAlMazo.setEnabled(true);
+        } else if(claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).getPuntos()>=30){
+            JOptionPane.showMessageDialog(null, "Que lástima, perdiste la partida!");
+            claseGeneral.formJuego.apagarTodosBotones();
+            frmJuego.cmdAlMazo.setText("Revancha!");
+            frmJuego.cmdAlMazo.setEnabled(true);
+        } else if(claseGeneral.isSoyServer()){
             nuevaMano();
         }
     }
@@ -250,6 +329,20 @@ public class Juego {
         }
         
         claseGeneral.lstJugadores.get(id).setPuntos(ptos+claseGeneral.lstJugadores.get(id).getPuntos());
+        
+        if(claseGeneral.lstJugadores.get(claseGeneral.getMiId()).getPuntos()>=30){
+            JOptionPane.showMessageDialog(null, "Felicidades!, ganaste la partida!");
+            claseGeneral.formJuego.apagarTodosBotones();
+            frmJuego.cmdAlMazo.setText("Revancha!");
+            frmJuego.cmdAlMazo.setEnabled(true);
+        } else if(claseGeneral.lstJugadores.get(Math.abs(claseGeneral.getMiId()-1)).getPuntos()>=30){
+            JOptionPane.showMessageDialog(null, "Que lástima, perdiste la partida!");
+            claseGeneral.formJuego.apagarTodosBotones();
+            frmJuego.cmdAlMazo.setText("Revancha!");
+            frmJuego.cmdAlMazo.setEnabled(true);
+        } else if(claseGeneral.isSoyServer()){
+            nuevaMano();
+        }
         
         claseGeneral.formJuego.actualizarPuntos();
     }

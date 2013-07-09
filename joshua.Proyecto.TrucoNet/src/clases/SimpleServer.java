@@ -16,6 +16,7 @@ public class SimpleServer {
 	private static final String ENCODING = "ISO-8859-1";
         static ObjectOutputStream salida;
         static ObjectInputStream entrada;
+        private Socket s;
 
 	public SimpleServer(int portNumber) {
 		this.portNumber = portNumber;
@@ -48,11 +49,11 @@ public class SimpleServer {
             }
         }
 
-	private void processConnection(Socket socket) throws IOException {
-                salida = new ObjectOutputStream(socket.getOutputStream()); //Flujo de salida hacia el cliente
+	private void processConnection() throws IOException {
+                salida = new ObjectOutputStream(s.getOutputStream()); //Flujo de salida hacia el cliente
                 salida.flush();
                 
-                entrada = new ObjectInputStream(socket.getInputStream()); //Flujo de entrada del cliente
+                entrada = new ObjectInputStream(s.getInputStream()); //Flujo de entrada del cliente
                 frmPrincipal.log("[Server] Se obtuvieron los flujos de E/S");
                 String mensaje="";
                 
@@ -84,12 +85,12 @@ public class SimpleServer {
                     this.ss = new ServerSocket(portNumber); // Reservo el puerto deseado y se permite el ingresar a conexiones, es decir.. se levanta un servidor de sockets :)
                     try {
                         while (!shutdownRequested) {
-                            Socket s = null;
+//                            Socket s = null;
                             try {
                                 log("[AcceptingThread] Aceptando conexiones en el puerto: " + this.ss.getLocalPort());
                                 s = this.ss.accept(); // se levanta una conexion de la cola, en la variable "s" tengo la conexion o "enchufe" (traduccion de socket por google)
                                 log("[AcceptingThread] Conexión recibida desde " + s.getInetAddress().toString());
-                                processConnection(s); // se la procesa invocando el método de la clase exterior (SimpleServer) que se llama processConnection
+                                processConnection(); // se la procesa invocando el método de la clase exterior (SimpleServer) que se llama processConnection
                             } catch (SocketException se) {
                                 log("[AcceptingThread] Terminada - "
                                         + se.getMessage()); // por aca pasa cuando se TERMINA "manualmente" (es decir, libero el puerto y dejo de escuchar conexiones entrantes)
@@ -114,10 +115,10 @@ public class SimpleServer {
             }
 
         // dentro de este m�tedo que se ejecuta DIRECTAMENTE (es decir, como programadores estamos escribiendo su invocacion en algun momento del programa) se baja al servidor
-        public void abort() throws IOException {
-            this.shutdownRequested = true;
-            if (this.ss != null) {
-                this.ss.close();
+            public void abort() throws IOException {
+                this.shutdownRequested = true;
+                if (this.ss != null) {
+                    this.ss.close();
             }
         }
     }

@@ -92,25 +92,25 @@ public class Carta {
         return val;
     }
     
+    //<editor-fold defaultstate="collapsed" desc="Gets y Sets">
     public char getPalo() {
         return palo;
     }
-
+    
     public int getNumero() {
         return numero;
     }
-
+    
     public int getValor() {
         return valor;
     }
-
+    
     public void setPalo(char palo) {
         this.palo = palo;
     }
-
+    
     public void setNumero(int numero) {
         this.numero = numero;
     }
-    
-    
+    //</editor-fold>
 }

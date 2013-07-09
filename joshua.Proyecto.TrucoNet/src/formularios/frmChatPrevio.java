@@ -10,6 +10,7 @@ import clases.Jugador;
 import clases.SimpleClient;
 import clases.SimpleServer;
 import clases.claseGeneral;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -219,7 +220,21 @@ public class frmChatPrevio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmdListoActionPerformed
 
     private void cmdSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSalirActionPerformed
-        // TODO add your handling code here:
+        claseGeneral gral = claseGeneral.getInstance();
+        if(claseGeneral.isSoyServer()){
+            SimpleServer.enviarDatos("desconectar");
+            gral.cerrarSala();
+            frmPrincipal.cmdCrearSala.setEnabled(true);
+            this.dispose();
+        } else{
+            SimpleClient.enviarDatos("desconectar");
+            try {
+                gral.desconectarDelServidor();
+            } catch (IOException ex) {
+                Logger.getLogger(frmChatPrevio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.dispose();
+        }
     }//GEN-LAST:event_cmdSalirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

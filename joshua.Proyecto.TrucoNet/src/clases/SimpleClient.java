@@ -12,7 +12,7 @@ public class SimpleClient {
     private String mensaje;
     private int port;
     private Socket socket;
-    private AcceptingThread acceptingThread;
+    public AcceptingThread acceptingThread;
     static ObjectOutputStream salida;
     static ObjectInputStream entrada;
     
@@ -80,7 +80,7 @@ public class SimpleClient {
             } catch(ClassNotFoundException excepcionClaseNoEncontrada){
                 log("Se recibió un tipo de objeto desconocido");
             }
-        } while(!mensaje.equals("Fin"));
+        } while(!mensaje.equals("findelaconexion"));
     }
     
     public void close () throws IOException {

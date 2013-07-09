@@ -40,10 +40,11 @@ public class claseGeneral {
     
     //<editor-fold defaultstate="collapsed" desc="Variables de Formulario">
     static frmCrearSala formCrearSala;
-    private frmUnirse formUnirse;
+    static frmUnirse formUnirse;
     private frmOpciones formOpciones;
     static frmChatPrevio formChatPrevio;
     static public frmJuego formJuego;
+    private static int indiceVentanas=0;
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Variables de conexión">
@@ -53,12 +54,32 @@ public class claseGeneral {
     static String nombreSala;
     //</editor-fold>
     
+    private static int nuevoIndiceVentanas(){
+        indiceVentanas++;
+        return indiceVentanas;
+    }
     
-    private boolean svActivo;
+    private static boolean svActivo;
     
-    public static void procesarMensaje(String mensaje){
+    public static void procesarMensaje(String mensaje) throws IOException{
         String tipo = mensaje.substring(0,3);
         String msj = mensaje.substring(3,7);
+        
+        if(mensaje.equals("desconectar")){
+            if(soyServer){
+                simpleServer.stop();
+                soyServer=false;
+                svActivo=false;
+                JOptionPane.showMessageDialog(null, "El cliente terminó la conexión!");
+                frmPrincipal.cmdCrearSala.setEnabled(true);
+                cerrarVentanas();
+            } else{
+                simpleClient.close();
+                JOptionPane.showMessageDialog(null, "El servidor terminó la conexión!");
+                frmPrincipal.cmdUnirse.setEnabled(true);
+                cerrarVentanas();
+            }
+        }
         
         switch(tipo){
             case "CFG":
@@ -139,6 +160,25 @@ public class claseGeneral {
             case "JGO":
                 //<editor-fold defaultstate="collapsed" desc="Juego">
                 switch(msj){
+                    case "REVA":
+                        miJuego.setEsperando("revancha");
+                        break;
+                    case "NVJ1":
+//                        miJuego.inicializar();
+//                        SimpleClient.enviarDatos("JGONVJ2");
+//                        break;
+                    case "NVJ2":
+//                        miJuego.inicializar();
+//                        if(miJuego.getMano()!=miId){
+//                            formJuego.apagarTodosBotones();
+//                            frmJuego.cmdAlMazo.setText("Repartir");
+//                            formJuego.suTurno();
+//                        } else{
+//                            frmJuego.cmdAlMazo.setText("Al Mazo");
+//                            formJuego.apagarTodosBotones();
+//                            claseGeneral.formJuego.miTurno();
+//                            agregarAlChat("nada","Esperando cartas...",0);
+//                        }
                     case "CHAT":
                         //<editor-fold defaultstate="collapsed" desc="Chat del juego">
                         int suId=Integer.parseInt(mensaje.substring(7,8));
@@ -153,6 +193,7 @@ public class claseGeneral {
                         } catch (BadLocationException ex) {
                             Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                        frmJuego.tabChatPuntos.setSelectedIndex(0);
                         //</editor-fold>
                         break;
                     case "SISI":
@@ -437,6 +478,7 @@ public class claseGeneral {
                             frmJuego.cmdAlMazo.setText("Al Mazo");
                             formJuego.apagarTodosBotones();
                             claseGeneral.formJuego.miTurno();
+                            agregarAlChat("nada","Esperando cartas...",0);
                         }
                         //</editor-fold>
                         break;
@@ -606,19 +648,20 @@ public class claseGeneral {
                                 case "truco":
                                     claseGeneral.miJuego.setInstanciaTruco(2);
                                     formJuego.apagarTodosBotones();
+                                    agregarAlChat("almazo","",suIDD);
                                     break;
                                 case "retruco":
                                     claseGeneral.miJuego.setInstanciaTruco(3);
                                     formJuego.apagarTodosBotones();
+                                    agregarAlChat("almazo","",suIDD);
                                     break;
                                 case "valecuatro":
                                     claseGeneral.miJuego.setInstanciaTruco(4);
                                     formJuego.apagarTodosBotones();
+                                    agregarAlChat("almazo","",suIDD);
                                     break;
                             }
-                        
                         Juego.alMazo(suIDD);
-                        agregarAlChat("almazo","",suIDD);
                         //</editor-fold>
                         break;
                     case "TANT":
@@ -662,7 +705,6 @@ public class claseGeneral {
                         agregarAlChat("notif","Envido",Integer.parseInt(mensaje.substring(7)));
                         //</editor-fold>
                         break;
-                        
                     case "ENV2":
                         //<editor-fold defaultstate="collapsed" desc="Cantó Real Envido">
                         formJuego.pintar(frmJuego.lblElCanta, "RealEnvido");
@@ -690,7 +732,6 @@ public class claseGeneral {
                         agregarAlChat("notif","Real Envido",Integer.parseInt(mensaje.substring(7)));
                         //</editor-fold>
                         break;
-                    
                     case "ENV3":
                         //<editor-fold defaultstate="collapsed" desc="Cantó Falta Envido">
                         formJuego.pintar(frmJuego.lblElCanta, "RealEnvido");
@@ -706,8 +747,8 @@ public class claseGeneral {
                         agregarAlChat("notif","Falta Envido",Integer.parseInt(mensaje.substring(7)));
                         //</editor-fold>
                         break;
-                        
                     case "SONB":
+                        //<editor-fold defaultstate="collapsed" desc="Cantó Son Buenas">
                         formJuego.pintar(frmJuego.lblElCanta,"SonBuenas");
                         Juego.sumarTantos(getMiId());
                         
@@ -717,7 +758,7 @@ public class claseGeneral {
                         miJuego.setEnvido(false);
                         miJuego.setRonda(true);
                         formJuego.prenderBotones();
-                        
+                        //</editor-fold>
                         break;
                         //</editor-fold>
                         
@@ -729,6 +770,14 @@ public class claseGeneral {
     public static void agregarAlChat(String modo,String notif,int id){
         SimpleAttributeSet atrs = new SimpleAttributeSet();
         switch (modo) {
+            case "nada":
+                StyleConstants.setBold(atrs, true);
+                try {
+                    frmJuego.txtChat.getStyledDocument().insertString(frmJuego.txtChat.getStyledDocument().getLength(),notif+"\n",atrs);
+                } catch (BadLocationException ex) {
+                    Logger.getLogger(claseGeneral.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
             case "notif":
                 //<editor-fold defaultstate="collapsed" desc="notif">
                 StyleConstants.setBold(atrs, true);
@@ -889,35 +938,42 @@ public class claseGeneral {
         return msj;
     }
     
+    public static void cerrarVentanas(){
+        formChatPrevio.dispose();
+        formUnirse.dispose();
+        formCrearSala.dispose();
+        formJuego.dispose();
+    }
+    
     //<editor-fold defaultstate="collapsed" desc="Abrir y cerrar JFrames">
     static public void abrirJuego(){
         formChatPrevio.dispose();
-        frmPrincipal.jDesktopPane1.add(formJuego);
+        frmPrincipal.jDesktopPane1.add(formJuego,nuevoIndiceVentanas());
         formJuego.setLocation(10,10);
         formJuego.show();
         formJuego.pintarMisCartas();
     }
     
     public void mostrarCrearSala(){
-        frmPrincipal.jDesktopPane1.add(formCrearSala);
+        frmPrincipal.jDesktopPane1.add(formCrearSala,nuevoIndiceVentanas());
         formCrearSala.setLocation(10, 10);
         formCrearSala.show();
     }
     
     public void mostrarUnirse(){
-        frmPrincipal.jDesktopPane1.add(formUnirse);
+        frmPrincipal.jDesktopPane1.add(formUnirse,nuevoIndiceVentanas());
         formUnirse.setLocation(10,10);
         formUnirse.show();
     }
     
     public void mostrarOpciones(){
-        frmPrincipal.jDesktopPane1.add(formOpciones);
+        frmPrincipal.jDesktopPane1.add(formOpciones,nuevoIndiceVentanas());
         formOpciones.setLocation(10,10);
         formOpciones.show();
     }
     
     static void mostrarChatPrevio(){
-        frmPrincipal.jDesktopPane1.add(formChatPrevio);
+        frmPrincipal.jDesktopPane1.add(formChatPrevio,nuevoIndiceVentanas());
         formChatPrevio.show();
     }
     //</editor-fold>
@@ -931,24 +987,27 @@ public class claseGeneral {
         simpleServer.run();
         
         soyServer=true;
-        this.svActivo=true;
+        claseGeneral.svActivo=true;
     }
     
     public void cerrarSala(){
         try {
             simpleServer.stop();
             soyServer=false;
-            this.svActivo=false;
+            claseGeneral.svActivo=false;
         } catch (IOException e) {
             log("IOException in closeServer(): " + e.getMessage());
         }
+    }
+    
+    public void desconectarDelServidor() throws IOException{
+        simpleClient.close();
     }
     
     public void conectarAlServidor(String host, int port){
         simpleClient = new SimpleClient(host, port);
         simpleClient.run();
         soyServer=false;
-        formUnirse.dispose();
     }
     //</editor-fold>
     

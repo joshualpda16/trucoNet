@@ -154,9 +154,6 @@ public class Jugador {
         }
         return msj;
     }
-
-
-
     
     //<editor-fold defaultstate="collapsed" desc="GetSet">
     
